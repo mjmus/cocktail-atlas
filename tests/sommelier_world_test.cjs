@@ -59,6 +59,24 @@ vm.runInContext(sommelier,ctx);
  const svg=w.Sommelier.bottle(items[0]);assert.ok(svg.includes('<svg')&&svg.includes('STYLE ILLUSTRATION'));
  const withPhoto=w.Sommelier.bottleWithPhoto(items[0]);
  assert.ok(withPhoto.includes('somm-real-bottle')&&withPhoto.includes('Caymus')&&withPhoto.includes('onerror'),'Branded bottle must include original fallback');
+ assert.ok(index.includes('sommelier.js?v=20261102-photo-fix-2'),'Safari should retrieve the updated real-bottle renderer');
+ assert.ok(somCss.includes('.somm-bottle-frame:not(.is-fallback)>.somm-bottle{display:none!important}'),'Generic bottle art must stay hidden while a real product photo is expected');
+ const vietti=items.find(x=>x.id==='nebbiolo');
+ const photoCandidates=w.Sommelier.photoCandidates(vietti);
+ assert.ok(photoCandidates.length>=3&&photoCandidates[0].includes('canadianliquorstore.ca'),'Vietti real photo must use validated replacement');
+ assert.ok(photoCandidates.some(x=>x.includes('astorwines.com')),'Use a second independent source before generic fallback');
+ assert.ok(w.Sommelier.bottleWithPhoto(vietti).includes('data-photo-sources'),'Failed image should carry alternate photo URLs');
+ const frame={classList:{called:false,add(){this.called=true}}};
+ const el={dataset:{photoSources:encodeURIComponent(JSON.stringify(photoCandidates)),photoIndex:'0'},closest:()=>frame,src:photoCandidates[0],remove(){this.removed=true},onerror:()=>{}};
+ for(let k=1;k<photoCandidates.length;k++){
+   w.Sommelier.photoFailed(el);
+   assert.equal(el.src,photoCandidates[k],'Retry alternative real photo before illustration');
+ }
+ assert.equal(frame.classList.called,false,'The generic illustration should not appear until all photos fail');
+ w.Sommelier.photoFailed(el);
+ assert.equal(el.removed,true);
+ assert.equal(frame.classList.called,true);
+
 
  let html='';
  await w.Sommelier.page(['sommelier','wine','nebbiolo'],v=>{html=v});
