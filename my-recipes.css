@@ -1,0 +1,74 @@
+/* Personal Cocktail Notebook: matches Cocktail Atlas's original typography. */
+.my-library,.my-edit-section,.my-detail{padding-bottom:55px}
+.my-toolbar{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:18px}
+.my-primary,.my-import-label{display:inline-flex;justify-content:center;align-items:center;padding:12px 17px;background:var(--ink);border:1px solid var(--ink);border-radius:8px;color:var(--paper);font:600 .78rem var(--mono);cursor:pointer;transition:transform .15s,opacity .15s}
+.my-primary:hover{color:var(--paper);opacity:.82;transform:translateY(-1px)}
+.my-toolbar .btn-outline,.my-import-label{min-height:42px;padding:10px 14px}
+.my-import-label{background:var(--panel);color:var(--ink);border:1px solid var(--line2);font-weight:400}
+.my-import-label:hover{border-color:var(--acc)}
+.my-private-note{font-size:.79rem;color:var(--soft);max-width:80ch;margin:4px 0 25px}
+.my-search-label{display:grid;gap:5px;max-width:480px;color:var(--soft);font:.77rem var(--mono)}
+.my-search-label input{color:var(--ink);background:var(--paper);border:1px solid var(--line2);border-radius:8px;padding:11px 14px}
+.my-count{font:.72rem var(--mono);color:var(--faint);margin:19px 0 13px}
+.my-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:17px}
+.my-card{display:flex;flex-direction:column;overflow:hidden;border:1px solid var(--line);border-radius:13px;background:var(--paper);transition:transform .15s,border-color .15s}
+.my-card:hover{transform:translateY(-2px);border-color:var(--acc)}
+.my-card-photo{display:flex;justify-content:center;align-items:center;position:relative;min-height:165px;background:var(--panel)}
+.my-card-photo>img{height:145px;width:auto;object-fit:contain}
+.my-card-index{position:absolute;top:12px;left:12px;border:1px solid var(--line2);background:var(--paper);border-radius:4px;padding:4px 6px;color:var(--soft);font:.6rem var(--mono)}
+.my-card-body{padding:17px 18px 20px}
+.my-card-body h3{font-size:1.13rem;margin-bottom:6px}
+.my-card-body p{font-size:.84rem;color:var(--soft);margin:0 0 15px}
+.my-card-body span{font:.75rem var(--mono);color:var(--acc)}
+.my-empty{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:clamp(22px,7vw,60px);text-align:center}
+.my-empty-icon{font-size:2.3rem;color:var(--acc)}
+.my-empty h2{font-size:1.6rem;margin:10px 0}
+.my-empty p{color:var(--soft);margin-bottom:24px}
+.my-editor-layout{display:grid;grid-template-columns:minmax(0,1.65fr) minmax(260px,.9fr);gap:28px;align-items:start}
+.my-editor{padding:22px 26px;border:1px solid var(--line);border-radius:13px;background:var(--paper)}
+.my-origin-label{font:600 .7rem var(--mono);letter-spacing:.06em;color:var(--acc);margin-bottom:21px}
+.my-origin-label a{text-decoration:underline}
+.my-origin-label span{color:var(--faint)}
+.my-field-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.my-field,.my-ing-row label{display:flex;flex-direction:column;gap:7px;color:var(--soft);font:500 .78rem var(--mono)}
+.my-span{grid-column:1/-1}
+.my-field input,.my-field textarea,.my-ing-row input,.my-ing-row select{width:100%;background:var(--panel);border:1px solid var(--line2);border-radius:8px;color:var(--ink);padding:12px 13px;font:400 .89rem var(--sans);min-width:0}
+.my-field input:focus,.my-field textarea:focus,.my-ing-row input:focus,.my-ing-row select:focus{outline:2px solid var(--acc);outline-offset:1px}
+.my-field textarea{resize:vertical;min-height:96px;line-height:1.5}
+.my-editor-head{display:flex;justify-content:space-between;align-items:center;gap:12px;margin:27px 0 13px}
+.my-editor-head h2{font-size:1.28rem;margin:0}
+.my-ing-row{display:grid;grid-template-columns:minmax(95px,.9fr) minmax(155px,2.1fr) minmax(95px,.86fr) 26px;gap:8px;align-items:end;border-top:1px solid var(--line);padding:12px 0}
+.my-ing-row label{gap:4px}
+.my-ing-row input,.my-ing-row select{padding:9px 8px;font-size:.8rem}
+.my-row-controls{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px}
+.my-remove-row{border:0;background:transparent;color:var(--acc);font-size:1.4rem;line-height:1;padding:3px}
+.my-grip{font:13px var(--mono);color:var(--faint)}
+.my-editor-fields{display:grid;gap:16px;margin-top:28px}
+.my-save-bar{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-top:23px}
+.my-cancel{text-decoration:none;display:inline-flex;align-items:center}
+.my-form-error{border:1px solid var(--acc);border-radius:8px;background:var(--panel);padding:13px 15px;color:var(--acc);margin-top:14px}
+.my-editor-aside{position:sticky;top:80px}
+.my-preview-panel{background:var(--panel);border:1px solid var(--line);border-radius:13px;padding:20px}
+.my-preview-panel h3{margin:8px 0 15px;font-size:1.3rem}
+.my-preview-panel>p{font-size:.77rem;color:var(--soft);margin:18px 0 0}
+.my-preview-bottles{display:flex;align-items:flex-end;gap:10px;flex-wrap:wrap}
+.my-bottle{display:flex;flex-direction:column;align-items:center;justify-content:end;gap:5px;width:calc(33.333% - 8px);min-width:67px;text-align:center}
+.my-bottle img{height:110px;width:100%;object-fit:contain;mix-blend-mode:multiply}
+.my-bottle>span{font-size:.7rem;font-weight:600;line-height:1.25;overflow-wrap:anywhere}
+.my-bottle small{font:.65rem var(--mono);color:var(--soft)}
+.my-preview-empty{font-size:.8rem;color:var(--soft);padding:30px 0}
+.my-detail .pdesc{font-family:var(--mono);font-size:.78rem}
+.my-detail .ingredient-hero{margin-top:15px}
+.my-detail .step-main a{color:inherit}
+.my-notes{margin-top:14px;padding:17px 21px;border-left:3px solid var(--acc);background:var(--panel)}
+.my-notes h3{font-size:1.05rem;margin-bottom:7px}
+.my-notes p{margin:0;font-size:.9rem;white-space:pre-wrap;color:var(--soft)}
+.my-actions a,.my-actions button{flex:1 1 120px}
+.my-delete{border:1px solid var(--acc)!important;color:var(--acc)!important;background:transparent!important}
+.my-side-illustration{padding:30px 23px;min-height:260px;display:flex;flex-direction:column;justify-content:space-between;border-radius:13px;border:1px solid var(--line);background:var(--panel)}
+.my-side-big{font-size:clamp(2.4rem,5vw,4.2rem);line-height:.9;letter-spacing:-.065em;font-weight:750}
+.my-side-big em{font-style:normal;color:var(--acc)}
+.my-side-count{font:.83rem var(--mono);color:var(--soft)}
+@media(max-width:850px){.my-editor-layout{grid-template-columns:minmax(0,1fr)}.my-editor-aside{position:static;order:-1}.my-preview-bottles{flex-wrap:nowrap;overflow-x:auto}.my-bottle{flex:0 0 75px}}
+@media(max-width:600px){.my-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}.my-card-photo{min-height:115px}.my-card-photo img{height:100px}.my-card-body{padding:12px}.my-card-body h3{font-size:1rem}.my-editor{padding:16px}.my-ing-row{grid-template-columns:90px 1fr 24px;gap:6px}.my-ing-row>label:nth-child(3){grid-column:1/3}.my-row-controls{grid-column:3;grid-row:1/3}.my-ing-row input,.my-ing-row select{font-size:.82rem}.my-field-grid{gap:10px}.my-field input{padding:10px}.my-toolbar{gap:7px}.my-toolbar .btn-outline{padding:8px 11px}}
+@media(max-width:380px){.my-grid{grid-template-columns:1fr}.my-field-grid{grid-template-columns:1fr}.my-span{grid-column:auto}}
