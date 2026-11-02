@@ -64,7 +64,7 @@ win.MyRecipesUI.detail(version.id);
 assert.ok(markup.includes('My version of Negroni')&&markup.includes('Ingredients & steps'));
 (async()=>{
  await win.MyRecipesUI.editor(null,{book:'shakerrr',name:'Negroni'});
- assert.ok(markup.includes('Classic Negroni')&&markup.includes('MY')&&markup.includes('Gin'));
+ assert.ok(markup.includes('Classic Negroni')&&markup.includes('PERSONAL VERSION')&&markup.includes('Gin'));
  await win.MyRecipesUI.editor();
  assert.ok(markup.includes('Create a recipe')&&markup.includes('Add ingredient'));
  console.log('PASS: custom recipe CRUD, validation, versions, edit, import/export, UI routes and bottle previews');
