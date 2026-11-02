@@ -61,3 +61,9 @@
 .somm-producer-example a:hover{text-decoration:underline}
 @media(max-width:720px){.somm-detail-art .somm-bottle-frame{height:320px}.somm-card-art .somm-bottle-frame{height:162px;padding:6px}}
 @media(max-width:460px){.somm-detail-art .somm-bottle-frame{height:270px}.somm-card-art .somm-bottle-frame{height:150px}.somm-card-brand{font-size:.67rem}}
+
+/* Brand-first photos: never paint a generic SVG behind a real photograph. */
+.somm-bottle-frame:not(.is-fallback)>.somm-bottle{display:none!important}
+.somm-bottle-frame.is-fallback>.somm-bottle{display:block}
+.somm-bottle-frame:not(.is-fallback){background:#fff}
+.somm-real-bottle{background:#fff;object-fit:contain}
