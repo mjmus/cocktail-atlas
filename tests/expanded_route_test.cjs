@@ -14,6 +14,17 @@ const spiritIndex=JSON.parse(fs.readFileSync(path.join(root,'data/spirit-index.j
 const glassPdt=JSON.parse(fs.readFileSync(path.join(root,'data/glass-pdt.json'),'utf8'));
 const glassDeath=JSON.parse(fs.readFileSync(path.join(root,'data/glass-deathco.json'),'utf8'));
 assert.equal(shakerData.recipes.length,407);
+const mezcalBook=shakerData.recipes.filter(r=>r.collections.includes('Shakerrr Mezcal Library'));
+assert.equal(mezcalBook.length,38,'Holy Smoke Mezcal collection count changed');
+assert.equal(mezcalBook.filter(r=>!r.versions.find(v=>v.key==='holysmoke')?.instructions?.trim()).length,0,'Mezcal-book methods must not be empty');
+const recipeVersion=(name)=>shakerData.recipes.find(r=>r.name===name)?.versions?.find(v=>v.key==='holysmoke');
+assert.equal(recipeVersion('Exit Music').ingredients.find(i=>i.name.toLowerCase()==='fresh lemon juice').amount,'0.5 oz','Exit Music must not read 5 oz of lemon');
+assert.ok(recipeVersion('Battle For Pueblo').ingredients.some(i=>i.name==='Royal Combier'),'Battle for Pueblo requires Royal Combier');
+assert.ok(recipeVersion('Maximillian Affair').ingredients.some(i=>/mezcal/i.test(i.name)),'Maximillian Affair must include mezcal');
+assert.ok(recipeVersion('La Otra Palabra').ingredients.some(i=>/marachino|maraschino/i.test(i.name)),'La Otra Palabra must include maraschino');
+const agave=shakerData.recipes.filter(r=>r.collections.includes('Agave Companion'));
+assert.ok(agave.some(r=>r.category==='Tequila'),'Agave Companion should distinguish tequila from mezcal');
+
 assert.equal(Object.keys(spiritIndex.books).length,2);
 assert.equal(Object.keys(glassPdt.glasses).length,12);
 assert.equal(Object.keys(glassDeath.glasses).length,14);
