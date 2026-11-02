@@ -5,11 +5,12 @@
   if (!art) throw new Error('Ingredient artwork resolver must load first');
   const groups = {
     gin: {label:'Gin', names:['Plymouth Gin','Beefeater Gin',"Hendrick's Gin",'Tanqueray Gin','Bombay London Dry Gin','Aviation Gin']},
+    london_dry_gin:{label:'London dry gin',names:['Beefeater Gin','Tanqueray Gin','Bombay London Dry Gin','Ford\'s Gin']},
     sweet_vermouth:{label:'Sweet vermouth',names:['Carpano Antica Sweet Vermouth','Dolin Sweet Vermouth','Cocchi Vermouth di Torino','Martini Sweet Vermouth','Vya Sweet Vermouth']},
     dry_vermouth:{label:'Dry vermouth',names:['Dolin Dry Vermouth','Noilly Prat Dry Vermouth','Vya Dry Vermouth']},
     vermouth:{label:'Vermouth',names:['Carpano Antica Sweet Vermouth','Dolin Sweet Vermouth','Dolin Dry Vermouth','Noilly Prat Dry Vermouth','Martini Sweet Vermouth']},
     whiskey:{label:'Whiskey',names:['Rittenhouse Bonded Rye Whiskey','Wild Turkey Rye Whiskey','Jameson Irish Whiskey','Sazerac 6-Year-Old Rye Whiskey']},
-    bourbon:{label:'Bourbon',names:['Woodford Reserve Bourbon','Wild Turkey Russell\'s Reserve 6-Year-Old Rye Whiskey','Rittenhouse Bonded Rye Whiskey']},
+    bourbon:{label:'Bourbon',names:['Woodford Reserve Bourbon']},
     rum:{label:'Rum',names:['Bacardi 8 Rum','Appleton Estate Reserve Rum','Gosling\'s Black Seal Rum','Flor de Caña 7-Year Rum']},
     white_rum:{label:'White rum',names:['Flor de Caña Extra-Dry White Rum','Banks 5-Island White Rum','Appleton White Rum','Mount Gay Eclipse White Rum']},
     dark_rum:{label:'Dark rum',names:['Gosling\'s Black Seal Rum','Myers\'s Dark Rum','Cruzan Black Strap Rum']},
@@ -21,7 +22,7 @@
   };
   const normalize = input => String(input||'').normalize('NFKD').replace(/[\u0300-\u036f]/g,'').toLowerCase().replace(/&/g,' and ').replace(/[^a-z0-9]+/g,' ').trim().replace(/\s+/g,' ');
   const aliases={
-    'gin':'gin','dry gin':'gin','london dry gin':'gin','london dry':'gin',
+    'gin':'gin','dry gin':'gin','london dry gin':'london_dry_gin','london dry':'london_dry_gin',
     'sweet vermouth':'sweet_vermouth','red vermouth':'sweet_vermouth','rosso vermouth':'sweet_vermouth',
     'dry vermouth':'dry_vermouth','french vermouth':'dry_vermouth','vermouth':'vermouth',
     'whiskey':'whiskey','whisky':'whiskey','rye':'whiskey','rye whiskey':'whiskey','rye whisky':'whiskey',
