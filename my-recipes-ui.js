@@ -112,7 +112,7 @@ function detail(id){
    const rows=[...parts];
    if(r.glass)rows.push({name:r.glass,amount:'',role:'glass'});
    return rows.map((i,idx)=>{
-     const isGlass=i.role==='glass',amount=E.scaleAmount(i.amount,servings);
+     const isGlass=i.role==='glass',amount=E.scaleAmount(i.amount,servings,i);
      return '<div class="step"><div class="step-number">'+String(idx+1).padStart(2,'0')+'</div><div class="step-icon"><img src="'+safe(isGlass?E.glassImg(i.name):E.ingImg(i.name))+'" '+(isGlass?'':E.bottleImageAttrs(i.name,'t'))+' alt="" loading="lazy" onerror="this.onerror=null;this.src=window.IngredientArt?.fallback||\'\'"></div><div class="step-main"><div class="step-role">'+safe(i.role==='glass'?'glass':i.role==='garnish'?'garnish':'add')+'</div><div class="step-name">'+safe(i.name)+'</div><div class="step-cat">'+(isGlass?'Glassware':r.kind==='version'?'Personal version':'My recipe')+'</div></div><div class="step-amount"><strong>'+safe(isGlass?'':amount)+'</strong><small>'+safe(isGlass?'Glass':i.role==='garnish'?'Garnish':'Measure')+'</small></div></div>';
    }).join('');
  };
@@ -128,7 +128,7 @@ function detail(id){
  $('#myMore')?.addEventListener('click',()=>{if(servings<30){servings++;refresh();}});
  $('#myDuplicate')?.addEventListener('click',()=>{try{const copy=db().duplicate(id);location.hash=itemUrl(copy.id);E.toast('Copy created');}catch(ex){E.toast(ex.message);}});
  $('#myDelete')?.addEventListener('click',()=>{if(window.confirm('Delete "'+r.name+'"? This cannot be undone unless you have a backup.')){db().remove(id);location.hash='#/my-recipes';E.toast('Recipe deleted');}});
- $('#myCopy')?.addEventListener('click',async()=>{const text=r.name+'\n'+r.ingredients.map(i=>E.scaleAmount(i.amount,servings)+' '+i.name).join('\n')+'\n\n'+r.method+(r.garnish?'\nGarnish: '+r.garnish:'');try{await navigator.clipboard.writeText(text);E.toast('Recipe copied');}catch{E.toast('Clipboard unavailable');}});
+ $('#myCopy')?.addEventListener('click',async()=>{const text=r.name+'\n'+r.ingredients.map(i=>E.scaleAmount(i.amount,servings,i)+' '+i.name).join('\n')+'\n\n'+r.method+(r.garnish?'\nGarnish: '+r.garnish:'');try{await navigator.clipboard.writeText(text);E.toast('Recipe copied');}catch{E.toast('Clipboard unavailable');}});
  $('#myGuided')?.addEventListener('click',()=>E.previewScale({...rForSteps,book:'shakerrr'}));
 }
 function downloadBackup(){
