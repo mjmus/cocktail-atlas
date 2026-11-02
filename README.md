@@ -76,3 +76,9 @@ On any existing PDT, Death & Co or Shakerrr recipe, click **+ Make my version** 
 The personal library supports editing, duplication, deletion, resized serving measurements, guided preparation steps, and JSON backup **Export** / **Import**. Backups merge by recipe ID.
 
 **Privacy/storage:** Custom recipes are stored only in the current browser's `localStorage`. They are not uploaded to GitHub or shared across browsers and devices. Export backups regularly, particularly before clearing browser data or using a new device. Bottle photos may load from external image servers; custom ingredient names entered into the page are not transmitted by the recipe save function.
+
+## Real Sommelier producer bottle examples
+
+All 25 Sommelier categories now display a specifically matched **real producer bottle** instead of a generic primary illustration. The original SVG bottles remain fallback art for unavailable third-party images. Cards identify the producer; detail pages show the producer, cuvée, and image-source link. Brand names are searchable. Serving, flavor and pairing guidance remains wine-style guidance, not tasting notes for a given photographed vintage.
+
+Bottle images are externally linked, not stored in the repo. See `ATTRIBUTION.md` for rights and availability considerations.
