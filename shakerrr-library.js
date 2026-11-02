@@ -2,7 +2,7 @@
 (() => {
   'use strict';
   const URL = './data/shakerrr-recipes.json';
-  const IMAGE_ROOT = 'https://fusorxe.github.io/shakerrr-site/';
+  const IMAGE_ROOT = 'https://raw.githubusercontent.com/FusorXE/shakerrr-site/main/';
   const spirits = ['Whiskey', 'Gin', 'Brandy', 'Rum', 'Tequila', 'Vodka', 'Mezcal'];
   let records = null;
   let inflight = null;
@@ -52,7 +52,7 @@
   function glasses() {return [...new Set((records||[]).map(r=>r.glass).filter(Boolean))].sort((a,b)=>a.localeCompare(b));}
   function search(q) {
     const query=normalized(q);
-    return (records||[]).filter(r=>[r.name,r.family,r.method,r.category,r.country,...(r.collections||[]),...(r.ingredients||[]).map(i=>i.name)].some(s=>normalized(s).includes(query)));
+    return (records||[]).filter(r=>query.split(/\s+/).filter(Boolean).every(word=>[r.name,r.family,r.method,r.category,r.country,...(r.collections||[]),...(r.ingredients||[]).map(i=>i.name)].some(s=>normalized(s).includes(word))));
   }
   function details(name, index=0) {
     const src=find(name);if(!src)return null;
