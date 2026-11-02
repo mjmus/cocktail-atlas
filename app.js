@@ -110,7 +110,46 @@ function previewScale(r){
   $('#scaleNext')?.addEventListener('click',()=>{state.scaleIndex++;paint()});
  }paint();
 }
-async function searchPage(b,q){state.currentBook=b;saveStorage('book',b);header();const my=state.token;set(pageHead(b,'Search',`Search for “${esc(q)}” across cocktail names and ingredients.`,'Search')+`<section class="wrap blk"><div class="status"><span class="spinner"></span>Searching the recipe collection…</div></section>`);const names=await ensureNames(b);let matches=names.filter(n=>norm(n).includes(norm(q)));let ingredients=[];try{const result=await api(`${b}/search?q=${encodeURIComponent(q)}`);const candidates=[...(result.cocktails||result.recipes||result.items||[])];matches=[...new Set([...matches,...candidates.map(x=>typeof x==='string'?x:x.name).filter(Boolean)])];ingredients=(result.ingredients||[]).map(x=>typeof x==='string'?x:x.name)}catch(e){console.warn('Ingredient search not available',e)}if(my!==state.token)return;set(`${pageHead(b,'Search',`Results for “${esc(q)}”`,'Search')}<section class="wrap blk" style="border-top:0"><form id="searchAgain" class="searchbox"><input name="q" type="search" value="${attr(q)}" aria-label="Search cocktails or ingredients" required><button>Search →</button></form><div style="height:28px"></div>${sectionTitle('01',`${matches.length} matching cocktails`)}${matches.length?tiles(b,matches.slice(0,60)):'<div class="empty">No matching cocktail names returned.</div>'}${ingredients.length?`<div style="height:38px"></div>${sectionTitle('02','Matching ingredients')}<div class="chips">${ingredients.slice(0,25).map(n=>`<a class="chip" href="${bookRoute(b,'ingredient',n)}">${esc(n)} →</a>`).join('')}</div>`:''}</section>`);$('#searchAgain')?.addEventListener('submit',e=>{e.preventDefault();navigate(bookRoute(b,'search',e.target.q.value.trim()))})}
+async function fullIngredientSearchIndex(){
+ if(state.fullIngredientSearchIndex)return state.fullIngredientSearchIndex;
+ if(!state.fullIngredientSearchPromise){
+  state.fullIngredientSearchPromise=fetch('./data/recipe-search-index.json',{cache:'force-cache'})
+   .then(r=>{if(!r.ok)throw Error('Full ingredient search index unavailable');return r.json()})
+   .then(d=>{state.fullIngredientSearchIndex=d.books;return d.books})
+   .catch(e=>{state.fullIngredientSearchPromise=null;throw e});
+ }
+ return state.fullIngredientSearchPromise;
+}
+async function searchPublicResults(b,q){
+ const [catalog,groups]=await Promise.all([fullIngredientSearchIndex(),exactSpiritIndex()]);
+ const words=norm(q).split(/\s+/).filter(Boolean);
+ const known={whisky:'whiskey',scotch:'whiskey',bourbon:'whiskey',whiskey:'whiskey',gin:'gin',rum:'rum',brandy:'brandy',tequila:'tequila',vodka:'vodka',mezcal:'mezcal'};
+ const memberships={};
+ for(const w of words)if(known[w]&&!memberships[known[w]])memberships[known[w]]=new Set(groups[b]?.[known[w]]||[]);
+ const matches=(catalog[b]||[]).filter(r=>{
+  const hay=norm(r.name+' '+r.ingredients);
+  return words.every(w=>known[w]?memberships[known[w]].has(r.name):hay.includes(w));
+ }).map(r=>r.name);
+ const ingredients=words.length===1?[...new Set((catalog[b]||[]).flatMap(r=>r.ingredients.split(', ').filter(n=>norm(n).includes(words[0]))))].sort().slice(0,40):[];
+ return {matches,ingredients};
+}
+async function combinationPage(b,spirit,flavor){
+ const token=state.token,sp=norm(spirit),withName=norm(flavor),label=spirit+' + '+flavor;
+ set(pageHead(b,esc(label),'Finding cocktails with both ingredients…','Combinations')+'<section class="wrap blk"><div class="status"><span class="spinner"></span>Matching recipes…</div></section>');
+ const [catalog,groups]=await Promise.all([fullIngredientSearchIndex(),exactSpiritIndex()]);
+ if(state.token!==token)return;
+ const names=new Set(groups[b]?.[sp]||[]);
+ const matches=(catalog[b]||[]).filter(r=>names.has(r.name)&&norm(r.ingredients).includes(withName)).map(r=>r.name);
+ set(`${pageHead(b,esc(label),`${matches.length} recipes with ${esc(spirit)} and ${esc(flavor)}.`,esc('Combinations'))}<section class="wrap blk" style="border-top:0">${sectionTitle('01',`${matches.length} matching cocktails`)}${matches.length?tiles(b,matches):'<div class="empty">No recipe in this book combines these ingredients. Try another pairing.</div>'}<p><a class="inline-link" href="${bookRoute(b)}">← Back to combinations</a></p></section>`);
+}
+async function searchPage(b,q){
+ state.currentBook=b;saveStorage('book',b);header();const token=state.token;
+ set(pageHead(b,'Search',`Searching for “${esc(q)}”…`,'Search')+'<section class="wrap blk"><div class="status"><span class="spinner"></span>Searching all recipe ingredients…</div></section>');
+ const {matches,ingredients}=await searchPublicResults(b,q);
+ if(token!==state.token)return;
+ set(`${pageHead(b,'Search',`Results for “${esc(q)}”`,'Search')}<section class="wrap blk" style="border-top:0"><form id="searchAgain" class="searchbox"><input name="q" type="search" value="${attr(q)}" aria-label="Search cocktails or ingredients" required><button>Search →</button></form><div style="height:28px"></div>${sectionTitle('01',`${matches.length} matching cocktails`)}${matches.length?tiles(b,matches):'<div class="empty">No recipes match all of those terms. Try fewer ingredients.</div>'}${ingredients.length?`<div style="height:38px"></div>${sectionTitle('02','Matching ingredients')}<div class="chips">${ingredients.slice(0,25).map(n=>`<a class="chip" href="${bookRoute(b,'ingredient',n)}">${esc(n)} →</a>`).join('')}</div>`:''}</section>`);
+ $('#searchAgain')?.addEventListener('submit',e=>{e.preventDefault();location.hash=bookRoute(b,'search',e.target.elements.namedItem('q').value.trim())});
+}
 function spiritsPage(b){const v=BOOKS[b];set(`${pageHead(b,'Spirits','Browse cocktails by their base spirit.','Spirits')}<section class="wrap blk" style="border-top:0">${spiritRows(b)}</section>`)}
 async function spiritPage(b,sp){
  const title=sp.charAt(0).toUpperCase()+sp.slice(1),token=state.token;
@@ -215,6 +254,6 @@ async function shakerrGlassPage(g){
  const arr=window.ShakerrrLibrary.forGlass(g).map(x=>x.name);
  set(`${pageHead('shakerrr',esc(g),`${arr.length} recipes in this glass group.`,esc(g))}<section class="wrap blk" style="border-top:0">${tiles('shakerrr',arr)}</section>`);
 }
-async function render(){const token=++state.token;document.title='Cocktail Atlas · English';const hash=(location.hash.replace(/^#\/?/,'')||'');const parts=hash.split('/').filter(Boolean).map(x=>{try{return decodeURIComponent(x)}catch{return x}});if(parts[0] in BOOKS)state.currentBook=parts[0];header();footer();state.menu=false;window.scrollTo({top:0,behavior:'instant'});try{if(!parts.length)home();else if(parts[0]==='bar')barPage();else if(parts[0]==='saved')savedPage();else if(parts[0]==='about')aboutPage();else if(parts[0]==='help')helpPage();else if(parts[0] in BOOKS){const [b,p,name]=parts;if(!p)bookHome(b);else if(p==='collections'&&b==='shakerrr')await shakerrCollections();else if(p==='collection'&&name&&b==='shakerrr')await shakerrCollection(name);else if(p==='recipes')await allRecipes(b);else if(p==='recipe'&&name)await recipePage(b,name);else if(p==='search'&&name){if(b==='shakerrr')await shakerrSearch(name);else await searchPage(b,name);}else if(p==='spirits'){if(b==='shakerrr')await window.ShakerrrLibrary.load();spiritsPage(b);}else if(p==='spirit'&&name)await spiritPage(b,name);else if(p==='ingredients')await ingredientsPage(b);else if(p==='ingredient'&&name){if(b==='shakerrr')await shakerrIngredientPage(name);else await ingredientPage(b,name);}else if(p==='glasses'){if(b==='shakerrr')await shakerrGlassesPage();else await glassesPage(b);}else if(p==='glass'&&name){if(b==='shakerrr')await shakerrGlassPage(name);else await glassPage(b,name);}else bookHome(b)}else home()}catch(e){if(state.token===token){console.error(e);set(`<section class="wrap phead"><h1>Something went wrong</h1><p class="pdesc">${esc(e.message)}</p><a class="inline-link" href="#/">Return home →</a></section>`)}}}
+async function render(){const token=++state.token;document.title='Cocktail Atlas · English';const hash=(location.hash.replace(/^#\/?/,'')||'');const parts=hash.split('/').filter(Boolean).map(x=>{try{return decodeURIComponent(x)}catch{return x}});if(parts[0] in BOOKS)state.currentBook=parts[0];header();footer();state.menu=false;window.scrollTo({top:0,behavior:'instant'});try{if(!parts.length)home();else if(parts[0]==='bar')barPage();else if(parts[0]==='saved')savedPage();else if(parts[0]==='about')aboutPage();else if(parts[0]==='help')helpPage();else if(parts[0] in BOOKS){const [b,p,name]=parts;if(!p)bookHome(b);else if(p==='collections'&&b==='shakerrr')await shakerrCollections();else if(p==='collection'&&name&&b==='shakerrr')await shakerrCollection(name);else if(p==='recipes')await allRecipes(b);else if(p==='recipe'&&name)await recipePage(b,name);else if(p==='mix'&&name&&parts[3]&&b!=='shakerrr')await combinationPage(b,name,parts[3]);else if(p==='search'&&name){if(b==='shakerrr')await shakerrSearch(name);else await searchPage(b,name);}else if(p==='spirits'){if(b==='shakerrr')await window.ShakerrrLibrary.load();spiritsPage(b);}else if(p==='spirit'&&name)await spiritPage(b,name);else if(p==='ingredients')await ingredientsPage(b);else if(p==='ingredient'&&name){if(b==='shakerrr')await shakerrIngredientPage(name);else await ingredientPage(b,name);}else if(p==='glasses'){if(b==='shakerrr')await shakerrGlassesPage();else await glassesPage(b);}else if(p==='glass'&&name){if(b==='shakerrr')await shakerrGlassPage(name);else await glassPage(b,name);}else bookHome(b)}else home()}catch(e){if(state.token===token){console.error(e);set(`<section class="wrap phead"><h1>Something went wrong</h1><p class="pdesc">${esc(e.message)}</p><a class="inline-link" href="#/">Return home →</a></section>`)}}}
 window.addEventListener('hashchange',render);render();
 })();
