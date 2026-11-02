@@ -59,3 +59,13 @@ This is for personal use but **the GitHub repository and GitHub Pages site are p
 The imported Shakerrr recipes preserve their documented factual amounts and versions; their weights are not treated as exact grams. The site does not implement synchronized accounts, Bluetooth scale telemetry or all advanced substitution tools.
 
 Source attribution and third-party asset conditions are documented in [ATTRIBUTION.md](ATTRIBUTION.md). Some bottle/product images are loaded from external sites and have separate rights; they are not packaged in this repository. The imported Shakerrr drink images reference the existing Shakerrr repository and may not all be available.
+
+## My Recipes: personal cocktail notebook
+
+Use **My Recipes** in the navigation to create and save custom cocktails. Enter drink name, ingredient names and amounts, glassware, garnishes, instructions and tasting notes. A live bottle gallery uses the same verified artwork matcher and saved generic-spirit bottle preferences.
+
+On any existing PDT, Death & Co or Shakerrr recipe, click **+ Make my version** to pre-fill the editor with the original recipe, then customize and save a separate personal variation. Your original source recipe remains unchanged.
+
+The personal library supports editing, duplication, deletion, resized serving measurements, guided preparation steps, and JSON backup **Export** / **Import**. Backups merge by recipe ID.
+
+**Privacy/storage:** Custom recipes are stored only in the current browser's `localStorage`. They are not uploaded to GitHub or shared across browsers and devices. Export backups regularly, particularly before clearing browser data or using a new device. Bottle photos may load from external image servers; custom ingredient names entered into the page are not transmitted by the recipe save function.
