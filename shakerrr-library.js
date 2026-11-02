@@ -61,7 +61,7 @@
     return {
       ok:true,book:'shakerrr',name:src.name,sourceId:src.id,
       description:[src.family,src.country].filter(Boolean).join(' · '),
-      ingredients:(values.ingredients||[]).map(i=>({name:i.name,amount:i.amount,grams:null,role:'add',category:'Ingredient'})),
+      ingredients:(values.ingredients||[]).map(i=>({name:i.name,amount:i.amount,grams:null,role:/\b(salt\s+for\s+rim|lime\s+wheel|orange\s+twist|lemon\s+twist)\b/i.test(i.name)?'garnish':'add',category:'Ingredient'})),
       method:values.instructions||src.instructions||'See the ingredients and method.',
       glass:values.glass||src.glass||'',garnish:values.garnish||src.garnish||'',
       ice:values.ice||src.ice||'',category:src.category||'',family:src.family||'',
