@@ -8,6 +8,7 @@ const adapter=fs.readFileSync(path.join(root,'shakerrr-library.js'),'utf8');
 const ingredientArt=fs.readFileSync(path.join(root,'ingredient-art.js'),'utf8');
 const bottleVariants=fs.readFileSync(path.join(root,'bottle-variants.js'),'utf8');
 const tourSource=fs.readFileSync(path.join(root,'tour.js'),'utf8');
+const measurements=fs.readFileSync(path.join(root,'recipe-measurements.js'),'utf8');
 const tourStyles=fs.readFileSync(path.join(root,'tour.css'),'utf8');
 const fullSearchIndex=JSON.parse(fs.readFileSync(path.join(root,'data/recipe-search-index.json'),'utf8'));
 const artIndex=JSON.parse(fs.readFileSync(path.join(root,'data/ingredient-art-index.json'),'utf8'));
@@ -30,7 +31,7 @@ assert.ok(agave.some(r=>r.category==='Tequila'),'Agave Companion should distingu
 assert.equal(Object.keys(spiritIndex.books).length,2);
 assert.equal(Object.keys(glassPdt.glasses).length,12);
 assert.equal(Object.keys(glassDeath.glasses).length,14);
-new Function(source);new Function(adapter);new Function(ingredientArt);new Function(bottleVariants);new Function(tourSource);
+new Function(source);new Function(adapter);new Function(ingredientArt);new Function(bottleVariants);new Function(tourSource);new Function(measurements);
 assert.ok(tourStyles.includes('prefers-reduced-motion:reduce'),'Animation should respect reduced-motion preference');
 assert.ok(!source.includes('youtube-nocookie.com'),'Old video embed must not return');
 assert.ok(!source.includes('video/explainer.jpg'),'Old thumbnail must not return');
@@ -96,6 +97,7 @@ assert.equal(context.window.CocktailAtlasTour.chapters.length,4);
 assert.ok(context.window.CocktailAtlasTour.hero().includes('data-atlas-tour-open'));
 assert.ok(context.window.CocktailAtlasTour.modalMarkup().includes('data-atlas-tour-dialog'));
 assert.ok(!context.window.CocktailAtlasTour.modalMarkup().includes('<iframe'));
+vm.runInContext(measurements,context,{timeout:5000});
 vm.runInContext(source,context,{timeout:5000});
 function tick(){return new Promise(done=>setImmediate(done))}
 async function route(hash,expected){
@@ -130,9 +132,22 @@ async function route(hash,expected){
  let recipe=await route('#/shakerrr/recipe/Elderflower%20Samba%20Martini','Elderflower Samba Martini');
  assert.ok(recipe.includes('2 oz'),'volume measurements absent');
  assert.ok(recipe.includes('ingredients/tc/'),'bottle cutouts absent');
+ const testCure={...mockRecipe,book:'deathco',name:'Cure for Pain',method:'Stir with ice.',ingredients:[
+  {name:'Campari',role:'add',category:'liqueur',grams:5.2,amount:'1 tsp'},
+  {name:'Marie Brizard White Creme de Cacao',role:'add',category:'liqueur',grams:5.4,amount:'1 tsp'},
+  {name:'Rittenhouse Bonded Rye Whiskey',role:'add',category:'whiskey',grams:41.3,amount:'1.5 oz'},
+  {name:'Orange Twist',role:'garnish',category:'fruit',grams:2,amount:'1'}]};
+ const sourceBackup=mockRecipe.ingredients;
+ mockRecipe.ingredients=testCure.ingredients;
+ let cure=await route('#/deathco/recipe/Cure%20for%20Pain','Ingredients & steps');
+ assert.ok(cure.includes('5.2 g')&&cure.includes('5.4 g'),'Source gram values must remain primary');
+ assert.equal((cure.match(/⅙ oz/g)||[]).length,2,'Both spoon-based liqueurs should show 1/6 US fl oz');
+ assert.ok(!cure.includes('1 tsp'),'Tsp labels must not remain on liquid rows');
+ assert.ok(cure.includes('1½ oz'),'Regular ounce components should remain accurate');
+ mockRecipe.ingredients=sourceBackup;
  const margarita=await route('#/shakerrr/recipe/Margarita','Ingredients & steps');
  assert.ok(margarita.includes('/ingredients/tc/cointreau.jpg'),'Cointreau bottle art alias is missing');
- assert.ok(recipe.includes('Original volume measurements'),'Shakerrr weights must not be fabricated');
+ assert.ok(recipe.includes('Gram values are not asserted'),'Shakerrr weights must not be fabricated');
 const negroni=await route('#/shakerrr/recipe/Negroni','Ingredients & steps');
 assert.ok(negroni.includes('data-bottle-select="gin"'),'Negroni Gin needs selector');
 assert.ok(negroni.includes('data-bottle-select="sweet_vermouth"'),'Negroni sweet vermouth needs selector');
