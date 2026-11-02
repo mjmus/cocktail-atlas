@@ -5,6 +5,9 @@ const assert=require('node:assert/strict');
 const root=path.join(__dirname,'..');
 const source=fs.readFileSync(path.join(root,'app.js'),'utf8');
 const adapter=fs.readFileSync(path.join(root,'shakerrr-library.js'),'utf8');
+const ingredientArt=fs.readFileSync(path.join(root,'ingredient-art.js'),'utf8');
+const fullSearchIndex=JSON.parse(fs.readFileSync(path.join(root,'data/recipe-search-index.json'),'utf8'));
+const artIndex=JSON.parse(fs.readFileSync(path.join(root,'data/ingredient-art-index.json'),'utf8'));
 const shakerData=JSON.parse(fs.readFileSync(path.join(root,'data/shakerrr-recipes.json'),'utf8'));
 const spiritIndex=JSON.parse(fs.readFileSync(path.join(root,'data/spirit-index.json'),'utf8'));
 const glassPdt=JSON.parse(fs.readFileSync(path.join(root,'data/glass-pdt.json'),'utf8'));
@@ -13,7 +16,10 @@ assert.equal(shakerData.recipes.length,407);
 assert.equal(Object.keys(spiritIndex.books).length,2);
 assert.equal(Object.keys(glassPdt.glasses).length,12);
 assert.equal(Object.keys(glassDeath.glasses).length,14);
-new Function(source);new Function(adapter);
+new Function(source);new Function(adapter);new Function(ingredientArt);
+assert.equal(fullSearchIndex.books.pdt.length,304);
+assert.equal(fullSearchIndex.books.deathco.length,477);
+assert.ok(Object.keys(artIndex.items).length>=700);
 const dom={
  '#site-header':{innerHTML:''},'#site-footer':{innerHTML:''},'#content':{innerHTML:''},
  '#toast':{textContent:'',classList:{add(){},remove(){}}}
@@ -36,6 +42,7 @@ const context={
  fetch:async url=>({
   ok:true,json:async()=>{
    if(url.includes('shakerrr-recipes.json'))return shakerData;
+   if(url.includes('recipe-search-index.json'))return fullSearchIndex;
    if(url.includes('spirit-index.json'))return spiritIndex;
    if(url.includes('glass-pdt.json'))return glassPdt;
    if(url.includes('glass-deathco.json'))return glassDeath;
@@ -48,6 +55,10 @@ const context={
  })
 };
 vm.createContext(context);
+vm.runInContext(ingredientArt,context,{timeout:5000});
+assert.equal(context.window.IngredientArt.match('Orange Liqueur, Preferably Cointreau').stem,'cointreau');
+assert.equal(context.window.IngredientArt.match('Fresh Lime Juice').stem,'lime_juice');
+assert.ok(context.window.IngredientArt.url('unknown ingredient without photo').startsWith('data:image/svg+xml'));
 vm.runInContext(adapter,context,{timeout:5000});
 vm.runInContext(source,context,{timeout:5000});
 function tick(){return new Promise(done=>setImmediate(done))}
@@ -66,6 +77,12 @@ async function route(hash,expected){
  await route('#/pdt/glasses','Browse by glass');
  await route('#/pdt/glass/Coupe','176 cocktails');
  await route('#/deathco/glass/Rocks','85 cocktails');
+ let combo=await route('#/deathco/mix/Rum/Lime','matching cocktails');
+ assert.ok(!combo.includes('0 matching cocktails'),'Rum + lime must match ingredients');
+ combo=await route('#/deathco/mix/Whiskey/Orange','matching cocktails');
+ assert.ok(!combo.includes('0 matching cocktails'),'Whiskey + orange must match ingredients');
+ let searched=await route('#/deathco/search/Whiskey%20orange','matching cocktails');
+ assert.ok(!searched.includes('0 matching cocktails'),'multiword ingredient search must return full-index matches');
  await route('#/shakerrr','11 collections');
  await route('#/shakerrr/collections','Browse collections');
  await route('#/shakerrr/collection/Essential%20Cocktail%20Book','125 recipes');
@@ -74,6 +91,8 @@ async function route(hash,expected){
  let recipe=await route('#/shakerrr/recipe/Elderflower%20Samba%20Martini','Elderflower Samba Martini');
  assert.ok(recipe.includes('2 oz'),'volume measurements absent');
  assert.ok(recipe.includes('ingredients/tc/'),'bottle cutouts absent');
+ const margarita=await route('#/shakerrr/recipe/Margarita','Ingredients & steps');
+ assert.ok(margarita.includes('/ingredients/tc/cointreau.jpg'),'Cointreau bottle art alias is missing');
  assert.ok(recipe.includes('Original volume measurements'),'Shakerrr weights must not be fabricated');
  await route('#/shakerrr/search/gin','matching cocktails');
  await route('#/shakerrr/glasses','Glasses');
@@ -84,5 +103,5 @@ async function route(hash,expected){
  await route('#/help','Help');
  let about=await route('#/about','About Cocktail Atlas');
  assert.ok(!about.includes('Decent Espresso'),'vendor wording leaked to About');
- console.log('PASS: 22 route and integration tests, 407 imported recipes, complete 14 spirit and 26 glass groups');
+ console.log('PASS: 26+ route and integration checks, 781 indexed source recipes, 407 Shakerrr recipes, verified bottle image aliases');
 })().catch(e=>{console.error(e);process.exitCode=1});
