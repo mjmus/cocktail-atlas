@@ -10,7 +10,7 @@ A home-focused, responsive cocktail library in English. The original layout, bot
 | Death & Co | 477 | Public recipe API, on demand |
 | Shakerrr Library | 407 | Bundled recipe specifications in `data/shakerrr-recipes.json` |
 
-The source interface uses rounded headings (300 and 500) for the first two books. All 407 Shakerrr entries were imported from `FusorXE/shakerrr-site` as a separate catalog; the existing book catalogs were not modified.
+The existing interface uses rounded headings (300 and 500) for the first two books. All 407 Shakerrr entries were imported from `FusorXE/shakerrr-site` as a separate catalog; the existing book catalogs were not modified.
 
 ## Features
 
@@ -59,6 +59,13 @@ This is for personal use but **the GitHub repository and GitHub Pages site are p
 The imported Shakerrr recipes preserve their documented factual amounts and versions; their weights are not treated as exact grams. The site does not implement synchronized accounts, Bluetooth scale telemetry or all advanced substitution tools.
 
 Source attribution and third-party asset conditions are documented in [ATTRIBUTION.md](ATTRIBUTION.md). Some bottle/product images are loaded from external sites and have separate rights; they are not packaged in this repository. The imported Shakerrr drink images reference the existing Shakerrr repository and may not all be available.
+
+## Additional independent modules (2026-11-02)
+
+- **Mixed ingredient art:** Exact Cinzano Sweet Vermouth and named Scrappy's Cardamom Bitters use verified bottle-photo URLs. Other unrecognized bitters, syrups, juices, and specialty ingredients use original neutral category illustrations rather than invented brand bottles. This is an additive image resolver, not a wholesale replacement of the existing bottle index.
+- **One World Cocktail:** A separately stored published `Spicy Pomegranate (Istanbul)` entry with bartender attribution and original SVG cocktail illustration. The 407 imported Shakerrr recipe records are unchanged.
+- **Sommelier:** A standalone guide containing 25 representative wine styles, illustrated bottles, grape and region notes, flavor profiles, serving suggestions, structure indicators, and food pairings. These are educational styles, not specific winery vintages. The guide's data and CSS do not alter existing cocktail screens.
+- **Safety:** All features were prepared on a branch, with regression tests for original recipe counts, imported versions, personal recipes and new modules.
 
 ## My Recipes: personal cocktail notebook
 
