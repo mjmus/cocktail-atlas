@@ -41,7 +41,7 @@ vm.runInContext(enhanced,ctx);
 assert.match(w.IngredientArt.url('Cinzano Sweet Vermouth'),/CinzanoVermouthRossoTransp/);
 assert.equal(w.IngredientArt.url('Cinzano Rosso'),w.IngredientArt.url('Cinzano Sweet Vermouth'));
 assert.equal(w.IngredientArt.url('Cardamom Bitters'),'./assets/original/cardamom-bitters.svg');
-assert.match(w.IngredientArt.url('Demerara syrup not in catalog'),/^data:image\/svg\+xml/);
+assert.match(w.IngredientArt.url('Unobtanium nectar not in catalog'),/^data:image\/svg\+xml/);
 assert.match(w.IngredientArt.url('Cointreau','tc'),/cointreau\.jpg$/);
 vm.runInContext(adapter,ctx);
 vm.runInContext(sommelier,ctx);
