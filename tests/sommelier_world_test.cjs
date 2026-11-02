@@ -19,6 +19,11 @@ assert.ok(wine.wines.length>=24);
 assert.equal(new Set(wine.wines.map(x=>x.id)).size,wine.wines.length);
 assert.ok(wine.wines.every(x=>x.grape&&x.aromas&&x.food.length&&x.serve&&x.service));
 assert.ok(wine.wines.every(x=>['Red','White','Rosé','Sparkling','Dessert','Fortified'].includes(x.type)));
+assert.ok(wine.wines.every(x=>x.example&&x.example.brand&&x.example.wine&&/^https:\/\//.test(x.example.imageUrl)&&/^https:\/\//.test(x.example.sourceUrl)),'Every wine needs a matching branded bottle with image and source');
+assert.equal(new Set(wine.wines.map(x=>x.example.brand)).size,25,'Use independent recognizable producer examples across all 25 styles');
+assert.equal(wine.wines.find(x=>x.id==='nebbiolo').example.brand,'Vietti');
+assert.equal(wine.wines.find(x=>x.id==='champagne').example.brand,'Moët & Chandon');
+
 assert.ok(index.indexOf('ingredient-art.js')<index.indexOf('ingredient-enhancements.js'));
 assert.ok(index.indexOf('ingredient-enhancements.js')<index.indexOf('bottle-variants.js'));
 assert.ok(index.indexOf('sommelier.js')<index.indexOf('app.js'));
@@ -52,8 +57,12 @@ vm.runInContext(sommelier,ctx);
  assert.equal(w.ShakerrrLibrary.details('Spicy Pomegranate (Istanbul)').image_url,'./assets/original/spicy-pomegranate-istanbul.svg');
  const items=await w.Sommelier.load();assert.equal(items.length,wine.wines.length);
  const svg=w.Sommelier.bottle(items[0]);assert.ok(svg.includes('<svg')&&svg.includes('STYLE ILLUSTRATION'));
+ const withPhoto=w.Sommelier.bottleWithPhoto(items[0]);
+ assert.ok(withPhoto.includes('somm-real-bottle')&&withPhoto.includes('Caymus')&&withPhoto.includes('onerror'),'Branded bottle must include original fallback');
+
  let html='';
  await w.Sommelier.page(['sommelier','wine','nebbiolo'],v=>{html=v});
  assert.ok(html.includes('Barolo')&&html.includes('Braised beef')&&html.includes('Serve at'));
+ assert.ok(html.includes('Vietti')&&html.includes('Bottle photo:'),'Wine detail should credit exact producer and original photo source');
  console.log('PASS: original 407 untouched, optional Istanbul cocktail, branded art, category fallbacks, 25 Sommelier styles & detail route');
 })().catch(e=>{console.error(e);process.exitCode=1});
