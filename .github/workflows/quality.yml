@@ -15,6 +15,9 @@ jobs:
         with:
           node-version: '22'
       - run: node --check tour.js
+      - run: node --check my-recipes.js
+      - run: node --check my-recipes-ui.js
       - run: node --check app.js
       - run: node --check shakerrr-library.js
       - run: node tests/expanded_route_test.cjs
+      - run: node tests/my_recipes_test.cjs
