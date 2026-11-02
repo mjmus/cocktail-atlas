@@ -1,0 +1,531 @@
+{
+  "schemaVersion": 1,
+  "note": "Educational profiles describe styles and grapes, not named producers or specific vintages. Bottle illustrations are original and not actual winery labels.",
+  "wines": [
+    {
+      "id": "cabernet-sauvignon",
+      "name": "Cabernet Sauvignon",
+      "type": "Red",
+      "region": "Bordeaux / Napa Valley",
+      "country": "France / USA",
+      "grape": "Cabernet Sauvignon",
+      "body": "Full",
+      "acidity": 4,
+      "tannin": 4,
+      "sweetness": 1,
+      "aromas": "Blackcurrant, cedar, dark cherry, tobacco",
+      "character": "Structured, dry, often oak-aged; firm tannins soften with age.",
+      "food": [
+        "Grilled ribeye",
+        "lamb",
+        "aged cheddar"
+      ],
+      "serve": "16–18°C",
+      "service": "Young concentrated examples may benefit from 30–60 minutes of air."
+    },
+    {
+      "id": "pinot-noir",
+      "name": "Pinot Noir",
+      "type": "Red",
+      "region": "Burgundy / Willamette Valley",
+      "country": "France / USA",
+      "grape": "Pinot Noir",
+      "body": "Light–medium",
+      "acidity": 3,
+      "tannin": 2,
+      "sweetness": 1,
+      "aromas": "Red cherry, raspberry, rose, forest floor",
+      "character": "Silky, aromatic and relatively light in tannin.",
+      "food": [
+        "Duck",
+        "salmon",
+        "mushroom risotto"
+      ],
+      "serve": "14–16°C",
+      "service": "Usually little or no decanting, especially for delicate mature bottles."
+    },
+    {
+      "id": "merlot",
+      "name": "Merlot",
+      "type": "Red",
+      "region": "Bordeaux / Washington State",
+      "country": "France / USA",
+      "grape": "Merlot",
+      "body": "Medium–full",
+      "acidity": 3,
+      "tannin": 3,
+      "sweetness": 1,
+      "aromas": "Plum, black cherry, chocolate, herbs",
+      "character": "Softer texture and rounder fruit than many Cabernet-focused blends.",
+      "food": [
+        "Roast chicken",
+        "meatloaf",
+        "mushroom pasta"
+      ],
+      "serve": "15–18°C",
+      "service": "A short aeration can help younger examples."
+    },
+    {
+      "id": "syrah",
+      "name": "Syrah / Shiraz",
+      "type": "Red",
+      "region": "Northern Rhône / Barossa",
+      "country": "France / Australia",
+      "grape": "Syrah (Shiraz)",
+      "body": "Full",
+      "acidity": 3,
+      "tannin": 4,
+      "sweetness": 1,
+      "aromas": "Blackberry, violet, black pepper, smoke",
+      "character": "Rhône styles lean savory; warmer climates can be richer and fruitier.",
+      "food": [
+        "Pepper steak",
+        "barbecue",
+        "lamb kebab"
+      ],
+      "serve": "16–18°C",
+      "service": "A young, intense bottle can benefit from a short decant."
+    },
+    {
+      "id": "tempranillo",
+      "name": "Tempranillo (Rioja)",
+      "type": "Red",
+      "region": "Rioja",
+      "country": "Spain",
+      "grape": "Tempranillo",
+      "body": "Medium–full",
+      "acidity": 3,
+      "tannin": 3,
+      "sweetness": 1,
+      "aromas": "Red cherry, leather, vanilla, dill",
+      "character": "Savory red fruit with oak notes in barrel-aged Rioja styles.",
+      "food": [
+        "Tapas",
+        "roast pork",
+        "Manchego"
+      ],
+      "serve": "15–17°C",
+      "service": "Reserva and Gran Reserva can be pleasant after brief aeration."
+    },
+    {
+      "id": "sangiovese",
+      "name": "Chianti Classico",
+      "type": "Red",
+      "region": "Tuscany",
+      "country": "Italy",
+      "grape": "Sangiovese",
+      "body": "Medium",
+      "acidity": 4,
+      "tannin": 3,
+      "sweetness": 1,
+      "aromas": "Sour cherry, oregano, dried flowers",
+      "character": "Brisk acidity and savory character suit tomato-based dishes.",
+      "food": [
+        "Pizza",
+        "tomato pasta",
+        "grilled vegetables"
+      ],
+      "serve": "15–17°C",
+      "service": "Optional short aeration; serve slightly cool."
+    },
+    {
+      "id": "nebbiolo",
+      "name": "Barolo / Nebbiolo",
+      "type": "Red",
+      "region": "Piedmont",
+      "country": "Italy",
+      "grape": "Nebbiolo",
+      "body": "Medium–full",
+      "acidity": 5,
+      "tannin": 5,
+      "sweetness": 1,
+      "aromas": "Rose, sour cherry, anise, tar",
+      "character": "High acidity and tannin with pale color and complex aromatics.",
+      "food": [
+        "Braised beef",
+        "porcini",
+        "truffle dishes"
+      ],
+      "serve": "16–18°C",
+      "service": "Young bottles often benefit from a decant; handle aged bottles gently."
+    },
+    {
+      "id": "malbec",
+      "name": "Malbec",
+      "type": "Red",
+      "region": "Mendoza",
+      "country": "Argentina",
+      "grape": "Malbec",
+      "body": "Full",
+      "acidity": 3,
+      "tannin": 3,
+      "sweetness": 1,
+      "aromas": "Black plum, blackberry, violet, cocoa",
+      "character": "Rich dark fruit and approachable structure in many Mendoza examples.",
+      "food": [
+        "Grilled steak",
+        "empanadas",
+        "smoked meats"
+      ],
+      "serve": "16–18°C",
+      "service": "A short decant can open young, full-bodied examples."
+    },
+    {
+      "id": "gamay",
+      "name": "Beaujolais / Gamay",
+      "type": "Red",
+      "region": "Beaujolais",
+      "country": "France",
+      "grape": "Gamay",
+      "body": "Light",
+      "acidity": 4,
+      "tannin": 1,
+      "sweetness": 1,
+      "aromas": "Strawberry, red cherry, violet",
+      "character": "Juicy, fresh, low-tannin red; often enjoyable slightly chilled.",
+      "food": [
+        "Charcuterie",
+        "roast chicken",
+        "picnic food"
+      ],
+      "serve": "12–15°C",
+      "service": "No decanting normally needed."
+    },
+    {
+      "id": "riesling",
+      "name": "Dry Riesling",
+      "type": "White",
+      "region": "Mosel / Clare Valley",
+      "country": "Germany / Australia",
+      "grape": "Riesling",
+      "body": "Light",
+      "acidity": 5,
+      "tannin": 0,
+      "sweetness": 1,
+      "aromas": "Lime, green apple, jasmine, slate",
+      "character": "High acidity, aromatic citrus and a crisp finish; this entry is the dry style.",
+      "food": [
+        "Spicy Thai food",
+        "seafood",
+        "fresh cheeses"
+      ],
+      "serve": "8–11°C",
+      "service": "No decanting normally needed."
+    },
+    {
+      "id": "chardonnay",
+      "name": "Chardonnay",
+      "type": "White",
+      "region": "Burgundy / Sonoma",
+      "country": "France / USA",
+      "grape": "Chardonnay",
+      "body": "Medium–full",
+      "acidity": 3,
+      "tannin": 0,
+      "sweetness": 1,
+      "aromas": "Yellow apple, lemon curd, butter, toast",
+      "character": "Unoaked styles are leaner; oak and lees aging can bring creaminess.",
+      "food": [
+        "Roast chicken",
+        "lobster",
+        "creamy pasta"
+      ],
+      "serve": "10–13°C",
+      "service": "Avoid serving rich styles ice-cold."
+    },
+    {
+      "id": "sauvignon-blanc",
+      "name": "Sauvignon Blanc",
+      "type": "White",
+      "region": "Loire Valley / Marlborough",
+      "country": "France / New Zealand",
+      "grape": "Sauvignon Blanc",
+      "body": "Light",
+      "acidity": 5,
+      "tannin": 0,
+      "sweetness": 1,
+      "aromas": "Grapefruit, gooseberry, cut grass, passion fruit",
+      "character": "Zesty aromatic white; herbaceous intensity varies by region.",
+      "food": [
+        "Goat cheese",
+        "green salads",
+        "oysters"
+      ],
+      "serve": "7–10°C",
+      "service": "Best served fresh rather than decanted."
+    },
+    {
+      "id": "pinot-grigio",
+      "name": "Pinot Grigio",
+      "type": "White",
+      "region": "Alto Adige / Friuli",
+      "country": "Italy",
+      "grape": "Pinot Grigio",
+      "body": "Light",
+      "acidity": 4,
+      "tannin": 0,
+      "sweetness": 1,
+      "aromas": "Pear, lemon, almond blossom",
+      "character": "Light-bodied, delicate and dry; some versions are richer and textured.",
+      "food": [
+        "Grilled shrimp",
+        "antipasti",
+        "light pasta"
+      ],
+      "serve": "8–10°C",
+      "service": "Best served fresh."
+    },
+    {
+      "id": "chenin-blanc",
+      "name": "Chenin Blanc",
+      "type": "White",
+      "region": "Loire Valley / Stellenbosch",
+      "country": "France / South Africa",
+      "grape": "Chenin Blanc",
+      "body": "Medium",
+      "acidity": 5,
+      "tannin": 0,
+      "sweetness": 2,
+      "aromas": "Quince, yellow apple, honey, chamomile",
+      "character": "Versatile grape spanning bone-dry through sweet; this profile is lightly off-dry.",
+      "food": [
+        "Pork",
+        "roasted squash",
+        "spicy noodles"
+      ],
+      "serve": "9–12°C",
+      "service": "Adjust pairing to the bottle's actual sweetness."
+    },
+    {
+      "id": "gruner",
+      "name": "Grüner Veltliner",
+      "type": "White",
+      "region": "Wachau / Kamptal",
+      "country": "Austria",
+      "grape": "Grüner Veltliner",
+      "body": "Light–medium",
+      "acidity": 4,
+      "tannin": 0,
+      "sweetness": 1,
+      "aromas": "Green apple, white pepper, citrus, herbs",
+      "character": "Dry, refreshing and food-flexible with distinctive peppery notes.",
+      "food": [
+        "Schnitzel",
+        "asparagus",
+        "sushi"
+      ],
+      "serve": "8–11°C",
+      "service": "No decanting normally needed."
+    },
+    {
+      "id": "gewurztraminer",
+      "name": "Gewürztraminer",
+      "type": "White",
+      "region": "Alsace",
+      "country": "France",
+      "grape": "Gewürztraminer",
+      "body": "Medium",
+      "acidity": 2,
+      "tannin": 0,
+      "sweetness": 2,
+      "aromas": "Lychee, rose, ginger, orange blossom",
+      "character": "Powerfully aromatic, with modest acidity; sweetness varies widely.",
+      "food": [
+        "Indian curry",
+        "Thai noodles",
+        "washed-rind cheese"
+      ],
+      "serve": "9–12°C",
+      "service": "Check the label for actual sweetness."
+    },
+    {
+      "id": "provence-rose",
+      "name": "Provence Rosé",
+      "type": "Rosé",
+      "region": "Provence",
+      "country": "France",
+      "grape": "Grenache / Cinsault / Syrah",
+      "body": "Light",
+      "acidity": 4,
+      "tannin": 0,
+      "sweetness": 1,
+      "aromas": "Strawberry, watermelon, citrus peel",
+      "character": "Dry, pale, refreshing and delicate.",
+      "food": [
+        "Niçoise salad",
+        "grilled prawns",
+        "mezze"
+      ],
+      "serve": "8–11°C",
+      "service": "Drink young for freshness."
+    },
+    {
+      "id": "tavel-rose",
+      "name": "Tavel Rosé",
+      "type": "Rosé",
+      "region": "Southern Rhône",
+      "country": "France",
+      "grape": "Grenache-dominant blend",
+      "body": "Medium",
+      "acidity": 3,
+      "tannin": 1,
+      "sweetness": 1,
+      "aromas": "Ripe raspberry, orange peel, herbs",
+      "character": "Deeper-colored, fuller-bodied rosé suitable for substantial dishes.",
+      "food": [
+        "Roast chicken",
+        "grilled tuna",
+        "ratatouille"
+      ],
+      "serve": "10–13°C",
+      "service": "A little warmer than pale rosés."
+    },
+    {
+      "id": "champagne",
+      "name": "Brut Champagne",
+      "type": "Sparkling",
+      "region": "Champagne",
+      "country": "France",
+      "grape": "Chardonnay / Pinot Noir / Meunier",
+      "body": "Medium",
+      "acidity": 5,
+      "tannin": 0,
+      "sweetness": 1,
+      "aromas": "Green apple, lemon, brioche, almond",
+      "character": "Traditional-method sparkling wine; fine bubbles and toasty lees character.",
+      "food": [
+        "Oysters",
+        "fried chicken",
+        "soft cheese"
+      ],
+      "serve": "7–10°C",
+      "service": "Chill, but not so cold that aromatics disappear."
+    },
+    {
+      "id": "prosecco",
+      "name": "Prosecco Brut",
+      "type": "Sparkling",
+      "region": "Veneto / Friuli",
+      "country": "Italy",
+      "grape": "Glera",
+      "body": "Light",
+      "acidity": 3,
+      "tannin": 0,
+      "sweetness": 2,
+      "aromas": "Pear, apple, white flowers",
+      "character": "Typically fruit-forward sparkling wine made by tank fermentation.",
+      "food": [
+        "Brunch",
+        "prosciutto",
+        "light appetizers"
+      ],
+      "serve": "6–9°C",
+      "service": "Best fresh, no decanting."
+    },
+    {
+      "id": "cava",
+      "name": "Cava Brut",
+      "type": "Sparkling",
+      "region": "Penedès",
+      "country": "Spain",
+      "grape": "Macabeo / Xarel·lo / Parellada",
+      "body": "Light–medium",
+      "acidity": 4,
+      "tannin": 0,
+      "sweetness": 1,
+      "aromas": "Lemon, apple, toasted bread",
+      "character": "Traditional-method Spanish sparkling with savory, dry finish.",
+      "food": [
+        "Tapas",
+        "seafood paella",
+        "fried calamari"
+      ],
+      "serve": "7–10°C",
+      "service": "Serve chilled in a white-wine glass if possible."
+    },
+    {
+      "id": "port",
+      "name": "Ruby Port",
+      "type": "Fortified",
+      "region": "Douro Valley",
+      "country": "Portugal",
+      "grape": "Traditional Portuguese red blend",
+      "body": "Full",
+      "acidity": 2,
+      "tannin": 2,
+      "sweetness": 5,
+      "aromas": "Blackberry jam, dark chocolate, spice",
+      "character": "Sweet fortified wine with rich berry flavors.",
+      "food": [
+        "Blue cheese",
+        "chocolate cake",
+        "nuts"
+      ],
+      "serve": "12–16°C",
+      "service": "Serve smaller portions; often no decant for basic Ruby styles."
+    },
+    {
+      "id": "sauternes",
+      "name": "Sauternes",
+      "type": "Dessert",
+      "region": "Bordeaux",
+      "country": "France",
+      "grape": "Sémillon / Sauvignon Blanc",
+      "body": "Full",
+      "acidity": 4,
+      "tannin": 0,
+      "sweetness": 5,
+      "aromas": "Apricot, honey, marmalade, saffron",
+      "character": "Lusciously sweet dessert wine balanced by acidity.",
+      "food": [
+        "Foie gras",
+        "blue cheese",
+        "peach tart"
+      ],
+      "serve": "8–11°C",
+      "service": "A small pour goes a long way."
+    },
+    {
+      "id": "tokaji",
+      "name": "Tokaji Aszú",
+      "type": "Dessert",
+      "region": "Tokaj",
+      "country": "Hungary",
+      "grape": "Furmint-led blend",
+      "body": "Medium–full",
+      "acidity": 5,
+      "tannin": 0,
+      "sweetness": 5,
+      "aromas": "Dried apricot, orange peel, honey, ginger",
+      "character": "High-acid sweet wine made with botrytized grapes; intensity depends on style.",
+      "food": [
+        "Blue cheese",
+        "fruit desserts",
+        "pâté"
+      ],
+      "serve": "9–12°C",
+      "service": "Check sweetness level and producer guidance."
+    },
+    {
+      "id": "moscato-dasti",
+      "name": "Moscato d'Asti",
+      "type": "Sparkling",
+      "region": "Piedmont",
+      "country": "Italy",
+      "grape": "Moscato Bianco",
+      "body": "Light",
+      "acidity": 3,
+      "tannin": 0,
+      "sweetness": 4,
+      "aromas": "Peach, orange blossom, grape",
+      "character": "Low-alcohol, gently sparkling sweet wine.",
+      "food": [
+        "Fruit salad",
+        "panna cotta",
+        "light pastry"
+      ],
+      "serve": "6–8°C",
+      "service": "Chill well and serve promptly after opening."
+    }
+  ]
+}
