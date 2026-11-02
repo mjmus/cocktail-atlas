@@ -7,6 +7,8 @@ const source=fs.readFileSync(path.join(root,'app.js'),'utf8');
 const adapter=fs.readFileSync(path.join(root,'shakerrr-library.js'),'utf8');
 const ingredientArt=fs.readFileSync(path.join(root,'ingredient-art.js'),'utf8');
 const bottleVariants=fs.readFileSync(path.join(root,'bottle-variants.js'),'utf8');
+const tourSource=fs.readFileSync(path.join(root,'tour.js'),'utf8');
+const tourStyles=fs.readFileSync(path.join(root,'tour.css'),'utf8');
 const fullSearchIndex=JSON.parse(fs.readFileSync(path.join(root,'data/recipe-search-index.json'),'utf8'));
 const artIndex=JSON.parse(fs.readFileSync(path.join(root,'data/ingredient-art-index.json'),'utf8'));
 const shakerData=JSON.parse(fs.readFileSync(path.join(root,'data/shakerrr-recipes.json'),'utf8'));
@@ -28,7 +30,10 @@ assert.ok(agave.some(r=>r.category==='Tequila'),'Agave Companion should distingu
 assert.equal(Object.keys(spiritIndex.books).length,2);
 assert.equal(Object.keys(glassPdt.glasses).length,12);
 assert.equal(Object.keys(glassDeath.glasses).length,14);
-new Function(source);new Function(adapter);new Function(ingredientArt);new Function(bottleVariants);
+new Function(source);new Function(adapter);new Function(ingredientArt);new Function(bottleVariants);new Function(tourSource);
+assert.ok(tourStyles.includes('prefers-reduced-motion:reduce'),'Animation should respect reduced-motion preference');
+assert.ok(!source.includes('youtube-nocookie.com'),'Old video embed must not return');
+assert.ok(!source.includes('video/explainer.jpg'),'Old thumbnail must not return');
 assert.equal(fullSearchIndex.books.pdt.length,304);
 assert.equal(fullSearchIndex.books.deathco.length,477);
 assert.ok(Object.keys(artIndex.items).length>=700);
@@ -86,6 +91,11 @@ assert.ok(context.window.IngredientArt.choose('sweet_vermouth','Dolin Sweet Verm
 assert.ok(context.window.IngredientArt.url('Sweet Vermouth','tc').includes('/dolin_sweet_vermouth.jpg'));
 assert.ok(context.window.IngredientArt.url('unknown ingredient without photo').startsWith('data:image/svg+xml'));
 vm.runInContext(adapter,context,{timeout:5000});
+vm.runInContext(tourSource,context,{timeout:5000});
+assert.equal(context.window.CocktailAtlasTour.chapters.length,4);
+assert.ok(context.window.CocktailAtlasTour.hero().includes('data-atlas-tour-open'));
+assert.ok(context.window.CocktailAtlasTour.modalMarkup().includes('data-atlas-tour-dialog'));
+assert.ok(!context.window.CocktailAtlasTour.modalMarkup().includes('<iframe'));
 vm.runInContext(source,context,{timeout:5000});
 function tick(){return new Promise(done=>setImmediate(done))}
 async function route(hash,expected){
@@ -96,7 +106,10 @@ async function route(hash,expected){
  return html;
 }
 (async()=>{
- await route('#/','Shakerrr Library');
+ const home=await route('#/','Shakerrr Library');
+ assert.ok(home.includes('data-atlas-tour-open'),'Homepage animated tour trigger missing');
+ assert.ok(home.includes('Your bar.'),'Original preview missing');
+ assert.ok(!home.includes('youtube-nocookie'),'Old video must not appear');
  await route('#/pdt/spirits','Whiskey');
  await route('#/pdt/spirit/gin','68 Gin cocktails');
  await route('#/deathco/spirit/rum','118 Rum cocktails');
