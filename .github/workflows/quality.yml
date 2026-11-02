@@ -19,8 +19,10 @@ jobs:
       - run: node --check my-recipes-ui.js
       - run: node --check ingredient-enhancements.js
       - run: node --check sommelier.js
+      - run: node --check recipe-measurements.js
       - run: node --check app.js
       - run: node --check shakerrr-library.js
       - run: node tests/expanded_route_test.cjs
       - run: node tests/my_recipes_test.cjs
+      - run: node tests/measurement_units_test.cjs
       - run: node tests/sommelier_world_test.cjs
