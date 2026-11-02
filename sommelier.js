@@ -51,8 +51,9 @@ function list(wines,set){
  }));
  document.querySelector('#sommSearch')?.addEventListener('input',e=>{q=e.target.value;filter()});
 }
-async function page(parts,set){
+async function page(parts,set,isCurrent){
  const wines=await load();
+ if(typeof isCurrent==='function'&&!isCurrent())return;
  if(parts?.[1]==='wine'&&parts?.[2]){
    const wine=wines.find(w=>w.id===parts[2]);if(wine)return detail(wine,set);
    set(pageHead('Wine not found','This wine is not in the guide yet.')+'<section class="wrap blk"><a class="inline-link" href="#/sommelier">Browse the guide →</a></section>');return;
