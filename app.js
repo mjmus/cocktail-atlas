@@ -159,6 +159,62 @@ function helpPage(){
 function aboutPage(){
  set(`${pageHead(state.currentBook,'About Cocktail Atlas','Your home cocktail library.')}<section class="wrap blk" style="border-top:0"><div class="callout"><h2>Three libraries, one bar</h2><p>Browse classic and modern drinks from PDT, Death & Co and your Shakerrr collection. Search by spirit, glass or ingredient, resize recipes, and save favorite drinks.</p><p>Your wishlist, finished drinks and bar ingredients are saved in this browser.</p><p><a class="inline-link" href="${bookRoute('shakerrr','collections')}">Browse Shakerrr collections →</a></p></div></section>`);
 }
+async function exactSpiritIndex(){
+ if(state.spiritIndex)return state.spiritIndex;
+ const res=await fetch('./data/spirit-index.json',{cache:'force-cache'});
+ if(!res.ok)throw Error('Unable to load spirit groups');
+ const data=await res.json();return state.spiritIndex=data.books;
+}
+async function glassData(b){
+ if(!state.glassIndex)state.glassIndex={};
+ if(state.glassIndex[b])return state.glassIndex[b];
+ const res=await fetch(`./data/glass-${b}.json`,{cache:'force-cache'});
+ if(!res.ok)throw Error('Unable to load glass groups');
+ const data=await res.json();return state.glassIndex[b]=data.glasses;
+}
+async function shakerrHome(){
+ const b='shakerrr',token=state.token;state.currentBook=b;saveStorage('book',b);header();
+ set(`${pageHead(b,'Shakerrr Library','Loading your cocktail collection…')}<section class="wrap blk"><div class="status">Loading recipes…</div></section>`);
+ await window.ShakerrrLibrary.load();if(state.token!==token)return;
+ const lib=window.ShakerrrLibrary,groups=lib.collectionGroups(),picks=[...new Set([...BOOKS[b].popular.filter(n=>lib.find(n)),...groups.flatMap(g=>g.items.map(r=>r.name))])].slice(0,12);
+ set(`<section class="wrap hero"><div><div class="eye">Your expanded collection</div><h1>407 <em>cocktails</em> in <em class="g">11 collections</em></h1><p class="lede">Browse the recipes you already have in Shakerrr, organized by collection, ingredient and spirit.</p><form id="heroSearch" class="searchbox"><input name="q" type="search" placeholder="Search recipes or ingredients…" required><button>Search →</button></form></div><div class="heroimg"><div class="shakerr-collage">${picks.slice(0,4).map(n=>`<a href="${bookRoute(b,'recipe',n)}"><img src="${attr(img(b,n))}" alt="" loading="lazy" onerror="this.style.display='none'"><span>${esc(n)}</span></a>`).join('')}</div></div></section>
+ <section class="wrap blk">${sectionTitle('01','By collection',bookRoute(b,'collections'))}<div class="collection-grid">${groups.map(g=>`<a class="collection-tile" href="${bookRoute(b,'collection',g.name)}"><span>${esc(g.name)}</span><strong>${g.items.length} recipes</strong><i>→</i></a>`).join('')}</div></section>
+ <section class="wrap blk">${sectionTitle('02','By base spirit',bookRoute(b,'spirits'))}${spiritRows(b)}</section>
+ <section class="wrap blk">${sectionTitle('03','Browse recipes',bookRoute(b,'recipes'),'All 407 →')}${tiles(b,picks)}</section>`);
+ $('#heroSearch')?.addEventListener('submit',e=>{e.preventDefault();location.hash=bookRoute(b,'search',e.target.q.value.trim())});
+}
+async function shakerrCollections(){
+ const token=state.token;await window.ShakerrrLibrary.load();if(state.token!==token)return;
+ const groups=window.ShakerrrLibrary.collectionGroups();
+ set(`${pageHead('shakerrr','Browse collections','Your original Shakerrr collections.','Collections')}<section class="wrap blk" style="border-top:0"><div class="collection-grid">${groups.map(g=>`<a class="collection-tile" href="${bookRoute('shakerrr','collection',g.name)}"><span>${esc(g.name)}</span><strong>${g.items.length} recipes</strong><i>→</i></a>`).join('')}</div></section>`);
+}
+async function shakerrCollection(name){
+ const token=state.token;await window.ShakerrrLibrary.load();if(state.token!==token)return;
+ const g=window.ShakerrrLibrary.collectionGroups().find(x=>x.name===name);
+ set(`${pageHead('shakerrr',esc(name),`${g?.items.length||0} recipes in this collection.`,'Collections')}<section class="wrap blk" style="border-top:0">${g?tiles('shakerrr',g.items.map(x=>x.name)):'<div class="empty">Collection not found.</div>'}</section>`);
+}
+async function shakerrSearch(q){
+ const token=state.token;await window.ShakerrrLibrary.load();if(state.token!==token)return;
+ const lib=window.ShakerrrLibrary,recipes=lib.search(q),ings=lib.ingredients().filter(x=>norm(x).includes(norm(q)));
+ set(`${pageHead('shakerrr','Search',`Results for “${esc(q)}”`,'Search')}<section class="wrap blk" style="border-top:0"><form id="searchAgain" class="searchbox"><input name="q" value="${attr(q)}"><button>Search →</button></form><div style="height:25px"></div>${sectionTitle('01',`${recipes.length} matching cocktails`)}${recipes.length?tiles('shakerrr',recipes.map(x=>x.name)):'<div class="empty">No matches.</div>'}${ings.length?`${sectionTitle('02','Ingredients')}<div class="chips">${ings.slice(0,70).map(x=>`<a class="chip" href="${bookRoute('shakerrr','ingredient',x)}">${esc(x)} →</a>`).join('')}</div>`:''}</section>`);
+ $('#searchAgain')?.addEventListener('submit',e=>{e.preventDefault();location.hash=bookRoute('shakerrr','search',e.target.q.value.trim())});
+}
+async function shakerrIngredientPage(name){
+ const token=state.token;await window.ShakerrrLibrary.load();if(state.token!==token)return;
+ const recipes=window.ShakerrrLibrary.forIngredient(name).map(x=>x.name);
+ set(`${pageHead('shakerrr',esc(name),`${recipes.length} recipes using this ingredient.`,esc(name))}<section class="wrap blk" style="border-top:0"><div class="callout"><img src="${attr(bottleCutout(name))}" alt="" style="float:right;max-height:100px" onerror="this.style.display='none'"><strong>${esc(name)}</strong><p><button class="btn-outline" id="addIngredient">+ Add to Your Bar</button></p></div>${sectionTitle('01','Cocktails using '+name)}${tiles('shakerrr',recipes)}</section>`);
+ $('#addIngredient')?.addEventListener('click',()=>addToBar(name));
+}
+async function shakerrGlassesPage(){
+ const token=state.token;await window.ShakerrrLibrary.load();if(state.token!==token)return;
+ const lib=window.ShakerrrLibrary;
+ set(`${pageHead('shakerrr','Glasses','Browse Shakerrr recipes by glass type.','Glasses')}<section class="wrap blk" style="border-top:0"><div class="taglist">${lib.glasses().map(g=>`<a class="tagrow" href="${bookRoute('shakerrr','glass',g)}"><img src="${attr(glassImg(g))}" alt="" onerror="this.style.display='none'"><span class="tagname">${esc(g)}</span><span class="tagcount">${lib.forGlass(g).length} →</span></a>`).join('')}</div></section>`);
+}
+async function shakerrGlassPage(g){
+ const token=state.token;await window.ShakerrrLibrary.load();if(state.token!==token)return;
+ const arr=window.ShakerrrLibrary.forGlass(g).map(x=>x.name);
+ set(`${pageHead('shakerrr',esc(g),`${arr.length} recipes in this glass group.`,esc(g))}<section class="wrap blk" style="border-top:0">${tiles('shakerrr',arr)}</section>`);
+}
 async function render(){const token=++state.token;document.title='Cocktail Atlas · English';const hash=(location.hash.replace(/^#\/?/,'')||'');const parts=hash.split('/').filter(Boolean).map(x=>{try{return decodeURIComponent(x)}catch{return x}});if(parts[0] in BOOKS)state.currentBook=parts[0];header();footer();state.menu=false;window.scrollTo({top:0,behavior:'instant'});try{if(!parts.length)home();else if(parts[0]==='bar')barPage();else if(parts[0]==='saved')savedPage();else if(parts[0]==='about')aboutPage();else if(parts[0]==='help')helpPage();else if(parts[0] in BOOKS){const [b,p,name]=parts;if(!p)bookHome(b);else if(p==='collections'&&b==='shakerrr')await shakerrCollections();else if(p==='collection'&&name&&b==='shakerrr')await shakerrCollection(name);else if(p==='recipes')await allRecipes(b);else if(p==='recipe'&&name)await recipePage(b,name);else if(p==='search'&&name){if(b==='shakerrr')await shakerrSearch(name);else await searchPage(b,name);}else if(p==='spirits'){if(b==='shakerrr')await window.ShakerrrLibrary.load();spiritsPage(b);}else if(p==='spirit'&&name)await spiritPage(b,name);else if(p==='ingredients')await ingredientsPage(b);else if(p==='ingredient'&&name){if(b==='shakerrr')await shakerrIngredientPage(name);else await ingredientPage(b,name);}else if(p==='glasses'){if(b==='shakerrr')await shakerrGlassesPage();else await glassesPage(b);}else if(p==='glass'&&name){if(b==='shakerrr')await shakerrGlassPage(name);else await glassPage(b,name);}else bookHome(b)}else home()}catch(e){if(state.token===token){console.error(e);set(`<section class="wrap phead"><h1>Something went wrong</h1><p class="pdesc">${esc(e.message)}</p><a class="inline-link" href="#/">Return home →</a></section>`)}}}
 window.addEventListener('hashchange',render);render();
 })();
