@@ -70,7 +70,7 @@ window.addEventListener('error',event=>{
  if(img.dataset?.artFallback==='1')return;
  img.dataset.artFallback='1';
  img.onerror=null;
- img.src=fallback;
+ img.src=window.IngredientArt?.categoryArt?.(img.alt||'Ingredient')||fallback;
  event.stopImmediatePropagation();
 },true);
 })();

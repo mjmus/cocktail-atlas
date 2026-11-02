@@ -1,0 +1,42 @@
+/* A separate, additive wine reference. Existing cocktail layouts remain unchanged. */
+.somm-head h1{letter-spacing:-.065em}.somm-list{padding-bottom:55px}
+.somm-intro{display:flex;justify-content:space-between;gap:20px;align-items:center;padding:28px 32px;background:var(--panel);border:1px solid var(--line);border-radius:14px;margin-bottom:25px}
+.somm-intro h2{font-size:clamp(1.45rem,2.7vw,2.3rem);letter-spacing:-.05em;max-width:580px;line-height:1.15;margin:10px 0}.somm-intro p{color:var(--soft);font-size:.92rem;max-width:570px;margin:0}
+.somm-intro-stamp{font-size:5rem;letter-spacing:-.09em;line-height:1;font-weight:700;flex-shrink:0;color:var(--acc);display:flex;align-items:flex-end;gap:11px}
+.somm-intro-stamp span{font:.62rem/1.6 var(--mono);color:var(--soft);letter-spacing:0;margin-bottom:6px}
+.somm-tools{display:flex;align-items:end;gap:20px;justify-content:space-between;flex-wrap:wrap}
+.somm-tabs{display:flex;gap:6px;flex-wrap:wrap}.somm-tabs button{border:1px solid var(--line2);border-radius:20px;padding:9px 13px;background:var(--paper);color:var(--soft);font:.75rem var(--mono);cursor:pointer}
+.somm-tabs button.selected{background:var(--ink);color:var(--paper);border-color:var(--ink)}.somm-tabs button:not(.selected):hover{border-color:var(--acc)}
+.somm-search{display:grid;gap:5px;color:var(--soft);font:.72rem var(--mono);min-width:min(100%,250px);flex:1;max-width:370px}
+.somm-search input{border:1px solid var(--line2);background:var(--paper);border-radius:7px;padding:10px 12px;color:var(--ink);font:.85rem var(--sans)}
+.somm-count{font:.75rem var(--mono);color:var(--soft);margin:20px 0 13px}
+.somm-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px}
+.somm-card{display:flex;flex-direction:column;border:1px solid var(--line);border-radius:12px;overflow:hidden;color:var(--ink);background:var(--paper);transition:border-color .2s,transform .2s;min-width:0}
+.somm-card:hover{border-color:var(--acc);transform:translateY(-3px)}
+.somm-card-art{height:220px;display:flex;align-items:center;justify-content:center;overflow:hidden}
+.somm-card-art svg{height:210px;max-width:100%;filter:drop-shadow(0 8px 10px #0001)}
+.somm-card-copy{padding:16px 16px 18px;display:flex;flex-direction:column;gap:8px;flex:1}
+.somm-card-copy .eye{font-size:.62rem;color:var(--soft);line-height:1.5}
+.somm-card h3{font-size:1.12rem;line-height:1.15;letter-spacing:-.02em;margin:0}
+.somm-card p{font-size:.78rem;color:var(--soft);line-height:1.5;margin:0 0 12px;flex:1}
+.somm-card-copy span{font:.72rem var(--mono);color:var(--acc)}
+.somm-disclaimer{font-size:.72rem;color:var(--soft);line-height:1.55;padding:18px 0 0}
+.somm-detail{padding-bottom:60px}.somm-detail-grid{display:grid;grid-template-columns:minmax(280px,.8fr) minmax(0,1.2fr);gap:45px}
+.somm-detail-art{min-height:540px;border:1px solid var(--line);border-radius:14px;display:flex;align-items:center;flex-direction:column;justify-content:center;padding:28px}
+.somm-detail-art .somm-bottle{height:440px;max-width:100%;filter:drop-shadow(0 15px 13px #0002)}
+.somm-art-caption{font:.7rem var(--mono);color:#5f5b58;text-align:center;margin-top:10px;line-height:1.5}
+.somm-detail-copy{padding:12px 0}.somm-eyebrow{font:.7rem var(--mono);letter-spacing:.09em;color:var(--acc);margin-bottom:12px}
+.somm-detail-copy h2{font-size:clamp(1.7rem,3.5vw,2.8rem);letter-spacing:-.05em;line-height:1.05;margin:0 0 16px}
+.somm-lead{color:var(--soft);font-size:1rem;line-height:1.7;max-width:60ch}
+.somm-statrow{display:flex;gap:12px;margin:25px 0}.somm-statrow>div{display:flex;flex-direction:column;gap:5px;padding:14px 17px;border:1px solid var(--line2);border-radius:9px;min-width:145px}
+.somm-statrow strong{font-size:.93rem}.somm-statrow span{font:.65rem var(--mono);color:var(--soft)}
+.somm-scores{display:grid;gap:14px;max-width:550px;margin:25px 0}
+.somm-score{display:grid;grid-template-columns:83px minmax(90px,1fr) 36px;gap:12px;align-items:center;font:.74rem var(--mono)}
+.somm-score-track{height:7px;background:var(--line2);border-radius:20px;overflow:hidden}.somm-score-track i{height:100%;background:var(--acc);display:block;border-radius:20px}
+.somm-score b{font-size:.7rem;text-align:right;font-weight:500}
+.somm-detail-section{padding:17px 0;border-top:1px solid var(--line)}.somm-detail-section h3{font-size:1.05rem;margin:0 0 8px}.somm-detail-section p{font-size:.9rem;line-height:1.65;color:var(--soft);margin:0}
+.somm-foods{display:flex;gap:7px;flex-wrap:wrap}.somm-foods span{border:1px solid var(--line2);border-radius:7px;padding:8px 10px;font:.75rem var(--mono)}
+.somm-no-results{border:1px solid var(--line2);padding:30px;border-radius:9px;grid-column:1/-1}
+@media(max-width:980px){.somm-grid{grid-template-columns:repeat(3,minmax(0,1fr))}.somm-detail-grid{gap:22px}}
+@media(max-width:720px){.somm-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.somm-detail-grid{grid-template-columns:1fr}.somm-detail-art{min-height:350px}.somm-detail-art .somm-bottle{height:320px}.somm-intro{padding:22px}.somm-intro-stamp{font-size:3.2rem}}
+@media(max-width:460px){.somm-intro-stamp{display:none}.somm-card-art{height:170px}.somm-card-art svg{height:162px}.somm-card-copy{padding:11px}.somm-card h3{font-size:1rem}.somm-detail-copy h2{font-size:1.9rem}.somm-statrow{flex-wrap:wrap}.somm-detail-art{min-height:300px}.somm-detail-art .somm-bottle{height:270px}}

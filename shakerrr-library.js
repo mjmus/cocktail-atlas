@@ -27,12 +27,23 @@
       if (!response.ok) throw new Error('Shakerrr recipe data could not be loaded ('+response.status+')');
       const data = await response.json();
       if (!Array.isArray(data.recipes)) throw new Error('Unexpected Shakerrr data format');
-      records = data.recipes;
+      // Additional World Cocktails are independent of the imported book catalog.
+      // Failure to load this optional collection never blocks the 407 original records.
+      let extras=[];
+      try {
+        const response=await fetch('./data/world-spicy-pomegranate.json',{cache:'force-cache'});
+        if(response.ok){
+          const extraData=await response.json();
+          if(Array.isArray(extraData.recipes))extras=extraData.recipes.filter(x=>x&&x.id&&x.name);
+        }
+      } catch {}
+      records = [...data.recipes,...extras.filter(x=>!data.recipes.some(r=>normalized(r.name)===normalized(x.name)))];
       return records;
     })().catch(error=>{inflight=null;throw error;});
     return inflight;
   }
   function image(item) {
+    if (/^assets\/original\/[a-z0-9_-]+\.svg$/i.test(item?.image||'')) return './'+item.image;
     if (!item?.image || !/^assets\/recipes\/[a-z0-9_-]+\.webp$/i.test(item.image)) return '';
     return IMAGE_ROOT + item.image;
   }

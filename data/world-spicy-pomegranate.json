@@ -1,0 +1,70 @@
+{
+  "schemaVersion": 1,
+  "recipes": [
+    {
+      "id": "spicy-pomegranate-istanbul",
+      "name": "Spicy Pomegranate (Istanbul)",
+      "category": "World",
+      "family": "Sour",
+      "method": "Shake",
+      "country": "Turkey",
+      "collections": [
+        "World Cocktails"
+      ],
+      "ingredients": [
+        {
+          "amount": "1½ oz",
+          "name": "Gin"
+        },
+        {
+          "amount": "1 oz",
+          "name": "Pomegranate juice"
+        },
+        {
+          "amount": "1 tsp",
+          "name": "Lemon juice"
+        },
+        {
+          "amount": "1",
+          "name": "Egg white"
+        }
+      ],
+      "instructions": "Shake all ingredients with ice, strain into a chilled cocktail (martini) glass, and grind fresh black pepper over the foam.",
+      "glass": "Cocktail glass",
+      "garnish": "Freshly ground black pepper",
+      "ice": "Shake with ice; serve chilled",
+      "image": "assets/original/spicy-pomegranate-istanbul.svg",
+      "versions": [
+        {
+          "key": "istanbul-original",
+          "label": "Murat Öztürk · Four Seasons Sultanahmet",
+          "type": "Published bartender recipe",
+          "url": "https://www.elizabethminchilli.com/2011/02/spicy-pomegranate-cocktail-from-the-four-seasons-sultanahmet/",
+          "ingredients": [
+            {
+              "amount": "1½ oz",
+              "name": "Gin"
+            },
+            {
+              "amount": "1 oz",
+              "name": "Pomegranate juice"
+            },
+            {
+              "amount": "1 tsp",
+              "name": "Lemon juice"
+            },
+            {
+              "amount": "1",
+              "name": "Egg white"
+            }
+          ],
+          "instructions": "Shake with ice, strain into a chilled cocktail glass, and finish with freshly ground pepper.",
+          "glass": "Cocktail glass",
+          "garnish": "Freshly ground black pepper"
+        }
+      ],
+      "source": "Original Shakerrr Atlas entry; documented by Elizabeth Minchilli (2011)",
+      "imageNote": "Original Cocktail Atlas illustration, not the photographer's image"
+    }
+  ]
+}
