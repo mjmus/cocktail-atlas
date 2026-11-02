@@ -6,12 +6,29 @@ const base = 'https://fast.decentespresso.com/cocktails/img/ingredients';
 const normalize = input => String(input||'').normalize('NFKD').replace(/[\u0300-\u036f]/g,'').toLowerCase().replace(/&/g,' and ').replace(/[^a-z0-9]+/g,' ').trim().replace(/\s+/g,' ');
 const entries = Object.entries(known).map(([name,stem])=>({name,stem,key:normalize(name)}));
 const exact = new Map(entries.map(item=>[item.key,item]));
+const imageAliases={
+ 'st germain':'St. Germain Elderflower Liqueur',
+ 'velvet falernum':"John D. Taylor's Velvet Falernum",
+ 'luxardo maraschino':'Luxardo Maraschino Liqueur',
+ 'pimm s no 1':"Pimm's No. 1 Cup",
+ 'vida mezcal':'Del Maguey Vida Mezcal',
+ 'carpano antica formula':'Carpano Antica Sweet Vermouth',
+ 'carpano antica formula vermouth':'Carpano Antica Sweet Vermouth',
+ 'mint leaves':'Mint Sprig',
+ 'mint leaf':'Mint Sprig',
+ 'salt for rim optional':'Salt',
+ 'salt for rim':'Salt',
+ 'soda water':'Club Soda',
+ 'grenadine':'House Grenadine',
+ 'falernum':"John D. Taylor's Velvet Falernum",
+ 'cinnamon orange tea infused sweet':'Cinnamon Orange Tea-Infused Sweet Vermouth'
+};
 const resultCache=new Map();
 const prefixes=/\b(freshly squeezed|fresh squeezed|fresh|chilled|quality|premium|homemade|organic|strained|unsweetened|bottled|good quality|approximately)\b/gi;
 function match(name) {
   if(resultCache.has(name))return resultCache.get(name);
   const source=normalize(name),cleaned=normalize(String(name).replace(prefixes,' ').replace(/\([^)]*\)/g,''));
-  let result=exact.get(source)||exact.get(cleaned)||null;
+  let result=exact.get(source)||exact.get(cleaned)||exact.get(normalize(imageAliases[source]||''))||exact.get(normalize(imageAliases[cleaned]||''))||null;
   if(!result){
     // A named brand inside a longer instruction is a legitimate match:
     // e.g. "Orange liqueur, preferably Cointreau" -> Cointreau.
