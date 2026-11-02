@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "note": "Educational wine style guide with one identified example producer bottle per style. Bottle photographs hotlink from their credited external sources and can be replaced with original illustrations if blocked. Images are not guaranteed licensed for redistribution. Flavor and pairing notes describe wine styles, not the specific photographed vintage.",
+  "note": "Educational wine style guide with one identified example producer bottle per style. Bottle photographs hotlink from their credited external sources and can be replaced with original illustrations if blocked. Images are not guaranteed licensed for redistribution. Flavor and pairing notes describe wine styles, not the specific photographed vintage. Real producer photos are preferred, with secondary original-source URLs and a neutral loading surface; original SVG artwork is a last-resort fallback after all live photographs fail.",
   "wines": [
     {
       "id": "cabernet-sauvignon",
@@ -193,9 +193,13 @@
       "example": {
         "brand": "Vietti",
         "wine": "Barolo Castiglione",
-        "imageUrl": "https://www.bswliquor.com/cdn/shop/files/11_barolo_castiglione_vietti-1_df0704f6-90db-4919-b56f-641d94efc156.jpg?v=1696834769",
-        "sourceUrl": "https://www.bswliquor.com/products/vietti-barolo-castiglione-2",
-        "imageCredit": "BSW Liquor"
+        "imageUrl": "https://www.canadianliquorstore.ca/cdn/shop/files/8745625-736986.png?v=1770156924&width=1080",
+        "sourceUrl": "https://www.canadianliquorstore.ca/products/vietti-barolo-castiglione",
+        "imageCredit": "Canadian Liquor Store",
+        "imageAlternates": [
+          "https://www.astorwines.com/images/items/16272.jpg",
+          "https://www.bswliquor.com/cdn/shop/files/11_barolo_castiglione_vietti-1_df0704f6-90db-4919-b56f-641d94efc156.jpg?v=1696834769"
+        ]
       }
     },
     {
