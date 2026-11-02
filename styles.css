@@ -43,3 +43,21 @@ footer.site{border-top:1px solid var(--line);padding-block:30px;margin-top:30px}
 .help-image img{display:block;width:100%;height:auto;object-fit:contain}
 .help-section>.inline-link{font:.81rem var(--mono)}
 @media(max-width:700px){.help-layout{grid-template-columns:1fr}.help-nav{position:static;display:flex;flex-direction:row;gap:12px;flex-wrap:wrap;border-bottom:1px solid var(--line);padding:0 0 20px}.help-nav strong{width:100%;margin:0}.help-nav a{padding:5px 8px;border:1px solid var(--line);border-radius:7px}.ingredient-hero.ingstrip{overflow-x:auto;overflow-y:visible;max-width:100%}.ingstrip .isi .isc{height:106px;max-width:77px}.ingstrip .isi .isbig{height:200px;max-width:190px}}
+
+
+/* Shakerrr additions retain the existing typography, spacing and card system. */
+.collection-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.collection-tile{display:grid;grid-template-columns:minmax(0,1fr) auto;column-gap:12px;row-gap:8px;align-items:center;border:1px solid var(--line);border-radius:12px;padding:20px;background:var(--paper);transition:background .15s,border-color .15s}
+.collection-tile:hover{border-color:var(--acc);background:var(--panel)}
+.collection-tile>span{font-weight:600;font-size:1.12rem;line-height:1.25}
+.collection-tile>strong{grid-column:1;font:.78rem var(--mono);font-weight:400;color:var(--soft);line-height:1.5}
+.collection-tile>i{font-style:normal;color:var(--acc);grid-column:2;grid-row:1 / span 2;font-size:1.2rem}
+.shakerr-collage{display:grid;grid-template-columns:1fr 1fr;gap:10px;aspect-ratio:1.15}
+.shakerr-collage a{display:flex;flex-direction:column;justify-content:center;min-width:0;border:1px solid var(--line);background:var(--panel);border-radius:12px;overflow:hidden;position:relative}
+.shakerr-collage img{width:100%;height:100%;min-height:0;object-fit:contain;background:var(--panel);border:0!important;border-radius:0!important}
+.shakerr-collage span{position:absolute;bottom:0;left:0;right:0;padding:7px 8px;font:.69rem var(--mono);background:color-mix(in srgb,var(--paper) 90%,transparent);text-align:center}
+.version-picker{display:grid;gap:7px;margin:17px 0 10px;color:var(--soft);font:.77rem var(--mono)}
+.version-picker select{max-width:560px;width:100%;padding:11px 12px;background:var(--panel);border:1px solid var(--line2);border-radius:8px;color:var(--ink);font:inherit}
+.measure-note{padding:12px 15px;margin:18px 0 0;border-left:3px solid var(--acc);background:var(--panel);font-size:.8rem;color:var(--soft);line-height:1.5}
+@media(max-width:700px){.shakerr-collage{max-height:340px}}
+@media(max-width:520px){.collection-grid{grid-template-columns:1fr}.collection-tile{padding:16px}}
