@@ -45,6 +45,7 @@ assert.equal(val('1 splash',1),'1 splash','Unspecified splash is not a fixed oun
 assert.equal(val('1–2 tsp',1),'⅙–⅓ oz','Range endpoints must be converted without ambiguity');
 assert.equal(val('1–2 tbsp',2),'1–2 oz','Scaled tablespoon ranges must preserve bounds');
 assert.equal(val('1 barspoon',1),'1 barspoon','Do not assume how big a bar spoon is');
+assert.equal(val('1 tsp float'),'⅙ oz float','Preserve float instruction while displaying volume in fluid ounces');
 assert.equal(m.prettyOz(1/6),'⅙ oz');
 const source={name:'Campari',amount:'1 tsp',grams:5.2,role:'add'};
 const copy=JSON.parse(JSON.stringify(source));
