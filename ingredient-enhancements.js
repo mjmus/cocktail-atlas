@@ -8,6 +8,7 @@ const exact={
  'cinzano sweet vermouth':'https://cdn.shopify.com/s/files/1/0266/9992/3537/products/CinzanoVermouthRossoTransp_1024x1024.png?v=1669302945',
  'cinzano rosso':'https://cdn.shopify.com/s/files/1/0266/9992/3537/products/CinzanoVermouthRossoTransp_1024x1024.png?v=1669302945',
  'cinzano vermouth rosso':'https://cdn.shopify.com/s/files/1/0266/9992/3537/products/CinzanoVermouthRossoTransp_1024x1024.png?v=1669302945',
+ 'scrappy s cardamom bitters':'https://uploads-ssl.webflow.com/62c5a188e2198a60e6233605/62c5a188e2198a5b5e233711_cardamom.jpg',
  'scrappys cardamom bitters':'https://uploads-ssl.webflow.com/62c5a188e2198a60e6233605/62c5a188e2198a5b5e233711_cardamom.jpg'
 };
 const cardamom='./assets/original/cardamom-bitters.svg';
