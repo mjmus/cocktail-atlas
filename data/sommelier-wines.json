@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "note": "Educational profiles describe styles and grapes, not named producers or specific vintages. Bottle illustrations are original and not actual winery labels.",
+  "note": "Educational wine style guide with one identified example producer bottle per style. Bottle photographs hotlink from their credited external sources and can be replaced with original illustrations if blocked. Images are not guaranteed licensed for redistribution. Flavor and pairing notes describe wine styles, not the specific photographed vintage.",
   "wines": [
     {
       "id": "cabernet-sauvignon",
@@ -21,7 +21,14 @@
         "aged cheddar"
       ],
       "serve": "16–18°C",
-      "service": "Young concentrated examples may benefit from 30–60 minutes of air."
+      "service": "Young concentrated examples may benefit from 30–60 minutes of air.",
+      "example": {
+        "brand": "Caymus Vineyards",
+        "wine": "Napa Valley Cabernet Sauvignon",
+        "imageUrl": "https://images.tcdn.com.br/img/img_prod/802298/vinho_caymus_napa_valley_cabernet_sauvignon_2019_2017_1_f8f3d9e80f4feddf530d3211f6c17992.jpg",
+        "sourceUrl": "https://www.vinopassione.com.br/por-tipo/tintos/vinho-caymus-napa-valley-cabernet-sauvignon-2022",
+        "imageCredit": "Brazilian wine retailer"
+      }
     },
     {
       "id": "pinot-noir",
@@ -42,7 +49,14 @@
         "mushroom risotto"
       ],
       "serve": "14–16°C",
-      "service": "Usually little or no decanting, especially for delicate mature bottles."
+      "service": "Usually little or no decanting, especially for delicate mature bottles.",
+      "example": {
+        "brand": "La Crema",
+        "wine": "Sonoma Coast Pinot Noir",
+        "imageUrl": "https://applejack.com/site/images/La-Crema-Pinot-Noir-Sonoma-750-ml_1.png",
+        "sourceUrl": "https://applejack.com/La-Crema-Pinot-Noir-Sonoma-750-ml",
+        "imageCredit": "Applejack"
+      }
     },
     {
       "id": "merlot",
@@ -63,7 +77,14 @@
         "mushroom pasta"
       ],
       "serve": "15–18°C",
-      "service": "A short aeration can help younger examples."
+      "service": "A short aeration can help younger examples.",
+      "example": {
+        "brand": "Chateau Ste. Michelle",
+        "wine": "Indian Wells Merlot",
+        "imageUrl": "https://www.binnys.com/cdn-cgi/image/width%3D1000%2Cheight%3D1000%2Cfit%3Dpad%2Cbackground%3D%23fff%2Cformat%3Dauto/globalassets/catalogs/binnys/11/1172/117285/117285.jpg?v=639046782490000000",
+        "sourceUrl": "https://www.binnys.com/wine/red-wines/merlot/chateau-ste-michelle-indian-wells-merlot-117285/",
+        "imageCredit": "Binny's"
+      }
     },
     {
       "id": "syrah",
@@ -84,7 +105,14 @@
         "lamb kebab"
       ],
       "serve": "16–18°C",
-      "service": "A young, intense bottle can benefit from a short decant."
+      "service": "A young, intense bottle can benefit from a short decant.",
+      "example": {
+        "brand": "Penfolds",
+        "wine": "Bin 28 Shiraz",
+        "imageUrl": "https://www.theliquorshop.com.sg/cdn/shop/files/FjSIQJIf65b1de4b0747a_1706155595_700x700.jpg?v=1706155601",
+        "sourceUrl": "https://www.theliquorshop.com.sg/products/penfolds-bin-28-shiraz-75cl",
+        "imageCredit": "The Liquor Shop"
+      }
     },
     {
       "id": "tempranillo",
@@ -105,7 +133,14 @@
         "Manchego"
       ],
       "serve": "15–17°C",
-      "service": "Reserva and Gran Reserva can be pleasant after brief aeration."
+      "service": "Reserva and Gran Reserva can be pleasant after brief aeration.",
+      "example": {
+        "brand": "La Rioja Alta",
+        "wine": "Viña Ardanza Reserva",
+        "imageUrl": "https://scale.coolshop-cdn.com/product-media.coolshop-cdn.com/AD57VP/47ea01a8b5b848c8921afb678453d48e.jpg/f/la-rioja-alta-vina-ardanza-reserva-75cl.jpg",
+        "sourceUrl": "https://www.coolshop.dk/produkt/la-rioja-alta-vina-ardanza-reserva-75cl/AD57VP/",
+        "imageCredit": "Coolshop"
+      }
     },
     {
       "id": "sangiovese",
@@ -126,7 +161,14 @@
         "grilled vegetables"
       ],
       "serve": "15–17°C",
-      "service": "Optional short aeration; serve slightly cool."
+      "service": "Optional short aeration; serve slightly cool.",
+      "example": {
+        "brand": "Marchesi Antinori",
+        "wine": "Pèppoli Chianti Classico",
+        "imageUrl": "https://dinnerfromitaly.com/1744-thickbox_default/chianti-classico-peppoli-antinori-2023-75-cl.jpg",
+        "sourceUrl": "https://dinnerfromitaly.com/gb/vini-rossi/780-chianti-classico-peppoli-antinori-2023-75-cl.html",
+        "imageCredit": "Dinner from Italy"
+      }
     },
     {
       "id": "nebbiolo",
@@ -147,7 +189,14 @@
         "truffle dishes"
       ],
       "serve": "16–18°C",
-      "service": "Young bottles often benefit from a decant; handle aged bottles gently."
+      "service": "Young bottles often benefit from a decant; handle aged bottles gently.",
+      "example": {
+        "brand": "Vietti",
+        "wine": "Barolo Castiglione",
+        "imageUrl": "https://www.bswliquor.com/cdn/shop/files/11_barolo_castiglione_vietti-1_df0704f6-90db-4919-b56f-641d94efc156.jpg?v=1696834769",
+        "sourceUrl": "https://www.bswliquor.com/products/vietti-barolo-castiglione-2",
+        "imageCredit": "BSW Liquor"
+      }
     },
     {
       "id": "malbec",
@@ -168,7 +217,14 @@
         "smoked meats"
       ],
       "serve": "16–18°C",
-      "service": "A short decant can open young, full-bodied examples."
+      "service": "A short decant can open young, full-bodied examples.",
+      "example": {
+        "brand": "Catena Zapata",
+        "wine": "Catena Malbec",
+        "imageUrl": "https://verbenaflores.com.br/cdn/shop/products/19_68cda7d5-7cb0-469e-96ac-f75633864ff1_1200x1200.png?v=1610120653",
+        "sourceUrl": "https://verbenaflores.com.br/en/products/vinho-catena-zapata-malbec",
+        "imageCredit": "Verbena Flores"
+      }
     },
     {
       "id": "gamay",
@@ -189,7 +245,14 @@
         "picnic food"
       ],
       "serve": "12–15°C",
-      "service": "No decanting normally needed."
+      "service": "No decanting normally needed.",
+      "example": {
+        "brand": "Louis Jadot",
+        "wine": "Beaujolais-Villages",
+        "imageUrl": "https://target.scene7.com/is/image/Target/GUEST_aa36b0c6-d0c1-4f0d-834f-de3e13912732",
+        "sourceUrl": "https://www.target.com/p/-/A-13403724",
+        "imageCredit": "Target"
+      }
     },
     {
       "id": "riesling",
@@ -210,7 +273,14 @@
         "fresh cheeses"
       ],
       "serve": "8–11°C",
-      "service": "No decanting normally needed."
+      "service": "No decanting normally needed.",
+      "example": {
+        "brand": "Dr. Loosen",
+        "wine": "Blue Slate Riesling Dry",
+        "imageUrl": "https://cdn-next.cybassets.com/media/W1siZiIsIjMxMTUwL3Byb2R1Y3RzLzU3OTc0MDQ3LzE3NTM3ODMzNTNfYmVlNTVlYmI0ZDQ3NzQ3MDYwNDAuanBlZyJdXQ.jpeg?sha=32a7ae018d963ecc",
+        "sourceUrl": "https://www.formosawine.com/products/dr-loosen-blue-slate-riesling-dry",
+        "imageCredit": "Formosawine"
+      }
     },
     {
       "id": "chardonnay",
@@ -231,7 +301,14 @@
         "creamy pasta"
       ],
       "serve": "10–13°C",
-      "service": "Avoid serving rich styles ice-cold."
+      "service": "Avoid serving rich styles ice-cold.",
+      "example": {
+        "brand": "Rombauer Vineyards",
+        "wine": "Carneros Chardonnay",
+        "imageUrl": "https://storage.googleapis.com/images-lnb-prd-8936dd0.lnb.prd.v8.commerce.mi9cloud.com/product-images/zoom/00097921970109.png",
+        "sourceUrl": "https://www.lundsandbyerlys.com/product/rombauer-california-chardonnay-wine-id-00097921970109",
+        "imageCredit": "Lunds & Byerlys"
+      }
     },
     {
       "id": "sauvignon-blanc",
@@ -252,7 +329,14 @@
         "oysters"
       ],
       "serve": "7–10°C",
-      "service": "Best served fresh rather than decanted."
+      "service": "Best served fresh rather than decanted.",
+      "example": {
+        "brand": "Cloudy Bay",
+        "wine": "Marlborough Sauvignon Blanc",
+        "imageUrl": "https://www.winedoor.it/media/catalog/product/cache/22f3aa6bfff08028e0a0ae5d5cad6f13/s/a/sauvignon-blanc-cloudy-bay-winedoor.jpg",
+        "sourceUrl": "https://www.winedoor.it/sauvignon-blanc-marlborough-cloudy-bay.html",
+        "imageCredit": "Winedoor"
+      }
     },
     {
       "id": "pinot-grigio",
@@ -273,7 +357,14 @@
         "light pasta"
       ],
       "serve": "8–10°C",
-      "service": "Best served fresh."
+      "service": "Best served fresh.",
+      "example": {
+        "brand": "Santa Margherita",
+        "wine": "Alto Adige Pinot Grigio",
+        "imageUrl": "https://cdn.shopify.com/s/files/1/0914/7157/7451/files/santa-margherita-pinot-grigio-alto-adige-2024_1775739503422.png?v=1775739505",
+        "sourceUrl": "https://cellarcollectiveco.com/products/santa-margherita-pinot-grigio-alto-adige-2024",
+        "imageCredit": "Cellar Collective"
+      }
     },
     {
       "id": "chenin-blanc",
@@ -294,7 +385,14 @@
         "spicy noodles"
       ],
       "serve": "9–12°C",
-      "service": "Adjust pairing to the bottle's actual sweetness."
+      "service": "Adjust pairing to the bottle's actual sweetness.",
+      "example": {
+        "brand": "Ken Forrester",
+        "wine": "Old Vine Reserve Chenin Blanc",
+        "imageUrl": "https://xplorio.com/xplorio/public/2173/unnamed_2022_06_23T155951.433_1655992800.png",
+        "sourceUrl": "https://xplorio.com/hermanus/wine-and-company/en/blog/93467/in-stock-ken-forrester-old-vine-reserve-chenin-blanc/",
+        "imageCredit": "Xplorio"
+      }
     },
     {
       "id": "gruner",
@@ -315,7 +413,14 @@
         "sushi"
       ],
       "serve": "8–11°C",
-      "service": "No decanting normally needed."
+      "service": "No decanting normally needed.",
+      "example": {
+        "brand": "Weingut Bründlmayer",
+        "wine": "Terrassen Grüner Veltliner",
+        "imageUrl": "https://www.lavinia.com/media/catalog/product/b/r/brundlmayer-gruner-veltliner-terrassen.jpeg",
+        "sourceUrl": "https://www.lavinia.com/es-es/brundlmayer-terrassen-gruner-veltliner-2023",
+        "imageCredit": "Lavinia"
+      }
     },
     {
       "id": "gewurztraminer",
@@ -336,7 +441,14 @@
         "washed-rind cheese"
       ],
       "serve": "9–12°C",
-      "service": "Check the label for actual sweetness."
+      "service": "Check the label for actual sweetness.",
+      "example": {
+        "brand": "Trimbach",
+        "wine": "Classic Gewurztraminer",
+        "imageUrl": "https://www.wineswholesales.com.sg/cdn/shop/files/TrimbachClassicGewurztraminer.png?v=1695201970",
+        "sourceUrl": "https://www.wineswholesales.com.sg/products/trimbach-gewurztraminer",
+        "imageCredit": "Wines Wholesales"
+      }
     },
     {
       "id": "provence-rose",
@@ -357,7 +469,14 @@
         "mezze"
       ],
       "serve": "8–11°C",
-      "service": "Drink young for freshness."
+      "service": "Drink young for freshness.",
+      "example": {
+        "brand": "Château d'Esclans",
+        "wine": "Whispering Angel Côtes de Provence Rosé",
+        "imageUrl": "https://assets.superliquor.co.nz/thumbs/0012494.png",
+        "sourceUrl": "https://twizel.superliquor.co.nz/ch%C3%A2teau-desclans-whispering-angel-c%C3%B4tes-de-provence-ros%C3%A9-2021-750ml",
+        "imageCredit": "Super Liquor"
+      }
     },
     {
       "id": "tavel-rose",
@@ -378,7 +497,14 @@
         "ratatouille"
       ],
       "serve": "10–13°C",
-      "service": "A little warmer than pale rosés."
+      "service": "A little warmer than pale rosés.",
+      "example": {
+        "brand": "E. Guigal",
+        "wine": "Tavel Rosé",
+        "imageUrl": "https://www.mygourmet24.de/media/image/product/1915/lg/2020-tavel-rose-075-liter-domaine-e-guigal.jpg",
+        "sourceUrl": "https://www.mygourmet24.de/2020-Tavel-Rose-075-Liter-Domaine-E-Guigal",
+        "imageCredit": "MyGourmet24"
+      }
     },
     {
       "id": "champagne",
@@ -399,7 +525,14 @@
         "soft cheese"
       ],
       "serve": "7–10°C",
-      "service": "Chill, but not so cold that aromatics disappear."
+      "service": "Chill, but not so cold that aromatics disappear.",
+      "example": {
+        "brand": "Moët & Chandon",
+        "wine": "Brut Impérial Champagne",
+        "imageUrl": "https://thirstyliquorfranichst.co.nz/cdn/shop/files/Moet_ChandonImperialBrut-1.png?v=1729133017",
+        "sourceUrl": "https://thirstyliquorfranichst.co.nz/products/moet-chandon-champagne",
+        "imageCredit": "Thirsty Liquor"
+      }
     },
     {
       "id": "prosecco",
@@ -420,7 +553,14 @@
         "light appetizers"
       ],
       "serve": "6–9°C",
-      "service": "Best fresh, no decanting."
+      "service": "Best fresh, no decanting.",
+      "example": {
+        "brand": "La Marca",
+        "wine": "Prosecco Treviso Brut",
+        "imageUrl": "https://www.winemood.ch/cdn/shop/files/LaMArcaProseccoBrut.jpg?v=1750597958",
+        "sourceUrl": "https://www.winemood.ch/en/products/la-marca-prosecco-treviso-doc-brut-schaumwein",
+        "imageCredit": "Winemood"
+      }
     },
     {
       "id": "cava",
@@ -441,7 +581,14 @@
         "fried calamari"
       ],
       "serve": "7–10°C",
-      "service": "Serve chilled in a white-wine glass if possible."
+      "service": "Serve chilled in a white-wine glass if possible.",
+      "example": {
+        "brand": "Freixenet",
+        "wine": "Cordon Negro Brut Cava",
+        "imageUrl": "https://cdn-avaed8hqhrh6aefr.z01.azurefd.net/images/02fb4733-7373-411c-ae8a-ecfa4fb94c63.png",
+        "sourceUrl": "https://elbowliquor.ca/Products/Details/freixenet-cordon-negro-brut-cava-750-ml",
+        "imageCredit": "Elbow Liquor"
+      }
     },
     {
       "id": "port",
@@ -462,7 +609,14 @@
         "nuts"
       ],
       "serve": "12–16°C",
-      "service": "Serve smaller portions; often no decant for basic Ruby styles."
+      "service": "Serve smaller portions; often no decant for basic Ruby styles.",
+      "example": {
+        "brand": "Graham's",
+        "wine": "Six Grapes Reserve Ruby Port",
+        "imageUrl": "https://kegnbottle.com/cdn/shop/files/grahams-six-grapes-reserve-ruby-port-750-ml-keg-n-bottle-5549076.jpg?v=1772089869&width=1000",
+        "sourceUrl": "https://kegnbottle.com/products/graham-s-six-grapes-reserve-ruby-port-750-ml",
+        "imageCredit": "Keg N Bottle"
+      }
     },
     {
       "id": "sauternes",
@@ -483,7 +637,14 @@
         "peach tart"
       ],
       "serve": "8–11°C",
-      "service": "A small pour goes a long way."
+      "service": "A small pour goes a long way.",
+      "example": {
+        "brand": "Château Suduiraut",
+        "wine": "Sauternes Premier Cru Classé",
+        "imageUrl": "https://media.danmurphys.com.au/dmo/product/396444-1.png",
+        "sourceUrl": "https://www.danmurphys.com.au/product/DM_396444/ch-teau-suduiraut-sauternes-2020",
+        "imageCredit": "Dan Murphy's"
+      }
     },
     {
       "id": "tokaji",
@@ -504,7 +665,14 @@
         "pâté"
       ],
       "serve": "9–12°C",
-      "service": "Check sweetness level and producer guidance."
+      "service": "Check sweetness level and producer guidance.",
+      "example": {
+        "brand": "Royal Tokaji",
+        "wine": "Aszú 5 Puttonyos",
+        "imageUrl": "https://resources.vino.com/data/offertaFileFile/offertaFileFile-326654.jpg",
+        "sourceUrl": "https://www.vino.com/en/dettaglio/tokaji-pdo-aszu-5-puttonyos-blue-label-royal-tokaji-2018.html",
+        "imageCredit": "Vino.com"
+      }
     },
     {
       "id": "moscato-dasti",
@@ -525,7 +693,14 @@
         "light pastry"
       ],
       "serve": "6–8°C",
-      "service": "Chill well and serve promptly after opening."
+      "service": "Chill well and serve promptly after opening.",
+      "example": {
+        "brand": "Michele Chiarlo",
+        "wine": "Nivole Moscato d'Asti",
+        "imageUrl": "https://boir.be/cdn/shop/files/f75161611142db7815a65f19501ff2b7.png?v=1733264134",
+        "sourceUrl": "https://boir.be/fr/products/michele-chiarlo-moscato-dasti-nivole",
+        "imageCredit": "Boir"
+      }
     }
   ]
 }
