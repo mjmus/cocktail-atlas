@@ -63,4 +63,14 @@ function url(name,kind='t'){
  return obj?base+'/'+(kind?kind+'/':'')+obj.stem+'.jpg':fallback;
 }
 window.IngredientArt={known,match,stem:name=>match(name)?.stem||null,url,fallback};
+// Capture errors before legacy inline onerror handlers can hide ingredient images.
+window.addEventListener('error',event=>{
+ const img=event.target;
+ if(img?.tagName!=='IMG'||!String(img.src||'').includes('fast.decentespresso.com/cocktails/img/ingredients/'))return;
+ if(img.dataset?.artFallback==='1')return;
+ img.dataset.artFallback='1';
+ img.onerror=null;
+ img.src=fallback;
+ event.stopImmediatePropagation();
+},true);
 })();
