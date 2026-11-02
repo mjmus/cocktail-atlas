@@ -68,29 +68,13 @@ function measuredAmount(item,servings=1){
     const a=parseNumber(range[1]),b=parseNumber(range[2]);
     if(a!=null&&b!=null)return prettyOz(a*factor(range[3])*qty).replace(/ oz$/,'')+'–'+prettyOz(b*factor(range[3])*qty)+(range[4]?' per serving':'');
   }
-  // Some recipes specify a liquid teaspoon as a float. Preserve that method note.
-  const float=canConvert&&raw.match(new RegExp('^('+numeric+')\\s*(tsp\\.?|teaspoons?|tbsp\\.?|tablespoons?)\\s+(float|to float)
-  // optional ingredient amounts rather than inventing a volume.
-  if(qty===1)return raw;
-  const m=raw.match(new RegExp('^('+numeric+')(.*)$'));
-  if(!m)return raw;
-  const v=parseNumber(m[1]);
-  if(v==null)return raw;
-  return Number((v*qty).toFixed(3)).toString()+m[2];
-}
-function amountWithOriginal(item,servings=1){
-  const value=measuredAmount(item,servings);
-  return {display:value,original:typeof item==='object'?String(item?.amount||''):String(item||''),changed:value!==String(item?.amount||'')};
-}
-root.RecipeMeasurements={parseNumber,parseVolume,prettyOz,measuredAmount,amountWithOriginal,isDryIngredient};
-})(typeof window!=='undefined'?window:globalThis);
-,'i'));
-  if(float){
-    const n=parseNumber(float[1]);
-    if(n!=null)return prettyOz(n*factor(float[2])*qty)+' '+float[3].toLowerCase();
+  // Preserve the method when a liquid amount is intended as a float.
+  const floated=canConvert&&raw.match(/^(.+?)\s+(tsp|teaspoons?|tbsp|tablespoons?)\s+(float|to float)$/i);
+  if(floated){
+    const n=parseNumber(floated[1]);
+    if(n!=null)return prettyOz(n*factor(floated[2])*qty)+' '+floated[3].toLowerCase();
   }
-  // Retain source text for recipe-specific instructions, pinches, dash counts and
-  // optional ingredient amounts rather than inventing a volume.
+  // Unknown sizes, dashes and counts are not assigned fluid-ounce equivalents.
   if(qty===1)return raw;
   const m=raw.match(new RegExp('^('+numeric+')(.*)$'));
   if(!m)return raw;
