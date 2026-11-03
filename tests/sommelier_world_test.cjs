@@ -59,7 +59,7 @@ vm.runInContext(sommelier,ctx);
  const svg=w.Sommelier.bottle(items[0]);assert.ok(svg.includes('<svg')&&svg.includes('STYLE ILLUSTRATION'));
  const withPhoto=w.Sommelier.bottleWithPhoto(items[0]);
  assert.ok(withPhoto.includes('somm-real-bottle')&&withPhoto.includes('Caymus')&&withPhoto.includes('onerror'),'Branded bottle must include original fallback');
- assert.ok(index.includes('sommelier.js?v=20261102-photo-fix-2'),'Safari should retrieve the updated real-bottle renderer');
+ assert.ok(/sommelier\.js\?v=20[0-9]{6}-[a-z0-9-]+/.test(index),'Sommelier scripts must retain a versioned URL so Safari refreshes after new releases');
  assert.ok(somCss.includes('.somm-bottle-frame:not(.is-fallback)>.somm-bottle{display:none!important}'),'Generic bottle art must stay hidden while a real product photo is expected');
  const vietti=items.find(x=>x.id==='nebbiolo');
  const photoCandidates=w.Sommelier.photoCandidates(vietti);
