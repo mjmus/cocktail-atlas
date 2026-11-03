@@ -98,3 +98,9 @@ Added a separate, non-destructive personal Sommelier collection containing the *
 The personal list is stored in `data/sommelier-tried-wines.json`, rendered by `sommelier-tried.js` and `sommelier-tried.css` at `#/sommelier` and `#/sommelier/tried/<id>`. **The original 22 wine-producer profiles, 25 styles and cocktail data were not changed.**
 
 Important label caveats are shown on each entry: e.g., the supplied Willa wine's year isn't independently verified, Roselana's available matching photo is a 2024 label while the list records 2023, and Furlani 'Alpino' was matched to the skin-contact Pinot Grigio **Alpino Macerato** rather than a different conventional Alpino cuvée. Third-party photos are linked from their source websites and are not downloaded into this repository.
+
+## One Sommelier bottle catalog (2026-11-03)
+
+All **35 specific real wine bottles** appear together inside the existing **Explore real bottles** grid, alphabetically by producer: 22 producer profiles and 13 bottles originally collected from a wine list. The UI does not separate these sources, rank wines, or display prices. Search all bottles by name, producer, grape, country, region, flavor, or food pairing. Wine-type filters include red, white, rosé, orange, sparkling and dessert/fortified.
+
+Every bottle retains a dedicated profile, its real product image and source notes. Previous URLs remain supported, including the legacy `#/sommelier/tried/<id>` route, while new cards use the consistent `#/sommelier/bottle/<id>` route. The 25 educational wine-style cards continue below, unchanged. The original cocktail data, measurements and My Recipes features were not modified.
