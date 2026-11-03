@@ -3,6 +3,8 @@ const root=path.join(__dirname,'..');
 const read=p=>fs.readFileSync(path.join(root,p),'utf8');
 const journal=JSON.parse(read('data/sommelier-tried-wines.json'));
 const curated=JSON.parse(read('data/sommelier-curated-wines.json'));
+const batch03=JSON.parse(read('data/sommelier-wine-expansion-03.json'));
+assert.equal(batch03.wines.length,20);
 assert.equal(curated.wines.length,14,'14 new verified individual wines must be added');
 const existing=JSON.parse(read('data/sommelier-producer-bottles.json'));
 const styles=JSON.parse(read('data/sommelier-wines.json'));
@@ -27,7 +29,7 @@ assert.equal(journal.wines.find(w=>w.id==='furlani-alpino-macerato').wine,'Alpin
 assert.match(journal.wines.find(w=>w.id==='pearl-morissette-roselana-2023').imageVintageNote,/2024/,'Roselana photograph displays a newer vintage');
 assert.match(journal.wines.find(w=>w.id==='denny-bini-willa-lambrusco').vintageNote,/not an independently confirmed vintage/,'Do not silently assert a 2023 wine vintage');
 assert.ok(index.includes('sommelier-tried.css')&&index.includes('sommelier-tried.js'));
-assert.ok(index.includes('sommelier-tried.js?v=20261103-food'),'Safari should refresh the updated wine-photo handler');
+assert.ok(index.includes('sommelier-tried.js?v=20261103-batch03'),'Safari should refresh the updated wine-photo handler');
 const zorrito=journal.wines.find(x=>x.id==='santa-julia-el-zorrito-2024');
 assert.ok(zorrito.imageUrl.includes('goodpour.com')&&zorrito.imageAlternates.length>0,'El Zorrito needs replacement and fallback URLs');
 
@@ -36,6 +38,7 @@ assert.ok(app.includes("parts[0]==='sommelier'"),'Original app routing must be u
 for(const file of ['sommelier-pairings.js','sommelier-tried.js','sommelier.js','sommelier-bottles.js'])new Function(read(file));
 const ctx={window:{},document:{title:'',querySelectorAll:()=>[],querySelector:()=>null},fetch:async url=>{
  if(url.includes('sommelier-curated-wines.json'))return {ok:true,json:async()=>curated};
+ if(url.includes('sommelier-wine-expansion-03.json'))return {ok:true,json:async()=>batch03};
  if(url.includes('sommelier-tried-wines.json'))return {ok:true,json:async()=>journal};
  if(url.includes('sommelier-wines.json'))return {ok:true,json:async()=>styles};
  if(url.includes('sommelier-producer-bottles.json'))return {ok:true,json:async()=>existing};
@@ -47,7 +50,7 @@ for(const file of ['sommelier-pairings.js','sommelier-bottles.js','sommelier-tri
  const entries=await ctx.window.SommelierTried.load();
  assert.equal(entries.length,13);
  const expanded=await ctx.window.SommelierTried.loadCatalog();
- assert.equal(expanded.length,27,'13 personal + 14 new curated wines');
+ assert.equal(expanded.length,47,'13 personal + 14 first curated + 20 more authentic wines');
  const html=ctx.window.SommelierTried.photo(zorrito);
  assert.ok(html.includes('data-photo-sources')&&html.includes('photoFailed'),'Wine photo should use alternate sources');
  const urls=[zorrito.imageUrl,...zorrito.imageAlternates];
@@ -62,20 +65,20 @@ for(const file of ['sommelier-pairings.js','sommelier-bottles.js','sommelier-tri
 
  let rendered='';
  await ctx.window.Sommelier.page(['sommelier'],s=>{rendered=s},()=>true);
- assert.equal((rendered.match(/class="somm-producer-card somm-tried-card"/g)||[]).length,27);
+ assert.equal((rendered.match(/class="somm-producer-card somm-tried-card"/g)||[]).length,47);
  assert.equal((rendered.match(/class="somm-producer-card"/g)||[]).length,22);
  assert.equal((rendered.match(/class="somm-card"/g)||[]).length,25);
  assert.ok(rendered.includes('Explore real bottles.')&&rendered.includes('Alpino Macerato'));
  assert.equal((rendered.match(/<section class="somm-featured-bottles"/g)||[]).length,1,'Only one individual-bottle section');
  assert.ok(!rendered.includes('somm-tried-section'),'Do not separate personal wines from producer catalog');
- assert.ok(rendered.includes('49 wines')&&rendered.includes('49 bottles'),'Both collections should share one accurate count');
+ assert.ok(rendered.includes('69 wines')&&rendered.includes('69 bottles'),'Both collections should share one accurate count');
  assert.ok(rendered.includes('sommCatalogGrid')&&rendered.includes('sommCatalogSearch'),'One search/filter experience for every wine');
  assert.ok(rendered.includes('Dessert / Fortified')&&rendered.includes('Sparkling'),'SAQ-inspired wine-type filters');
  assert.doesNotMatch(rendered,/\$[0-9]|data-rating|data-price/i,'Catalog should not show pricing or rankings');
  const unified=ctx.window.SommelierBottles.catalogEntries(existing.bottles,styles.wines,expanded);
- assert.equal(unified.length,49);
+ assert.equal(unified.length,69);
  assert.equal(unified.map(x=>x.producer).join('|'),[...unified].sort((a,b)=>a.producer.localeCompare(b.producer,'en',{sensitivity:'base'})||a.wine.localeCompare(b.wine,'en',{sensitivity:'base'})).map(x=>x.producer).join('|'),'Catalog must be alphabetical, not ranked');
- assert.equal(ctx.window.SommelierBottles.catalogMatches(unified,'All','').length,49);
+ assert.equal(ctx.window.SommelierBottles.catalogMatches(unified,'All','').length,69);
  assert.ok(ctx.window.SommelierBottles.catalogMatches(unified,'Orange','').some(x=>x.id==='santa-julia-el-zorrito-2024'));
  assert.ok(ctx.window.SommelierBottles.catalogMatches(unified,'Sparkling','').some(x=>x.id==='denny-bini-willa-lambrusco'));
  assert.ok(ctx.window.SommelierBottles.catalogMatches(unified,'Red','malbec').some(x=>x.id==='catena-malbec-2022'));
@@ -84,6 +87,9 @@ for(const file of ['sommelier-pairings.js','sommelier-bottles.js','sommelier-tri
  assert.ok(rendered.includes('href="#/sommelier/bottle/pearl-morissette-roselana-2023"'),'Personal wines use the same detail route as other bottles');
  assert.ok(rendered.includes('href="#/sommelier/bottle/muga-reserva-2022"'),'New Muga bottle must share same catalog and route');
  assert.ok(rendered.includes('href="#/sommelier/bottle/taittinger-brut-reserve"'),'New Taittinger must appear in the same catalog');
+ assert.ok(rendered.includes('href="#/sommelier/bottle/royal-tokaji-aszu-2018"'),'2018 Tokaji should appear in the shared catalog');
+ assert.ok(rendered.includes('href="#/sommelier/bottle/inniskillin-vidal-icewine-2024"'),'Ontario icewine should appear');
+ assert.ok(rendered.includes('href="#/sommelier/bottle/gaia-wild-ferment-assyrtiko"'),'Greek wild-ferment Assyrtiko should appear');
  assert.ok(rendered.includes('somm-tried-image')&&rendered.includes('Nextdoor Rosie'));
  let wine='';
  await ctx.window.Sommelier.page(['sommelier','tried','occhipinti-sp68-bianco-2022'],s=>{wine=s},()=>true);
@@ -95,11 +101,18 @@ for(const file of ['sommelier-pairings.js','sommelier-bottles.js','sommelier-tri
  let expandedDetail='';
  await ctx.window.Sommelier.page(['sommelier','bottle','muga-reserva-2022'],html=>{expandedDetail=html},()=>true);
  assert.ok(expandedDetail.includes('Bodegas Muga')&&expandedDetail.includes('somm-pairing-grid')&&expandedDetail.includes('2022'),'New wine detail must have correct source and food photos');
+ let wine03='';
+ await ctx.window.Sommelier.page(['sommelier','bottle','suduiraut-sauternes-2020'],html=>{wine03=html},()=>true);
+ assert.ok(wine03.includes('Château Suduiraut')&&wine03.includes('Sémillon')&&wine03.includes('2020'),'New French dessert wine details should open');
+ assert.ok(!wine03.includes('Food photographs are illustrative.'),'Requested disclaimer must be absent');
+ let occhipinti='';
+ await ctx.window.Sommelier.page(['sommelier','bottle','occhipinti-sp68-bianco-2022'],html=>{occhipinti=html},()=>true);
+ assert.equal((occhipinti.match(/class="somm-pairing-media"/g)||[]).length,3,'All three Occhipinti dish names now map to photos');
  let old='';
  await ctx.window.Sommelier.page(['sommelier','bottle','cloudy-bay-sauvignon-2024'],s=>{old=s},()=>true);
  assert.ok(old.includes('Cloudy Bay'),'Existing producer page should still work');
  let style='';
  await ctx.window.Sommelier.page(['sommelier','wine','nebbiolo'],s=>{style=s},()=>true);
  assert.ok(style.includes('Vietti'),'Existing wine-style page should still work');
- console.log('PASS: 13 correct personal bottles with original notes and photos; 22 producers, 25 styles, 407 cocktails preserved');
+ console.log('PASS: 69 wine bottles, 31 photo match categories, 13 original personal wines, 22 original producer wines, 25 styles and 407 cocktail recipes preserved');
 })().catch(e=>{console.error(e);process.exitCode=1});

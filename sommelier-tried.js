@@ -23,11 +23,22 @@
     curatedCached=data.wines;
     return curatedCached;
   }
+  let expansionCached=null;
+  async function loadExpansion() {
+    if(expansionCached)return expansionCached;
+    const r=await fetch('./data/sommelier-wine-expansion-03.json?v=20261103-batch03',{cache:'no-cache'});
+    if(!r.ok)throw Error('Expanded wine list is temporarily unavailable.');
+    const data=await r.json();
+    if(data?.schemaVersion!==1||!Array.isArray(data.wines))throw Error('Invalid expanded wine dataset.');
+    expansionCached=data.wines;
+    return expansionCached;
+  }
   async function loadCatalog() {
     const base=await load();
-    let more=[];
-    try{more=await loadCurated();}catch{}
-    return [...base,...more];
+    let curated=[],additional=[];
+    try{curated=await loadCurated();}catch{}
+    try{additional=await loadExpansion();}catch{}
+    return [...base,...curated,...additional];
   }
   function photoFailed(img) {
     if(!img)return;
@@ -104,5 +115,5 @@
       '<p><a class="inline-link" href="#/sommelier">← All Sommelier wines</a></p>'+
       '</div></div></section>');
   }
-  window.SommelierTried={load,loadCurated,loadCatalog,photo,photoFailed,card,featured,detail};
+  window.SommelierTried={load,loadCurated,loadExpansion,loadCatalog,photo,photoFailed,card,featured,detail};
 })();
