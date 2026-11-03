@@ -67,7 +67,7 @@ function pageHead(title,desc){
 function detail(w,set){
  document.title=w.name+' · Sommelier · Cocktail Atlas';
  set(pageHead(w.name,w.country+' · '+w.region)+
- '<section class="wrap blk somm-detail" style="border-top:0;padding-top:0"><div class="somm-detail-grid"><div class="somm-detail-art" style="background:'+(w.example?.imageUrl?'#fff':palette[w.type].tint)+'">'+bottleWithPhoto(w)+'<div class="somm-art-caption">Representative bottle · actual label and vintage may differ</div></div><div class="somm-detail-copy"><div class="somm-eyebrow">'+esc(w.type)+' WINE · '+esc(w.country)+'</div><div class="somm-producer-example"><span>FEATURED PRODUCER EXAMPLE</span><strong>'+esc(w.example?.brand||'Wine style')+'</strong><div>'+esc(w.example?.wine||'')+'</div>'+(w.example?.sourceUrl?'<a href="'+esc(w.example.sourceUrl)+'" target="_blank" rel="noopener noreferrer">Bottle photo: '+esc(w.example.imageCredit||'Source')+' ↗</a>':'')+'</div><h2>'+esc(w.grape)+'</h2><p class="somm-lead">'+esc(w.character)+'</p><div class="somm-statrow"><div><strong>'+esc(w.body)+'</strong><span>Body</span></div><div><strong>'+esc(w.serve)+'</strong><span>Serve at</span></div></div><div class="somm-scores">'+stat('Acidity',w.acidity)+stat('Tannin',w.tannin)+stat('Sweetness',w.sweetness)+'</div><div class="somm-detail-section"><h3>What you might taste</h3><p>'+esc(w.aromas)+'.</p></div><div class="somm-detail-section"><h3>What to eat with it</h3><div class="somm-foods">'+w.food.map(x=>'<span>'+esc(x)+'</span>').join('')+'</div></div><div class="somm-detail-section"><h3>Sommelier serving note</h3><p>'+esc(w.service)+'</p></div><div class="somm-detail-section"><h3>Where it comes from</h3><p>'+esc(w.region)+' · '+esc(w.country)+'</p></div><p class="somm-disclaimer">The tasting and pairing profile describes the wine style, not a verified tasting of the pictured producer or vintage. Images are third-party product references, not endorsements.</p><a class="inline-link" href="#/sommelier">← Explore more wines</a></div></div></section>');
+ '<section class="wrap blk somm-detail" style="border-top:0;padding-top:0"><div class="somm-detail-grid"><div class="somm-detail-art" style="background:'+(w.example?.imageUrl?'#fff':palette[w.type].tint)+'">'+bottleWithPhoto(w)+'<div class="somm-art-caption">Representative bottle · actual label and vintage may differ</div></div><div class="somm-detail-copy"><div class="somm-eyebrow">'+esc(w.type)+' WINE · '+esc(w.country)+'</div><div class="somm-producer-example"><span>FEATURED PRODUCER EXAMPLE</span><strong>'+esc(w.example?.brand||'Wine style')+'</strong><div>'+esc(w.example?.wine||'')+'</div>'+(w.example?.sourceUrl?'<a href="'+esc(w.example.sourceUrl)+'" target="_blank" rel="noopener noreferrer">Bottle photo: '+esc(w.example.imageCredit||'Source')+' ↗</a>':'')+'</div><h2>'+esc(w.grape)+'</h2><p class="somm-lead">'+esc(w.character)+'</p><div class="somm-statrow"><div><strong>'+esc(w.body)+'</strong><span>Body</span></div><div><strong>'+esc(w.serve)+'</strong><span>Serve at</span></div></div><div class="somm-scores">'+stat('Acidity',w.acidity)+stat('Tannin',w.tannin)+stat('Sweetness',w.sweetness)+'</div><div class="somm-detail-section"><h3>What you might taste</h3><p>'+esc(w.aromas)+'.</p></div><div class="somm-detail-section"><h3>What to eat with it</h3>'+window.SommelierPairings.render(w.food)+'</div><div class="somm-detail-section"><h3>Sommelier serving note</h3><p>'+esc(w.service)+'</p></div><div class="somm-detail-section"><h3>Where it comes from</h3><p>'+esc(w.region)+' · '+esc(w.country)+'</p></div><p class="somm-disclaimer">The tasting and pairing profile describes the wine style, not a verified tasting of the pictured producer or vintage. Images are third-party product references, not endorsements.</p><a class="inline-link" href="#/sommelier">← Explore more wines</a></div></div></section>');
 }
 function list(wines,set,bottles=[],tried=[]){
  document.title='Sommelier · Cocktail Atlas';
@@ -92,7 +92,7 @@ async function page(parts,set,isCurrent){
  if(typeof isCurrent==='function'&&!isCurrent())return;
  if(parts?.[1]==='tried'&&parts?.[2]){
    let journal=[];
-   try{journal=await window.SommelierTried?.load()||[];}catch{}
+   try{journal=await window.SommelierTried?.loadCatalog()||[];}catch{}
    if(typeof isCurrent==='function'&&!isCurrent())return;
    const entry=journal.find(w=>w.id===parts[2]);
    if(entry)return window.SommelierTried.detail(entry,set);
@@ -107,7 +107,7 @@ async function page(parts,set,isCurrent){
    const found=individual.find(x=>x.id===parts[2]);
    if(found)return window.SommelierBottles.detail(found,wines,set);
    let journal=[];
-   try{journal=await window.SommelierTried?.load()||[];}catch{}
+   try{journal=await window.SommelierTried?.loadCatalog()||[];}catch{}
    if(typeof isCurrent==='function'&&!isCurrent())return;
    const personal=journal.find(x=>x.id===parts[2]);
    if(personal)return window.SommelierTried.detail(personal,set);
@@ -121,7 +121,7 @@ async function page(parts,set,isCurrent){
  }
  let individual=[],journal=[];
  try {individual=await window.SommelierBottles?.load()||[];} catch {}
- try {journal=await window.SommelierTried?.load()||[];} catch {}
+ try {journal=await window.SommelierTried?.loadCatalog()||[];} catch {}
  if(typeof isCurrent==='function'&&!isCurrent())return;
  list(wines,set,individual,journal);
 }

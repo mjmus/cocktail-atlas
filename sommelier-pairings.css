@@ -1,0 +1,14 @@
+/* Food pairing photography. Separate module, no global card changes. */
+.somm-pairing-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin-top:10px}
+.somm-pairing-item{min-width:0;border:1px solid var(--line2);background:var(--paper);border-radius:10px;overflow:hidden}
+.somm-pairing-media{aspect-ratio:3/2;background:var(--panel);position:relative;overflow:hidden}
+.somm-pairing-media img{display:block;width:100%;height:100%;object-fit:cover}
+.somm-pairing-media img[hidden],.somm-pairing-placeholder[hidden]{display:none!important}
+.somm-pairing-placeholder{display:flex;align-items:center;justify-content:center;height:100%;color:var(--faint);font:.68rem var(--mono);text-align:center;padding:10px}
+.somm-pairing-caption{display:flex;flex-wrap:wrap;align-items:start;justify-content:space-between;gap:5px;padding:9px}
+.somm-pairing-caption strong{font-size:.75rem;line-height:1.35;max-width:100%;font-weight:600}
+.somm-pairing-caption a{font:.65rem var(--mono);color:var(--acc)}
+.somm-pairing-text{display:flex;align-items:center;justify-content:center;text-align:center;min-height:92px;border:1px solid var(--line2);border-radius:9px;background:var(--panel);padding:14px;font-size:.76rem;line-height:1.5}
+.somm-food-photo-note{font:.67rem/1.55 var(--sans);color:var(--soft);margin:8px 0 14px}
+@media(max-width:720px){.somm-pairing-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:430px){.somm-pairing-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:7px}.somm-pairing-caption{padding:7px}.somm-pairing-text{min-height:72px;padding:8px}}
