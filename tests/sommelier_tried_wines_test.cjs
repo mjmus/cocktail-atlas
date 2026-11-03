@@ -25,7 +25,7 @@ assert.equal(journal.wines.find(w=>w.id==='furlani-alpino-macerato').wine,'Alpin
 assert.match(journal.wines.find(w=>w.id==='pearl-morissette-roselana-2023').imageVintageNote,/2024/,'Roselana photograph displays a newer vintage');
 assert.match(journal.wines.find(w=>w.id==='denny-bini-willa-lambrusco').vintageNote,/not an independently confirmed vintage/,'Do not silently assert a 2023 wine vintage');
 assert.ok(index.includes('sommelier-tried.css')&&index.includes('sommelier-tried.js'));
-assert.ok(index.includes('sommelier-tried.js?v=20261103-photo-fix'),'Safari should refresh the updated wine-photo handler');
+assert.ok(index.includes('sommelier-tried.js?v=20261103-unified'),'Safari should refresh the updated wine-photo handler');
 const zorrito=journal.wines.find(x=>x.id==='santa-julia-el-zorrito-2024');
 assert.ok(zorrito.imageUrl.includes('goodpour.com')&&zorrito.imageAlternates.length>0,'El Zorrito needs replacement and fallback URLs');
 
@@ -60,12 +60,31 @@ for(const file of ['sommelier-bottles.js','sommelier-tried.js','sommelier.js'])v
  assert.equal((rendered.match(/class="somm-producer-card somm-tried-card"/g)||[]).length,13);
  assert.equal((rendered.match(/class="somm-producer-card"/g)||[]).length,22);
  assert.equal((rendered.match(/class="somm-card"/g)||[]).length,25);
- assert.ok(rendered.includes('Wines I’ve Tried')&&rendered.includes('Alpino Macerato'));
+ assert.ok(rendered.includes('Explore real bottles.')&&rendered.includes('Alpino Macerato'));
+ assert.equal((rendered.match(/<section class="somm-featured-bottles"/g)||[]).length,1,'Only one individual-bottle section');
+ assert.ok(!rendered.includes('somm-tried-section'),'Do not separate personal wines from producer catalog');
+ assert.ok(rendered.includes('35 wines')&&rendered.includes('35 bottles'),'Both collections should share one accurate count');
+ assert.ok(rendered.includes('sommCatalogGrid')&&rendered.includes('sommCatalogSearch'),'One search/filter experience for every wine');
+ assert.ok(rendered.includes('Dessert / Fortified')&&rendered.includes('Sparkling'),'SAQ-inspired wine-type filters');
+ assert.doesNotMatch(rendered,/\$[0-9]|data-rating|data-price/i,'Catalog should not show pricing or rankings');
+ const unified=ctx.window.SommelierBottles.catalogEntries(existing.bottles,styles.wines,journal.wines);
+ assert.equal(unified.length,35);
+ assert.deepEqual(unified.map(x=>x.producer),[...unified].sort((a,b)=>a.producer.localeCompare(b.producer,'en',{sensitivity:'base'})||a.wine.localeCompare(b.wine,'en',{sensitivity:'base'})).map(x=>x.producer),'Catalog must be alphabetical, not ranked');
+ assert.equal(ctx.window.SommelierBottles.catalogMatches(unified,'All','').length,35);
+ assert.ok(ctx.window.SommelierBottles.catalogMatches(unified,'Orange','').some(x=>x.id==='santa-julia-el-zorrito-2024'));
+ assert.ok(ctx.window.SommelierBottles.catalogMatches(unified,'Sparkling','').some(x=>x.id==='denny-bini-willa-lambrusco'));
+ assert.ok(ctx.window.SommelierBottles.catalogMatches(unified,'Red','malbec').some(x=>x.id==='catena-malbec-2022'));
+ assert.ok(ctx.window.SommelierBottles.catalogMatches(unified,'All','roselana').some(x=>x.id==='pearl-morissette-roselana-2023'));
+ assert.equal(ctx.window.SommelierBottles.catalogMatches(unified,'All','unobtanium').length,0);
+ assert.ok(rendered.includes('href="#/sommelier/bottle/pearl-morissette-roselana-2023"'),'Personal wines use the same detail route as other bottles');
  assert.ok(rendered.includes('somm-tried-image')&&rendered.includes('Nextdoor Rosie'));
  let wine='';
  await ctx.window.Sommelier.page(['sommelier','tried','occhipinti-sp68-bianco-2022'],s=>{wine=s},()=>true);
- for(const snippet of ['Arianna Occhipinti','SP68 Bianco','FROM YOUR WINE LIST','SOMMELIER NOTES','On the palate','Food pairings','View original bottle photograph'])
+ for(const snippet of ['Arianna Occhipinti','SP68 Bianco','TASTING OVERVIEW','SOMMELIER GUIDE','On the palate','Food pairings','View original bottle photograph'])
   assert.ok(wine.includes(snippet),'Individual wine detail missing '+snippet);
+ let canonical='';
+ await ctx.window.Sommelier.page(['sommelier','bottle','occhipinti-sp68-bianco-2022'],s=>{canonical=s},()=>true);
+ assert.ok(canonical.includes('Arianna Occhipinti')&&canonical.includes('TASTING OVERVIEW'),'Unified bottle link should load uploaded wine profile');
  let old='';
  await ctx.window.Sommelier.page(['sommelier','bottle','cloudy-bay-sauvignon-2024'],s=>{old=s},()=>true);
  assert.ok(old.includes('Cloudy Bay'),'Existing producer page should still work');
