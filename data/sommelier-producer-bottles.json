@@ -736,6 +736,41 @@
       "producerSource": "https://freixenet.com/ca/en/our-products/cava/cordon-negro-brut/",
       "sourceLabel": "Freixenet official Cordon Negro Brut notes",
       "vintageNote": "A non-vintage blend; dosage and labels can differ by market."
+    },
+    {
+      "id": "grahams-six-grapes-ruby-port",
+      "styleId": "port",
+      "producer": "Graham's",
+      "wine": "Six Grapes Reserve Ruby Port",
+      "referenceVintage": "Non-vintage reserve blend",
+      "region": "Douro Valley",
+      "country": "Portugal",
+      "grape": "Traditional Douro red-variety blend",
+      "intro": "A rich reserve Port emphasizing fresh black fruit and a full-bodied structure.",
+      "nose": "Blackberry, blackcurrant, liquorice and ripe plum.",
+      "palate": "Generous dark fruit with an indulgent texture and good structure.",
+      "finish": "Long, concentrated and fruit-forward.",
+      "flavors": [
+        "Blackberry",
+        "Liquorice",
+        "Blackcurrant",
+        "Plum"
+      ],
+      "body": "Full",
+      "acidity": "Balanced",
+      "tannins": "Moderate",
+      "sweetness": "Sweet / fortified",
+      "food": [
+        "Dark chocolate truffles",
+        "Mature cheddar",
+        "Chocolate tart"
+      ],
+      "pairingBasis": "Graham's recommends dark chocolate and mature cheeses.",
+      "serve": "12–16°C",
+      "aeration": "Serve slightly chilled; bottled ready to drink.",
+      "producerSource": "https://www.grahams-port.com/wine/six-grapes/5",
+      "sourceLabel": "Graham's Six Grapes official tasting notes",
+      "vintageNote": "A non-vintage reserve Port; the bottle design may change."
     }
   ]
 }
