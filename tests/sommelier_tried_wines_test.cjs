@@ -25,6 +25,10 @@ assert.equal(journal.wines.find(w=>w.id==='furlani-alpino-macerato').wine,'Alpin
 assert.match(journal.wines.find(w=>w.id==='pearl-morissette-roselana-2023').imageVintageNote,/2024/,'Roselana photograph displays a newer vintage');
 assert.match(journal.wines.find(w=>w.id==='denny-bini-willa-lambrusco').vintageNote,/not an independently confirmed vintage/,'Do not silently assert a 2023 wine vintage');
 assert.ok(index.includes('sommelier-tried.css')&&index.includes('sommelier-tried.js'));
+assert.ok(index.includes('sommelier-tried.js?v=20261103-photo-fix'),'Safari should refresh the updated wine-photo handler');
+const zorrito=journal.wines.find(x=>x.id==='santa-julia-el-zorrito-2024');
+assert.ok(zorrito.imageUrl.includes('goodpour.com')&&zorrito.imageAlternates.length>0,'El Zorrito needs replacement and fallback URLs');
+
 assert.ok(index.indexOf('sommelier-tried.js')<index.indexOf('src="./sommelier.js'),'Journal dependency must load before Sommelier app');
 assert.ok(app.includes("parts[0]==='sommelier'"),'Original app routing must be unchanged');
 for(const file of ['sommelier-tried.js','sommelier.js','sommelier-bottles.js'])new Function(read(file));
@@ -39,6 +43,18 @@ for(const file of ['sommelier-bottles.js','sommelier-tried.js','sommelier.js'])v
 (async()=>{
  const entries=await ctx.window.SommelierTried.load();
  assert.equal(entries.length,13);
+ const html=ctx.window.SommelierTried.photo(zorrito);
+ assert.ok(html.includes('data-photo-sources')&&html.includes('photoFailed'),'Wine photo should use alternate sources');
+ const urls=[zorrito.imageUrl,...zorrito.imageAlternates];
+ const next={hidden:true};
+ const img={src:urls[0],dataset:{photoSources:encodeURIComponent(JSON.stringify(urls)),photoIndex:'0'},nextElementSibling:next,hidden:false,onerror:()=>{}};
+ ctx.window.SommelierTried.photoFailed(img);
+ assert.equal(img.src,urls[1],'First photo failure should retry the backup real bottle image');
+ assert.equal(img.hidden,false);
+ ctx.window.SommelierTried.photoFailed(img);
+ assert.equal(img.hidden,true,'No generic unrelated bottle should be substituted');
+ assert.equal(next.hidden,false,'Explicit unavailable-photo placeholder if all sources fail');
+
  let rendered='';
  await ctx.window.Sommelier.page(['sommelier'],s=>{rendered=s},()=>true);
  assert.equal((rendered.match(/class="somm-producer-card somm-tried-card"/g)||[]).length,13);
