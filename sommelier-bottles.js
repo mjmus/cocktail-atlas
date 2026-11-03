@@ -78,7 +78,7 @@
       '<input id="sommCatalogSearch" type="search" placeholder="Try Pinot Noir, Italy, seafood…" autocomplete="off"></label></div>'+
       '<div class="somm-count" id="sommCatalogCount">'+entries.length+' bottles</div>'+
       '<div class="somm-producer-grid" id="sommCatalogGrid">'+catalogCards(entries,styles)+'</div>'+
-      '<p class="somm-producer-caveat">Listed alphabetically, with no scores or prices. Bottle photographs can show different label vintages. Open a wine for its detailed tasting and pairing notes.</p>'+
+      '<p class="somm-producer-caveat">Bottles are listed alphabetically. Photographs can show different label vintages. Open any wine for detailed tasting and food-pairing notes.</p>'+
       '</section>';
   }
   function bindCatalog(bottles,styles,tried=[]) {
