@@ -18,7 +18,7 @@ for(const w of [...curated,...batch03]){
 }
 const context={window:{}};vm.createContext(context);vm.runInContext(read('sommelier-pairings.js'),context);
 const pair=context.window.SommelierPairings;
-assert.equal(pair.photos.length,24);
+assert.equal(pair.photos.length,31);
 for(const photo of pair.photos){
  assert.ok(photo.url.startsWith('https://images.unsplash.com/photo-'));
  assert.ok(photo.source.startsWith('https://unsplash.com/photos/'),'Every food photograph must link to its licensing and photographer source');
@@ -29,12 +29,18 @@ assert.equal(pair.match('Oysters with lemon').id,'oysters');
 assert.equal(pair.match('Mushroom risotto').id,'risotto');
 assert.equal(pair.match('Roast chicken').id,'chicken');
 assert.equal(pair.match('Grilled fish').id,'fish');
-assert.equal(pair.match('Tuna steak'),null,'A cooked beef-steak photo must not be shown for tuna');
+assert.equal(pair.match('Tuna steak').id,'tuna','Tuna steak must use a tuna photo, never a beef steak');
 assert.equal(pair.match('Scallop tartare').id,'scallops');
 assert.equal(pair.match('Seafood pasta').id,'seafood-pasta');
 assert.equal(pair.match('Grilled branzino').id,'fish');
 assert.equal(pair.match('Herb-roasted vegetables').id,'vegetables');
 assert.equal(pair.match('Grilled lamb').id,'lamb');
+assert.equal(pair.match('Roast pork').id,'pork');
+assert.equal(pair.match('Porcini mushrooms').id,'mushrooms');
+assert.equal(pair.match('Fried chicken').id,'fried-chicken');
+assert.equal(pair.match('Lobster').id,'lobster');
+assert.equal(pair.match('Seafood paella').id,'paella');
+assert.equal(pair.match('Fried calamari').id,'calamari');
 assert.equal(pair.match('Empanadas').id,'empanadas');
 const html=pair.render(['Ribeye steak','Charcuterie board','Braised beef casserole']);
 assert.ok(html.includes('somm-pairing-grid')&&html.includes('somm-pairing-media')&&html.includes('Ribeye steak'));
