@@ -58,6 +58,13 @@ assert.equal(fake.hidden,true,'Show a visible photo-unavailable label only after
 assert.equal(fallback.hidden,false);
 assert.ok(batch03.some(w=>w.id==='suduiraut-sauternes-2020')&&batch03.some(w=>w.id==='garzon-tannat-reserva-2023'));
 assert.ok(batch03.every(w=>!('price' in w)&&!('rating' in w)&&!('rank' in w)));
+const styles=JSON.parse(read('data/sommelier-wines.json')).wines;
+const dishes=[...new Set([...curated,...batch03,...personal,...producers,...styles].flatMap(w=>w.food||[]))];
+const supportedCount=dishes.filter(d=>pair.match(d)).length;
+const coverage=supportedCount/dishes.length;
+console.log('Food photography coverage: '+supportedCount+'/'+dishes.length+' dish names ('+(coverage*100).toFixed(1)+'%)');
+assert.ok(coverage>=0.70,'Food photo match coverage should exceed 70% of distinct pairings');
+assert.ok(!pair.render(['Grilled branzino','Seafood pasta','Herb-roasted vegetables']).includes('Food photographs are illustrative.'),'No old disclaimer in affected detail page');
 
 assert.ok(index.indexOf('sommelier-pairings.js')<index.indexOf('sommelier-tried.js'),'Food image helper should be initialized before detail renderers');
 assert.ok(read('sommelier-bottles.js').includes('SommelierPairings.render(b.food)'));
