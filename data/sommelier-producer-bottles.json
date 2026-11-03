@@ -701,6 +701,41 @@
       "producerSource": "https://www.lamarca.it/en/bouquet-collection/prosecco-doc-treviso-brut/",
       "sourceLabel": "La Marca Treviso Brut product tasting notes",
       "vintageNote": "This is Treviso Brut rather than the sweeter La Marca flagship Prosecco DOC."
+    },
+    {
+      "id": "freixenet-cordon-negro-brut",
+      "styleId": "cava",
+      "producer": "Freixenet",
+      "wine": "Cordon Negro Brut Cava",
+      "referenceVintage": "Non-vintage blend",
+      "region": "D.O. Cava, Catalonia",
+      "country": "Spain",
+      "grape": "Parellada / Macabeo / Xarel·lo",
+      "intro": "A lively traditional-method Cava combining fresh orchard fruit and citrus.",
+      "nose": "Fresh apple, ripe pear and bright citrus.",
+      "palate": "Crisp, clean and balanced, with lively bubbles and apple-pear fruit.",
+      "finish": "Refreshingly citrusy with a touch of ginger.",
+      "flavors": [
+        "Apple",
+        "Pear",
+        "Citrus",
+        "Ginger"
+      ],
+      "body": "Light",
+      "acidity": "Crisp",
+      "tannins": "Not applicable",
+      "sweetness": "Brut",
+      "food": [
+        "Fried chicken",
+        "Fish and chips",
+        "Spanish tapas"
+      ],
+      "pairingBasis": "Freixenet recommends rich crispy dishes, including fried chicken.",
+      "serve": "6–8°C",
+      "aeration": "Serve chilled without decanting.",
+      "producerSource": "https://freixenet.com/ca/en/our-products/cava/cordon-negro-brut/",
+      "sourceLabel": "Freixenet official Cordon Negro Brut notes",
+      "vintageNote": "A non-vintage blend; dosage and labels can differ by market."
     }
   ]
 }
