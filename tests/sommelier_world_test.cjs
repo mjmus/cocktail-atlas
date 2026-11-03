@@ -7,7 +7,7 @@ const extra=JSON.parse(read('data/world-spicy-pomegranate.json'));
 const wine=JSON.parse(read('data/sommelier-wines.json'));
 const oldPhoto=read('ingredient-art.js'),enhanced=read('ingredient-enhancements.js');
 const bottleVariants=read('bottle-variants.js'),adapter=read('shakerrr-library.js');
-const sommelier=read('sommelier.js'),somCss=read('sommelier.css');
+const sommelier=read('sommelier.js'),somCss=read('sommelier.css'),pairingPhotos=read('sommelier-pairings.js');
 assert.equal(sourceRecipes.recipes.length,407,'Original book catalog must be untouched');
 assert.equal(extra.recipes.length,1,'Exactly one optional World Cocktail');
 assert.equal(extra.recipes[0].name,'Spicy Pomegranate (Istanbul)');
@@ -49,6 +49,7 @@ assert.equal(w.IngredientArt.url('Cardamom Bitters'),'./assets/original/cardamom
 assert.match(w.IngredientArt.url('Unobtanium nectar not in catalog'),/^data:image\/svg\+xml/);
 assert.match(w.IngredientArt.url('Cointreau','tc'),/cointreau\.jpg$/);
 vm.runInContext(adapter,ctx);
+vm.runInContext(pairingPhotos,ctx);
 vm.runInContext(sommelier,ctx);
 (async()=>{
  await w.ShakerrrLibrary.load();
