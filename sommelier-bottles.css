@@ -1,0 +1,43 @@
+/* Individual winery profiles. Entirely additive to the existing Sommelier cards. */
+.somm-featured-bottles{margin:0 0 30px}
+.somm-producer-section-head{display:flex;align-items:end;justify-content:space-between;gap:22px;margin:20px 0}
+.somm-producer-section-head h2{font-size:clamp(1.5rem,3vw,2rem);letter-spacing:-.045em;margin:7px 0}
+.somm-producer-section-head p{font-size:.84rem;color:var(--soft);max-width:62ch;margin:0}
+.somm-bottle-count{font:.7rem var(--mono);color:var(--soft);white-space:nowrap}
+.somm-producer-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:15px}
+.somm-producer-card{display:flex;align-items:center;gap:13px;padding:12px;border:1px solid var(--line);border-radius:12px;background:var(--paper);min-width:0;transition:border-color .2s,transform .2s}
+.somm-producer-card:hover{transform:translateY(-2px);border-color:var(--acc)}
+.somm-producer-photo{height:152px;width:95px;flex:0 0 95px;display:flex;align-items:center;justify-content:center;background:#fff;border-radius:7px;overflow:hidden}
+.somm-producer-photo .somm-bottle-frame{height:100%;width:100%}
+.somm-producer-photo .somm-bottle{height:98%;max-width:100%}
+.somm-producer-photo .somm-real-bottle{height:100%;width:100%;object-fit:contain}
+.somm-producer-text{display:flex;flex-direction:column;gap:5px;min-width:0}
+.somm-producer-text h3{font-size:1.05rem;font-weight:700;letter-spacing:-.035em;line-height:1.15;margin:0}
+.somm-producer-text strong{font-size:.82rem;font-weight:500;line-height:1.4}
+.somm-producer-text small{font:.65rem var(--mono);color:var(--faint)}
+.somm-producer-text p{font:.69rem/1.5 var(--mono);color:var(--soft);margin:3px 0}
+.somm-producer-text>span{font:.7rem var(--mono);color:var(--acc)}
+.somm-producer-caveat{font:.72rem/1.55 var(--sans);color:var(--soft);margin:11px 0 24px}
+.somm-style-section-heading{margin:25px 0 15px;border-top:1px solid var(--line);padding-top:23px}
+.somm-style-section-heading h2{font-size:1.55rem;letter-spacing:-.045em;margin:5px 0}
+.somm-style-section-heading p{font-size:.82rem;color:var(--soft);margin:0}
+.somm-specific-bottle-art{background:#fff;overflow:hidden}
+.somm-specific-bottle-art .somm-bottle-frame{width:100%;height:440px}
+.somm-specific-bottle-art .somm-real-bottle{background:#fff;object-fit:contain}
+.somm-producer-meta{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin:20px 0}
+.somm-producer-meta>div{border:1px solid var(--line2);border-radius:8px;padding:11px 10px;display:flex;flex-direction:column;gap:6px}
+.somm-producer-meta span{font:.63rem var(--mono);color:var(--soft)}
+.somm-producer-meta strong{font-size:.8rem;line-height:1.35;font-weight:600}
+.somm-producer-flavors{display:flex;flex-wrap:wrap;gap:7px;margin:17px 0}
+.somm-producer-flavors span{background:var(--panel);border:1px solid var(--line2);border-radius:30px;padding:7px 10px;font:.73rem var(--mono)}
+.somm-producer-structure{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin:20px 0}
+.somm-producer-structure>div{display:flex;flex-direction:column;gap:4px;padding:12px;border:1px solid var(--line2);border-radius:8px}
+.somm-producer-structure b{font-size:.83rem}.somm-producer-structure span{font:.67rem var(--mono);color:var(--soft)}
+.somm-pairing-basis{font-size:.74rem!important;margin-top:13px!important}
+.somm-producer-sources{border:1px solid var(--line);background:var(--panel);padding:16px;border-radius:10px;display:grid;gap:8px;margin:17px 0}
+.somm-producer-sources strong{font-size:.85rem}
+.somm-producer-sources a{font:.76rem/1.4 var(--mono);color:var(--acc);overflow-wrap:anywhere}
+.somm-producer-sources p{font:.74rem/1.5 var(--sans);color:var(--soft);margin:3px 0 0}
+@media(max-width:1000px){.somm-producer-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:720px){.somm-producer-grid{grid-template-columns:1fr}.somm-producer-photo{width:110px;flex-basis:110px}.somm-specific-bottle-art .somm-bottle-frame{height:320px}}
+@media(max-width:460px){.somm-producer-photo{width:90px;flex-basis:90px;height:130px}.somm-producer-section-head{align-items:start}.somm-bottle-count{margin-top:6px}.somm-producer-meta{grid-template-columns:repeat(2,minmax(0,1fr))}.somm-specific-bottle-art .somm-bottle-frame{height:260px}}
