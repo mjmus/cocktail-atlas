@@ -9,6 +9,9 @@
 .somm-pairing-caption strong{font-size:.75rem;line-height:1.35;max-width:100%;font-weight:600}
 .somm-pairing-caption a{font:.65rem var(--mono);color:var(--acc)}
 .somm-pairing-text{display:flex;align-items:center;justify-content:center;text-align:center;min-height:92px;border:1px solid var(--line2);border-radius:9px;background:var(--panel);padding:14px;font-size:.76rem;line-height:1.5}
-.somm-food-photo-note{font:.67rem/1.55 var(--sans);color:var(--soft);margin:8px 0 14px}
 @media(max-width:720px){.somm-pairing-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media(max-width:430px){.somm-pairing-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:7px}.somm-pairing-caption{padding:7px}.somm-pairing-text{min-height:72px;padding:8px}}
+
+/* Photos load immediately on a wine detail page; retain a clean fallback if an external source fails. */
+.somm-pairing-media img{background:var(--panel);min-height:100%;font-size:0}
+.somm-pairing-media .somm-pairing-placeholder{font-weight:600;letter-spacing:.01em}
