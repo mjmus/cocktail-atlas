@@ -41,3 +41,13 @@
 @media(max-width:1000px){.somm-producer-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media(max-width:720px){.somm-producer-grid{grid-template-columns:1fr}.somm-producer-photo{width:110px;flex-basis:110px}.somm-specific-bottle-art .somm-bottle-frame{height:320px}}
 @media(max-width:460px){.somm-producer-photo{width:90px;flex-basis:90px;height:130px}.somm-producer-section-head{align-items:start}.somm-bottle-count{margin-top:6px}.somm-producer-meta{grid-template-columns:repeat(2,minmax(0,1fr))}.somm-specific-bottle-art .somm-bottle-frame{height:260px}}
+
+/* One shared wine catalog, using the existing bottle-card visual language. */
+.somm-catalog-tools{display:flex;flex-wrap:wrap;align-items:end;gap:16px;justify-content:space-between;margin:22px 0 12px}
+.somm-catalog-tabs{flex:1 1 550px}
+.somm-catalog-tabs button{white-space:nowrap}
+.somm-catalog-search{flex:1 1 250px;max-width:370px}
+#sommCatalogCount{margin-bottom:12px}
+#sommCatalogGrid .somm-tried-card{background:var(--paper)}
+#sommCatalogGrid .somm-no-results{grid-column:1/-1;border:1px solid var(--line);border-radius:10px;padding:30px;color:var(--soft);text-align:center}
+@media(max-width:720px){.somm-catalog-tools{display:grid;gap:12px}.somm-catalog-tabs{gap:6px}.somm-catalog-search{width:100%;max-width:none}}

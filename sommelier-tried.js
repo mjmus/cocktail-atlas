@@ -32,7 +32,7 @@
       '</div>';
   }
   function card(w) {
-    return '<a class="somm-producer-card somm-tried-card" href="#/sommelier/tried/'+encodeURIComponent(w.id)+'">'+
+    return '<a class="somm-producer-card somm-tried-card" href="#/sommelier/bottle/'+encodeURIComponent(w.id)+'">'+
       '<div class="somm-producer-photo">'+photo(w)+'</div>'+
       '<div class="somm-producer-text"><div class="eye">'+esc(w.wineType)+' · '+esc(w.country)+'</div>'+
       '<h3>'+esc(w.producer)+'</h3><strong>'+esc(w.wine)+'</strong>'+
@@ -54,24 +54,24 @@
     return '<div class="somm-detail-section"><h3>'+esc(title)+'</h3><p>'+esc(value)+'</p></div>';
   }
   function detail(w,set) {
-    document.title=w.wine+' · Wines I’ve Tried · Cocktail Atlas';
+    document.title=w.wine+' · Sommelier · Cocktail Atlas';
     set('<section class="wrap phead somm-head">'+
-      '<div class="crumb"><a href="#/">Home</a> / <a href="#/sommelier">Sommelier</a> / Wines I’ve Tried</div>'+
+      '<div class="crumb"><a href="#/">Home</a> / <a href="#/sommelier">Sommelier</a> / '+esc(w.producer)+'</div>'+
       '<h1>'+esc(w.producer)+'</h1>'+
       '<p class="pdesc">'+esc(w.wine)+' · '+esc(w.referenceVintage)+'</p></section>'+
       '<section class="wrap blk somm-detail somm-tried-detail" style="border-top:0;padding-top:0"><div class="somm-detail-grid">'+
       '<div class="somm-detail-art somm-tried-photo">'+photo(w)+
       '<div class="somm-art-caption">'+esc(w.imageVintageNote)+'</div></div>'+
       '<div class="somm-detail-copy">'+
-      '<div class="somm-eyebrow">WINES I’VE TRIED · '+esc(w.country)+' · '+esc(w.wineType.toUpperCase())+'</div>'+
+      '<div class="somm-eyebrow">INDIVIDUAL WINE · '+esc(w.country)+' · '+esc(w.wineType.toUpperCase())+'</div>'+
       '<h2>'+esc(w.wine)+'</h2><p class="somm-lead">'+esc(w.intro)+'</p>'+
       '<div class="somm-producer-meta">'+
       '<div><span>REFERENCE</span><strong>'+esc(w.referenceVintage)+'</strong></div>'+
       '<div><span>REGION</span><strong>'+esc(w.region)+'</strong></div>'+
       '<div><span>GRAPE(S)</span><strong>'+esc(w.grape)+'</strong></div>'+
       '</div><div class="somm-producer-flavors">'+w.flavors.map(x=>'<span>'+esc(x)+'</span>').join('')+'</div>'+
-      '<div class="somm-tried-original"><div class="eye">FROM YOUR WINE LIST</div><p>'+esc(w.personalNote)+'</p></div>'+
-      '<div class="eye somm-tried-section-label">SOMMELIER NOTES</div>'+
+      '<div class="somm-tried-original"><div class="eye">TASTING OVERVIEW</div><p>'+esc(w.personalNote)+'</p></div>'+
+      '<div class="eye somm-tried-section-label">SOMMELIER GUIDE</div>'+
       info('On the nose',w.nose)+info('On the palate',w.palate)+info('Finish',w.finish)+
       '<div class="somm-producer-structure">'+
       '<div><b>'+esc(w.body)+'</b><span>Body</span></div>'+
