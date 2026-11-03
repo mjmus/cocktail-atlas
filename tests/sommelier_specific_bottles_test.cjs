@@ -22,7 +22,7 @@ for(const b of profiles.bottles) {
  assert.ok(!b.producerSource.includes('example.com')&&b.sourceLabel,'Every profile needs an identifiable tasting source');
 }
 const html=read('index.html');
-assert.ok(html.includes('sommelier-bottles.js?v=20261103-batch02'));
+assert.ok(html.includes('sommelier-bottles.js?v=20261103-unified'));
 assert.ok(html.includes('sommelier-bottles.css?v=20261103-batch01'));
 assert.ok(html.indexOf('sommelier-bottles.js') < html.indexOf('sommelier.js'),'Producer component needs to load first');
 assert.ok(read('sommelier-bottles.css').includes('@media(max-width:460px)'),'Small screen styling needed');
@@ -50,7 +50,7 @@ scripts.forEach(s=>vm.runInContext(s,context,{timeout:5000}));
  assert.ok(detail.includes('View the real bottle photo source'));
  let list='';
  await window.Sommelier.page(['sommelier'],s=>{list=s},()=>true);
- assert.ok(list.includes('01 / SPECIFIC WINES')&&list.includes('02 / WINE STYLES'));
+ assert.ok(list.includes('01 / INDIVIDUAL WINES')&&list.includes('02 / WINE STYLES'));
  assert.equal((list.match(/class="somm-producer-card"/g)||[]).length,22);
  assert.equal((list.match(/class="somm-card"/g)||[]).length,25);
  let old='';
