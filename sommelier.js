@@ -71,8 +71,9 @@ function detail(w,set){
 }
 function list(wines,set,bottles=[],tried=[]){
  document.title='Sommelier · Cocktail Atlas';
- set(pageHead('Sommelier','Personal wine journal, real producer bottles and wine styles with food pairings.')+
- '<section class="wrap blk somm-list" style="border-top:0;padding-top:8px"><div class="somm-intro"><div><div class="eye">YOUR WINE GUIDE</div><h2>A little knowledge makes every glass better.</h2><p>Explore 25 foundational wine styles with real producer bottle examples. Learn flavors, food pairings and serving tips.</p></div><div class="somm-intro-stamp">25<span>WINE<br>STYLES</span></div></div>'+(tried.length?window.SommelierTried.featured(tried):'')+(bottles.length?window.SommelierBottles.featured(bottles,wines):'')+'<div class="somm-style-section-heading"><div class="eye">02 / WINE STYLES</div><h2>Explore by grape and style.</h2><p>The original wine-style guide remains available below.</p></div><div class="somm-tools"><div class="somm-tabs" aria-label="Filter wine styles">'+types.map((x,i)=>'<button type="button" data-wine-type="'+esc(x)+'" class="'+(i===0?'selected':'')+'">'+esc(x)+'</button>').join('')+'</div><label class="somm-search">Find a grape, region or food <input id="sommSearch" type="search" placeholder="Try seafood, Nebbiolo, Caymus…" autocomplete="off"></label></div><div class="somm-count" id="sommCount">25 wine styles</div><div class="somm-grid" id="sommGrid">'+wines.map(card).join('')+'</div><p class="somm-disclaimer">Bottle images link to credited third-party product photographs. Producers are representative examples, not endorsements. Vintages and labels may vary. The original illustrations remain as missing-image fallbacks.</p></section>');
+ set(pageHead('Sommelier','A single library of real wine bottles, tasting notes and food pairings.')+
+ '<section class="wrap blk somm-list" style="border-top:0;padding-top:8px"><div class="somm-intro"><div><div class="eye">YOUR WINE GUIDE</div><h2>A little knowledge makes every glass better.</h2><p>Explore real wines from producers around the world, with tasting notes, food pairings and serving advice. Learn wine styles below.</p></div><div class="somm-intro-stamp">'+(bottles.length+tried.length)+'<span>REAL<br>BOTTLES</span></div></div>'+(bottles.length||tried.length?window.SommelierBottles.featured(bottles,wines,tried):'')+'<div class="somm-style-section-heading"><div class="eye">02 / WINE STYLES</div><h2>Explore by grape and style.</h2><p>The original wine-style guide remains available below.</p></div><div class="somm-tools"><div class="somm-tabs" aria-label="Filter wine styles">'+types.map((x,i)=>'<button type="button" data-wine-type="'+esc(x)+'" class="'+(i===0?'selected':'')+'">'+esc(x)+'</button>').join('')+'</div><label class="somm-search">Find a grape, region or food <input id="sommSearch" type="search" placeholder="Try seafood, Nebbiolo, Caymus…" autocomplete="off"></label></div><div class="somm-count" id="sommCount">25 wine styles</div><div class="somm-grid" id="sommGrid">'+wines.map(card).join('')+'</div><p class="somm-disclaimer">Bottle images link to credited third-party product photographs. Producers are representative examples, not endorsements. Vintages and labels may vary. The original illustrations remain as missing-image fallbacks.</p></section>');
+ window.SommelierBottles?.bindCatalog(bottles,wines,tried);
  let active='All',q='';
  function filter(){
    const filtered=wines.filter(w=>(active==='All'||w.type===active)&&normalize([w.name,w.type,w.grape,w.region,w.country,w.aromas,w.character,w.example?.brand,w.example?.wine,...w.food].join(' ')).includes(normalize(q)));
@@ -105,6 +106,11 @@ async function page(parts,set,isCurrent){
    if(typeof isCurrent==='function'&&!isCurrent())return;
    const found=individual.find(x=>x.id===parts[2]);
    if(found)return window.SommelierBottles.detail(found,wines,set);
+   let journal=[];
+   try{journal=await window.SommelierTried?.load()||[];}catch{}
+   if(typeof isCurrent==='function'&&!isCurrent())return;
+   const personal=journal.find(x=>x.id===parts[2]);
+   if(personal)return window.SommelierTried.detail(personal,set);
    set(pageHead('Bottle not found','This individual wine is not available yet.')+
      '<section class="wrap blk"><a class="inline-link" href="#/sommelier">Browse the wine guide →</a></section>');
    return;
