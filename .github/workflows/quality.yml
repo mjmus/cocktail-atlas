@@ -18,6 +18,7 @@ jobs:
       - run: node --check my-recipes.js
       - run: node --check my-recipes-ui.js
       - run: node --check ingredient-enhancements.js
+      - run: node --check sommelier-pairings.js
       - run: node --check sommelier-bottles.js
       - run: node --check sommelier-tried.js
       - run: node --check sommelier.js
@@ -30,3 +31,4 @@ jobs:
       - run: node tests/sommelier_world_test.cjs
       - run: node tests/sommelier_specific_bottles_test.cjs
       - run: node tests/sommelier_tried_wines_test.cjs
+      - run: node tests/sommelier_curated_food_test.cjs
