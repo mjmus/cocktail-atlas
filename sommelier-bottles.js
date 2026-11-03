@@ -6,7 +6,7 @@
   const esc = value => String(value??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
   async function load() {
     if(cache)return cache;
-    const response = await fetch('./data/sommelier-producer-bottles.json?v=20261103-batch01',{cache:'no-cache'});
+    const response = await fetch('./data/sommelier-producer-bottles.json?v=20261103-batch02',{cache:'no-cache'});
     if(!response.ok)throw Error('Individual wine profiles are unavailable.');
     const data=await response.json();
     if(data?.schemaVersion!==1||!Array.isArray(data.bottles))throw Error('Invalid individual wine profiles.');
@@ -68,7 +68,7 @@
       '<div class="somm-detail-section"><h3>Food pairings</h3><div class="somm-foods">'+b.food.map(x=>'<span>'+esc(x)+'</span>').join('')+'</div>'+
       '<p class="somm-pairing-basis">'+esc(b.pairingBasis)+'</p></div>'+
       section('Serving',b.serve+' · '+b.aeration)+
-      '<div class="somm-producer-sources"><strong>Producer notes & bottle photo</strong>'+
+      '<div class="somm-producer-sources"><strong>Tasting reference & bottle photo</strong>'+
       '<a href="'+esc(b.producerSource)+'" rel="noopener noreferrer" target="_blank">Read '+esc(b.sourceLabel)+' ↗</a>'+
       (brandSource?.sourceUrl?'<a href="'+esc(brandSource.sourceUrl)+'" rel="noopener noreferrer" target="_blank">View the real bottle photo source ↗</a>':'')+
       '<p>'+esc(b.vintageNote)+' Flavors are source-supported tasting descriptions, not a claim that every vintage tastes identical.</p></div>'+
