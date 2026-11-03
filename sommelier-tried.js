@@ -6,17 +6,28 @@
   const esc = value => String(value ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
   async function load() {
     if(cached)return cached;
-    const response = await fetch('./data/sommelier-tried-wines.json?v=20261103-user-wines',{cache:'no-cache'});
+    const response = await fetch('./data/sommelier-tried-wines.json?v=20261103-photo-fix',{cache:'no-cache'});
     if(!response.ok)throw Error('Your personal wine collection is temporarily unavailable.');
     const data=await response.json();
     if(data?.schemaVersion!==1||!Array.isArray(data.wines))throw Error('Invalid personal wine collection.');
     cached=data.wines;
     return cached;
   }
+  function photoFailed(img) {
+    if(!img)return;
+    let sources=[];
+    try{sources=JSON.parse(decodeURIComponent(img.dataset.photoSources||''));}catch{}
+    const next=Number(img.dataset.photoIndex||0)+1;
+    if(next<sources.length){img.dataset.photoIndex=String(next);img.src=sources[next];return;}
+    img.onerror=null;
+    img.hidden=true;
+    if(img.nextElementSibling)img.nextElementSibling.hidden=false;
+  }
   function photo(w) {
     const alt='Photo of '+w.producer+' '+w.wine+' bottle';
+    const sources=[w.imageUrl,...(Array.isArray(w.imageAlternates)?w.imageAlternates:[])].filter(x=>typeof x==='string'&&x.startsWith('https://'));
     return '<div class="somm-tried-image">'+
-      '<img src="'+esc(w.imageUrl)+'" alt="'+esc(alt)+'" loading="lazy" decoding="async" onerror="this.hidden=true;this.nextElementSibling.hidden=false">'+
+      '<img src="'+esc(sources[0]||'')+'" alt="'+esc(alt)+'" loading="lazy" decoding="async" data-photo-sources="'+esc(encodeURIComponent(JSON.stringify(sources)))+'" data-photo-index="0" onerror="window.SommelierTried?.photoFailed(this)">'+
       '<div class="somm-tried-image-missing" hidden>Photo unavailable<br><small>Open photo source below</small></div>'+
       '</div>';
   }
@@ -77,5 +88,5 @@
       '<p><a class="inline-link" href="#/sommelier">← All Sommelier wines</a></p>'+
       '</div></div></section>');
   }
-  window.SommelierTried={load,photo,card,featured,detail};
+  window.SommelierTried={load,photo,photoFailed,card,featured,detail};
 })();
