@@ -76,10 +76,13 @@
       "pairingBasis": "Suggested for the wine's skin-contact tannin and citrus freshness; regional producer advice also recommends savory Argentine dishes.",
       "producerSource": "https://frechette.kork.ca/qc/en/our-wineries/santa-julia-bodega/santa-julia-el-zorrito-naranjo/2024/14899977",
       "sourceLabel": "Santa Julia 2024 importer product profile",
-      "imageUrl": "https://sipsy.com/cdn/shop/files/ProductImageforshopify_1200x1200px_9.png?v=1758001729",
-      "imageSource": "https://sipsy.com/products/santa-julia-el-zorrito-orange-natural-wine-750ml",
+      "imageUrl": "https://goodpour.com/cdn/shop/files/santa-julia-orange-chard.png?v=1727277861",
+      "imageSource": "https://goodpour.com/collections/best-sellers/products/santa-julia-el-zorrito-natural-orange-chardonnay?variant=51615889686900",
       "imageVintageNote": "Exact El Zorrito Naranjo label; printed vintage may differ from 2024.",
-      "vintageNote": "The uploaded tasting note says about 40 days on skins; other winemaker/importer documents cite approximately 45 days."
+      "vintageNote": "The uploaded tasting note says about 40 days on skins; other winemaker/importer documents cite approximately 45 days.",
+      "imageAlternates": [
+        "https://grainvine.com/cdn/shop/files/Bodegas-Santa-Julia-Chardonnay-El-Zorrito-Natural-Orange_1000x1000_b6aa68e7-a046-4e3e-a3f4-3c4af114f94e.jpg?v=1761684044&width=1500"
+      ]
     },
     {
       "id": "strange-grapes-nextdoor-rosie-2020",
