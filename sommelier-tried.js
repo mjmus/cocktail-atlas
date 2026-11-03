@@ -13,6 +13,22 @@
     cached=data.wines;
     return cached;
   }
+  let curatedCached=null;
+  async function loadCurated() {
+    if(curatedCached)return curatedCached;
+    const r=await fetch('./data/sommelier-curated-wines.json?v=20261103-expanded',{cache:'no-cache'});
+    if(!r.ok)throw Error('Additional wine profiles are unavailable.');
+    const data=await r.json();
+    if(data?.schemaVersion!==1||!Array.isArray(data.wines))throw Error('Invalid additional wine profiles.');
+    curatedCached=data.wines;
+    return curatedCached;
+  }
+  async function loadCatalog() {
+    const base=await load();
+    let more=[];
+    try{more=await loadCurated();}catch{}
+    return [...base,...more];
+  }
   function photoFailed(img) {
     if(!img)return;
     let sources=[];
@@ -78,7 +94,7 @@
       '<div><b>'+esc(w.acidity)+'</b><span>Acidity</span></div>'+
       '<div><b>'+esc(w.tannins)+'</b><span>Tannin</span></div>'+
       '<div><b>'+esc(w.sweetness)+'</b><span>Sweetness</span></div></div>'+
-      '<div class="somm-detail-section"><h3>Food pairings</h3><div class="somm-foods">'+w.food.map(x=>'<span>'+esc(x)+'</span>').join('')+'</div>'+
+      '<div class="somm-detail-section"><h3>Food pairings</h3>'+window.SommelierPairings.render(w.food)+
       '<p class="somm-pairing-basis">'+esc(w.pairingBasis)+'</p></div>'+
       info('Serving',w.serve+' · '+w.aeration)+
       '<div class="somm-producer-sources"><strong>Wine identification & photo sources</strong>'+
@@ -88,5 +104,5 @@
       '<p><a class="inline-link" href="#/sommelier">← All Sommelier wines</a></p>'+
       '</div></div></section>');
   }
-  window.SommelierTried={load,photo,photoFailed,card,featured,detail};
+  window.SommelierTried={load,loadCurated,loadCatalog,photo,photoFailed,card,featured,detail};
 })();
