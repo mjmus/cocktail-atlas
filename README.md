@@ -82,3 +82,11 @@ The personal library supports editing, duplication, deletion, resized serving me
 All 25 Sommelier categories now display a specifically matched **real producer bottle** instead of a generic primary illustration. The original SVG bottles remain fallback art for unavailable third-party images. Cards identify the producer; detail pages show the producer, cuvée, and image-source link. Brand names are searchable. Serving, flavor and pairing guidance remains wine-style guidance, not tasting notes for a given photographed vintage.
 
 Bottle images are externally linked, not stored in the repo. See `ATTRIBUTION.md` for rights and availability considerations.
+
+## Sommelier: individual wine profiles (2026-11-03)
+
+The Sommelier landing page now includes **22 individual producer-specific bottlings** with their real producer bottle images, descriptions, aroma, palate, finish, structure, food pairings, suggested serving temperatures, and linked tasting-source references. Profiles are in `data/sommelier-producer-bottles.json`. The original 25 wine-style pages remain available below the individual bottle catalog, without changing any cocktail recipes.
+
+Where the tasting references describe a specific vintage, the profile identifies it; non-vintage and house-style profiles are labeled accordingly. Bottle photos reuse the existing 25-product image gallery and can depict a different vintage. Third-party image usage and source credit remain governed by `ATTRIBUTION.md`.
+
+The remaining three style examples have not yet received individual profiles: Château Suduiraut, Royal Tokaji, and Michele Chiarlo. They still appear in the original wine-style guide with their bottle photos.
