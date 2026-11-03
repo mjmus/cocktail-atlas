@@ -4,7 +4,7 @@ const read=p=>fs.readFileSync(path.join(root,p),'utf8');
 const base=JSON.parse(read('data/sommelier-wines.json'));
 const profiles=JSON.parse(read('data/sommelier-producer-bottles.json'));
 const originalRecipes=JSON.parse(read('data/shakerrr-recipes.json'));
-const scripts=[read('sommelier-bottles.js'),read('sommelier.js')];
+const scripts=[read('sommelier-pairings.js'),read('sommelier-bottles.js'),read('sommelier.js')];
 scripts.forEach(s=>new Function(s));
 assert.equal(originalRecipes.recipes.length,407,'Do not modify Shakerrr cocktail data');
 assert.equal(base.wines.length,25,'Preserve 25 original wine-style profiles');
@@ -22,7 +22,7 @@ for(const b of profiles.bottles) {
  assert.ok(!b.producerSource.includes('example.com')&&b.sourceLabel,'Every profile needs an identifiable tasting source');
 }
 const html=read('index.html');
-assert.ok(html.includes('sommelier-bottles.js?v=20261103-unified'));
+assert.ok(html.includes('sommelier-bottles.js?v=20261103-food'));
 assert.ok(html.includes('sommelier-bottles.css?v=20261103-unified'));
 assert.ok(html.indexOf('sommelier-bottles.js') < html.indexOf('sommelier.js'),'Producer component needs to load first');
 assert.ok(read('sommelier-bottles.css').includes('@media(max-width:460px)'),'Small screen styling needed');
@@ -48,6 +48,7 @@ scripts.forEach(s=>vm.runInContext(s,context,{timeout:5000}));
  assert.ok(detail.includes('somm-real-bottle'),'Details must use real bottle art');
  assert.ok(detail.includes('cloudybay.com'),'Official wine producer tasting source must appear');
  assert.ok(detail.includes('View the real bottle photo source'));
+ assert.ok(detail.includes('somm-pairing-grid'),'Specific producers should show food pairing photographs where available');
  let list='';
  await window.Sommelier.page(['sommelier'],s=>{list=s},()=>true);
  assert.ok(list.includes('01 / INDIVIDUAL WINES')&&list.includes('02 / WINE STYLES'));
