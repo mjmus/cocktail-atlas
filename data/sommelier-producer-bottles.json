@@ -561,6 +561,111 @@
       "producerSource": "https://www.bruendlmayer.at/en/wines/kamptal-terrassen-gruener-veltliner-2024/factsheet/",
       "sourceLabel": "Bründlmayer Kamptal Terrassen 2024 official factsheet",
       "vintageNote": "Tasting descriptors and service temperature refer to the 2024 Terrassen bottling."
+    },
+    {
+      "id": "trimbach-gewurztraminer-2022",
+      "styleId": "gewurztraminer",
+      "producer": "Trimbach",
+      "wine": "Classic Gewurztraminer",
+      "referenceVintage": "2022",
+      "region": "Alsace",
+      "country": "France",
+      "grape": "Gewürztraminer",
+      "intro": "An aromatic Alsace Gewürztraminer with exotic fruit, floral perfume and textured spice.",
+      "nose": "Lychee, rose, jasmine, ripe peach and apricot.",
+      "palate": "Broad texture, fresh acidity, aromatic fruit, ginger and clove.",
+      "finish": "Lingering floral warmth and sweet spice.",
+      "flavors": [
+        "Lychee",
+        "Rose",
+        "Ginger",
+        "Apricot"
+      ],
+      "body": "Medium–full",
+      "acidity": "Moderate",
+      "tannins": "Not applicable",
+      "sweetness": "Off-dry",
+      "food": [
+        "Thai basil chicken",
+        "Indian curry",
+        "Soy-ginger chicken"
+      ],
+      "pairingBasis": "Importer notes recommend aromatic spice; dishes are sommelier suggestions.",
+      "serve": "8–10°C",
+      "aeration": "Chill but allow aromas to develop in the glass.",
+      "producerSource": "https://www.enotria.com/products/pdf/trimbach-gewurztraminer-2022-75cl-14-5",
+      "sourceLabel": "Trimbach 2022 importer technical sheet",
+      "vintageNote": "Descriptors refer to the 2022 vintage; sweetness varies by release."
+    },
+    {
+      "id": "esclans-whispering-angel-rose",
+      "styleId": "provence-rose",
+      "producer": "Château d'Esclans",
+      "wine": "Whispering Angel Côtes de Provence Rosé",
+      "referenceVintage": "Producer style (varies)",
+      "region": "Côtes de Provence",
+      "country": "France",
+      "grape": "Grenache / Cinsault / Rolle / Syrah",
+      "intro": "A pale rosé with red-berry perfume and a smooth yet dry palate.",
+      "nose": "Fresh red berries and gentle floral aromas.",
+      "palate": "Ripe, rounded red-fruit character that remains bone-dry.",
+      "finish": "Smooth and clean without harsh astringency.",
+      "flavors": [
+        "Red berries",
+        "Flowers",
+        "Dry palate",
+        "Soft finish"
+      ],
+      "body": "Light–medium",
+      "acidity": "Fresh",
+      "tannins": "Low",
+      "sweetness": "Dry",
+      "food": [
+        "Mediterranean mezze",
+        "Charcuterie",
+        "Sushi"
+      ],
+      "pairingBasis": "Château d'Esclans cites Mediterranean, charcuterie and Asian cuisines.",
+      "serve": "8–12°C",
+      "aeration": "Serve chilled; do not decant.",
+      "producerSource": "https://www.esclans.com/en-us/our-wines/whispering-angel",
+      "sourceLabel": "Whispering Angel producer description",
+      "vintageNote": "House-style description; actual vintage and bottle label may differ."
+    },
+    {
+      "id": "guigal-tavel-rose",
+      "styleId": "tavel-rose",
+      "producer": "E. Guigal",
+      "wine": "Tavel Rosé",
+      "referenceVintage": "Producer style (varies)",
+      "region": "Tavel, Southern Rhône",
+      "country": "France",
+      "grape": "Grenache / Cinsault / Clairette / Syrah",
+      "intro": "A fuller, structured Rhône rosé, unlike many lighter Provence examples.",
+      "nose": "Delicate flowers and fruity aromas.",
+      "palate": "Fleshy, structured fruit balanced by appealing acidity.",
+      "finish": "Harmonious, persistent and refreshing.",
+      "flavors": [
+        "Floral notes",
+        "Red fruit",
+        "Structured palate",
+        "Fresh acidity"
+      ],
+      "body": "Medium",
+      "acidity": "Balanced",
+      "tannins": "Light",
+      "sweetness": "Dry",
+      "food": [
+        "Grilled fish",
+        "Charcuterie",
+        "Grilled lamb"
+      ],
+      "pairingBasis": "Guigal lists fish, charcuterie and grilled meat.",
+      "serve": "12–14°C",
+      "aeration": "Serve less cold than pale rosé to appreciate the texture.",
+      "producerSource": "https://www.guigal.com/en/wine/tavel/",
+      "sourceLabel": "E. Guigal official Tavel tasting notes",
+      "vintageNote": "Producer provides cross-vintage tasting notes; pictured year may vary."
     }
   ]
 }
