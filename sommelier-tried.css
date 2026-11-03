@@ -1,0 +1,19 @@
+/* Additive personal wine journal, visually aligned with existing Sommelier. */
+.somm-tried-section{margin:0 0 35px}
+.somm-tried-section .somm-producer-section-head h2{font-size:clamp(1.6rem,3vw,2.15rem)}
+.somm-tried-section .somm-producer-section-head .eye{color:var(--acc)}
+.somm-tried-image{width:100%;height:100%;display:flex;align-items:center;justify-content:center;background:#fff;position:relative;overflow:hidden}
+.somm-tried-image img{display:block;max-width:100%;width:100%;height:100%;object-fit:contain}
+.somm-tried-image img[hidden],.somm-tried-image-missing[hidden]{display:none!important}
+.somm-tried-image-missing{width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;color:#777;background:#f8f7f3;font:.73rem/1.5 var(--mono);padding:15px}
+.somm-tried-image-missing small{font:.63rem/1.5 var(--mono);margin-top:5px}
+.somm-tried-card .somm-producer-photo{background:#fff}
+.somm-tried-photo{background:#fff}
+.somm-tried-photo>.somm-tried-image{height:440px;max-height:440px;width:100%;border-radius:8px}
+.somm-tried-photo .somm-art-caption{margin-top:12px;max-width:320px}
+.somm-tried-original{background:var(--panel);border-left:3px solid var(--acc);border-radius:5px;padding:17px 20px;margin:20px 0}
+.somm-tried-original .eye{font:.68rem var(--mono);color:var(--acc);letter-spacing:.06em}
+.somm-tried-original p{margin:8px 0 0;line-height:1.65;font-size:.88rem}
+.somm-tried-section-label{font:.7rem var(--mono);letter-spacing:.06em;color:var(--acc);margin:22px 0 7px}
+@media(max-width:720px){.somm-tried-photo>.somm-tried-image{height:330px}}
+@media(max-width:460px){.somm-tried-photo>.somm-tried-image{height:280px}.somm-tried-original{padding:13px 15px}}
