@@ -90,3 +90,11 @@ The Sommelier landing page now includes **22 individual producer-specific bottli
 Where the tasting references describe a specific vintage, the profile identifies it; non-vintage and house-style profiles are labeled accordingly. Bottle photos reuse the existing 25-product image gallery and can depict a different vintage. Third-party image usage and source credit remain governed by `ATTRIBUTION.md`.
 
 The remaining three style examples have not yet received individual profiles: Château Suduiraut, Royal Tokaji, and Michele Chiarlo. They still appear in the original wine-style guide with their bottle photos.
+
+## Wines I've Tried (2026-11-03)
+
+Added a separate, non-destructive personal Sommelier collection containing the **13 wines** from the user's uploaded wine list. All profiles have real photographs of the identified wine's bottle and visible source links, plus separate note sections for the uploaded descriptions and extended sommelier analysis (nose, palate, finish, suggested food pairings, serving temperature and structure).
+
+The personal list is stored in `data/sommelier-tried-wines.json`, rendered by `sommelier-tried.js` and `sommelier-tried.css` at `#/sommelier` and `#/sommelier/tried/<id>`. **The original 22 wine-producer profiles, 25 styles and cocktail data were not changed.**
+
+Important label caveats are shown on each entry: e.g., the supplied Willa wine's year isn't independently verified, Roselana's available matching photo is a 2024 label while the list records 2023, and Furlani 'Alpino' was matched to the skin-contact Pinot Grigio **Alpino Macerato** rather than a different conventional Alpino cuvée. Third-party photos are linked from their source websites and are not downloaded into this repository.
