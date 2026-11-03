@@ -129,7 +129,7 @@
       '<div><b>'+esc(b.acidity)+'</b><span>Acidity</span></div>'+
       '<div><b>'+esc(b.tannins)+'</b><span>Tannins</span></div>'+
       '<div><b>'+esc(b.sweetness)+'</b><span>Sweetness</span></div></div>'+
-      '<div class="somm-detail-section"><h3>Food pairings</h3><div class="somm-foods">'+b.food.map(x=>'<span>'+esc(x)+'</span>').join('')+'</div>'+
+      '<div class="somm-detail-section"><h3>Food pairings</h3>'+window.SommelierPairings.render(b.food)+
       '<p class="somm-pairing-basis">'+esc(b.pairingBasis)+'</p></div>'+
       section('Serving',b.serve+' · '+b.aeration)+
       '<div class="somm-producer-sources"><strong>Tasting reference & bottle photo</strong>'+
