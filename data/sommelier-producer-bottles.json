@@ -666,6 +666,41 @@
       "producerSource": "https://www.guigal.com/en/wine/tavel/",
       "sourceLabel": "E. Guigal official Tavel tasting notes",
       "vintageNote": "Producer provides cross-vintage tasting notes; pictured year may vary."
+    },
+    {
+      "id": "lamarca-treviso-prosecco-brut",
+      "styleId": "prosecco",
+      "producer": "La Marca",
+      "wine": "Prosecco Treviso Brut",
+      "referenceVintage": "Non-vintage / varies",
+      "region": "Treviso, Veneto",
+      "country": "Italy",
+      "grape": "Glera",
+      "intro": "A crisp Prosecco with orchard fruit, citrus and fine bubbles.",
+      "nose": "Fresh apples, pears, Mediterranean citrus and white flowers.",
+      "palate": "Energetic fruit with persistent bubbles and cleansing acidity.",
+      "finish": "Crisp and refreshing.",
+      "flavors": [
+        "Apple",
+        "Pear",
+        "Citrus",
+        "Fine bubbles"
+      ],
+      "body": "Light",
+      "acidity": "Crisp",
+      "tannins": "Not applicable",
+      "sweetness": "Brut",
+      "food": [
+        "Citrus prawns",
+        "Salmon tartare",
+        "Fried seafood"
+      ],
+      "pairingBasis": "Producer recommends raw seafood and fried fish.",
+      "serve": "6–8°C",
+      "aeration": "Serve chilled and freshly opened.",
+      "producerSource": "https://www.lamarca.it/en/bouquet-collection/prosecco-doc-treviso-brut/",
+      "sourceLabel": "La Marca Treviso Brut product tasting notes",
+      "vintageNote": "This is Treviso Brut rather than the sweeter La Marca flagship Prosecco DOC."
     }
   ]
 }
