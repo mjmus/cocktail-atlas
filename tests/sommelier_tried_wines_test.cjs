@@ -69,7 +69,7 @@ for(const file of ['sommelier-bottles.js','sommelier-tried.js','sommelier.js'])v
  assert.doesNotMatch(rendered,/\$[0-9]|data-rating|data-price/i,'Catalog should not show pricing or rankings');
  const unified=ctx.window.SommelierBottles.catalogEntries(existing.bottles,styles.wines,journal.wines);
  assert.equal(unified.length,35);
- assert.deepEqual(unified.map(x=>x.producer),[...unified].sort((a,b)=>a.producer.localeCompare(b.producer,'en',{sensitivity:'base'})||a.wine.localeCompare(b.wine,'en',{sensitivity:'base'})).map(x=>x.producer),'Catalog must be alphabetical, not ranked');
+ assert.equal(unified.map(x=>x.producer).join('|'),[...unified].sort((a,b)=>a.producer.localeCompare(b.producer,'en',{sensitivity:'base'})||a.wine.localeCompare(b.wine,'en',{sensitivity:'base'})).map(x=>x.producer).join('|'),'Catalog must be alphabetical, not ranked');
  assert.equal(ctx.window.SommelierBottles.catalogMatches(unified,'All','').length,35);
  assert.ok(ctx.window.SommelierBottles.catalogMatches(unified,'Orange','').some(x=>x.id==='santa-julia-el-zorrito-2024'));
  assert.ok(ctx.window.SommelierBottles.catalogMatches(unified,'Sparkling','').some(x=>x.id==='denny-bini-willa-lambrusco'));
