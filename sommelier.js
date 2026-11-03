@@ -107,7 +107,7 @@ async function page(parts,set,isCurrent){
    const found=individual.find(x=>x.id===parts[2]);
    if(found)return window.SommelierBottles.detail(found,wines,set);
    let journal=[];
-   try{journal=await window.SommelierTried?.load()||[];}catch{}
+   try{journal=await window.SommelierTried?.loadCatalog()||[];}catch{}
    if(typeof isCurrent==='function'&&!isCurrent())return;
    const personal=journal.find(x=>x.id===parts[2]);
    if(personal)return window.SommelierTried.detail(personal,set);
