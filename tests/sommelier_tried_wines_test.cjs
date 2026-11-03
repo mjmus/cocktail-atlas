@@ -114,5 +114,5 @@ for(const file of ['sommelier-pairings.js','sommelier-bottles.js','sommelier-tri
  let style='';
  await ctx.window.Sommelier.page(['sommelier','wine','nebbiolo'],s=>{style=s},()=>true);
  assert.ok(style.includes('Vietti'),'Existing wine-style page should still work');
- console.log('PASS: 69 wine bottles, 24 photo match categories, 13 original personal wines, 22 original producer wines, 25 styles and 407 cocktail recipes preserved');
+ console.log('PASS: 69 wine bottles, 31 photo match categories, 13 original personal wines, 22 original producer wines, 25 styles and 407 cocktail recipes preserved');
 })().catch(e=>{console.error(e);process.exitCode=1});
