@@ -1,0 +1,59 @@
+const fs=require('node:fs'), path=require('node:path'), vm=require('node:vm'), assert=require('node:assert/strict');
+const root=path.join(__dirname,'..');
+const read=p=>fs.readFileSync(path.join(root,p),'utf8');
+const base=JSON.parse(read('data/sommelier-wines.json'));
+const profiles=JSON.parse(read('data/sommelier-producer-bottles.json'));
+const originalRecipes=JSON.parse(read('data/shakerrr-recipes.json'));
+const scripts=[read('sommelier-bottles.js'),read('sommelier.js')];
+scripts.forEach(s=>new Function(s));
+assert.equal(originalRecipes.recipes.length,407,'Do not modify Shakerrr cocktail data');
+assert.equal(base.wines.length,25,'Preserve 25 original wine-style profiles');
+assert.equal(profiles.bottles.length,6,'Batch 01 should contain exactly six producer-specific wines');
+assert.equal(new Set(profiles.bottles.map(x=>x.id)).size,6,'IDs must be unique');
+assert.equal(new Set(profiles.bottles.map(x=>x.producer)).size,6,'Producer diversity');
+const supported=new Map(base.wines.map(w=>[w.id,w]));
+for(const b of profiles.bottles) {
+ assert.ok(supported.has(b.styleId),'Every producer must map to an existing wine style: '+b.id);
+ assert.equal(b.producer,supported.get(b.styleId).example.brand,'Real product photo must match producer: '+b.id);
+ for(const key of ['wine','referenceVintage','region','country','grape','nose','palate','finish','serve','aeration','pairingBasis','vintageNote','producerSource','sourceLabel'])
+    assert.ok(typeof b[key]==='string'&&b[key].trim().length>=3,'Missing '+key+' for '+b.id);
+ assert.ok(/^https:\/\//.test(b.producerSource),'Producer reference must be HTTPS');
+ assert.ok(b.food.length>=2 && b.flavors.length>=3,'Insufficient pairings and tasting descriptors: '+b.id);
+}
+const html=read('index.html');
+assert.ok(html.includes('sommelier-bottles.js?v=20261103-batch01'));
+assert.ok(html.includes('sommelier-bottles.css?v=20261103-batch01'));
+assert.ok(html.indexOf('sommelier-bottles.js') < html.indexOf('sommelier.js'),'Producer component needs to load first');
+assert.ok(read('sommelier-bottles.css').includes('@media(max-width:460px)'),'Small screen styling needed');
+const window={};
+const document={title:'',querySelectorAll:()=>[],querySelector:()=>null};
+const context={window,document,fetch:async url=>{
+  if(url.includes('sommelier-producer-bottles.json'))return {ok:true,json:async()=>profiles};
+  if(url.includes('sommelier-wines.json'))return {ok:true,json:async()=>base};
+  throw Error('Unexpected fetch '+url);
+}};
+vm.createContext(context);
+scripts.forEach(s=>vm.runInContext(s,context,{timeout:5000}));
+(async()=>{
+ const wines=await window.Sommelier.load(),bottles=await window.SommelierBottles.load();
+ assert.equal(bottles.length,6);
+ const featured=window.SommelierBottles.featured(bottles,wines);
+ assert.ok(featured.includes('Explore real bottles.')&&featured.includes('Caymus Vineyards'));
+ assert.ok(featured.includes('somm-real-bottle'),'Cards should use the existing real-photo image renderer');
+ assert.ok(!featured.includes('No wine bottles found'));
+ let detail='';
+ await window.Sommelier.page(['sommelier','bottle','cloudy-bay-sauvignon-2024'],s=>{detail=s},()=>true);
+ assert.ok(detail.includes('Cloudy Bay')&&detail.includes('Passionfruit')&&detail.includes('2024')&&detail.includes('Producer notes'));
+ assert.ok(detail.includes('somm-real-bottle'),'Details must use real bottle art');
+ assert.ok(detail.includes('cloudybay.com'),'Official wine producer tasting source must appear');
+ assert.ok(detail.includes('View the real bottle photo source'));
+ let list='';
+ await window.Sommelier.page(['sommelier'],s=>{list=s},()=>true);
+ assert.ok(list.includes('01 / SPECIFIC WINES')&&list.includes('02 / WINE STYLES'));
+ assert.equal((list.match(/class="somm-producer-card"/g)||[]).length,6);
+ assert.equal((list.match(/class="somm-card"/g)||[]).length,25);
+ let old='';
+ await window.Sommelier.page(['sommelier','wine','nebbiolo'],s=>{old=s},()=>true);
+ assert.ok(old.includes('Vietti')&&old.includes('Braised beef'),'Original style route should remain operational');
+ console.log('PASS: six winery-sourced real bottle profiles, 25 wine styles, original 407 cocktails, new details and responsive UI');
+})().catch(err=>{console.error(err);process.exitCode=1});
