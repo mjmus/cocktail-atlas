@@ -23,7 +23,7 @@ for(const b of profiles.bottles) {
 }
 const html=read('index.html');
 assert.ok(html.includes('sommelier-bottles.js?v=20261103-unified'));
-assert.ok(html.includes('sommelier-bottles.css?v=20261103-batch01'));
+assert.ok(html.includes('sommelier-bottles.css?v=20261103-unified'));
 assert.ok(html.indexOf('sommelier-bottles.js') < html.indexOf('sommelier.js'),'Producer component needs to load first');
 assert.ok(read('sommelier-bottles.css').includes('@media(max-width:460px)'),'Small screen styling needed');
 const window={};
